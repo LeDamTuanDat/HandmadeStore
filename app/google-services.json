@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "316808668380",
+    "project_id": "handmadestore-a4315",
+    "storage_bucket": "handmadestore-a4315.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316808668380:android:0ad2dd43ddf3796c7c4019",
+        "android_client_info": {
+          "package_name": "com.example.handmadestore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDI2dACPQWuMzordPebXxPeMhnD-p9PVUM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
