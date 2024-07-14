@@ -1,6 +1,7 @@
 package com.example.handmadestore;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -9,8 +10,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.preference.PreferenceManager;
 
 public class SplashScreenActivity extends AppCompatActivity {
+
+    SharedPreferences sharedPreferences;
+
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +29,30 @@ public class SplashScreenActivity extends AppCompatActivity {
             return insets;
         });
 
+        initPreferences();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashScreenActivity.this,MainActivity.class);
-                startActivity(intent);
+
+                boolean isFirstTime = sharedPreferences.getBoolean("isFirstTime", true);
+                if (isFirstTime) {
+                    editor.putBoolean("isFirstTime", false);
+                    editor.apply();
+                    Intent intent = new Intent(SplashScreenActivity.this,IntroSliderActivity.class);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(SplashScreenActivity.this,MainActivity.class);
+                    startActivity(intent);
+                }
+
                 finish();
             }
         }, 2000);
+    }
+
+    private void initPreferences() {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = sharedPreferences.edit();
     }
 }
