@@ -11,5 +11,8 @@
     <color name="color3">#B4EBCA</color>
     <color name="color4">#D9F2B4</color>"
     <color name="color1">#63CCCA</color>
+
     <color name="title_intro">#112A46</color>
+    <color name="login_bg">#EAEFBD</color>
+    <color name="login_btn">#9ED8DB</color>
 </resources>
