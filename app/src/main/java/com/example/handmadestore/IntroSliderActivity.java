@@ -1,6 +1,10 @@
 package com.example.handmadestore;
 
+import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.github.appintro.AppIntro;
 import com.github.appintro.AppIntroFragment;
@@ -43,5 +47,13 @@ public class IntroSliderActivity extends AppIntro {
         setImmersiveMode();
         setColorTransitionsEnabled(true);
         setDoneText("Bắt đầu");
+    }
+
+    @Override
+    protected void onDonePressed(@Nullable Fragment currentFragment) {
+        super.onDonePressed(currentFragment);
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
