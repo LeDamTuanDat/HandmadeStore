@@ -1,14 +1,33 @@
 {
   "project_info": {
-    "project_number": "316808668380",
-    "firebase_url": "https://handmadestore-a4315-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "handmadestore-a4315",
-    "storage_bucket": "handmadestore-a4315.appspot.com"
+    "project_number": "755990915390",
+    "firebase_url": "https://androidshophandmade-default-rtdb.firebaseio.com",
+    "project_id": "androidshophandmade",
+    "storage_bucket": "androidshophandmade.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:316808668380:android:0ad2dd43ddf3796c7c4019",
+        "mobilesdk_app_id": "1:755990915390:android:6eda6a4d87901292f6646f",
+        "android_client_info": {
+          "package_name": "com.example.androidshophandmade"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDj7Xb3c6C1tqLox1dxhhz76Fpnlaex6m8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755990915390:android:fce5e7f7cc034da9f6646f",
         "android_client_info": {
           "package_name": "com.example.handmadestore"
         }
@@ -16,7 +35,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDI2dACPQWuMzordPebXxPeMhnD-p9PVUM"
+          "current_key": "AIzaSyDj7Xb3c6C1tqLox1dxhhz76Fpnlaex6m8"
         }
       ],
       "services": {

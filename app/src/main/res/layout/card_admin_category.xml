@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="#e9e9e9"
+    android:elevation="0dp"
+    app:cardCornerRadius="5dp"
+    android:layout_margin="3dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:orientation="vertical">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/anh_begai"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="50dp" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginVertical="5dp"
+            android:text="Túi xách"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image" />
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/modify"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Sửa"-->
+<!--            android:textAllCaps="false"-->
+<!--            app:icon="@drawable/note_pencil"-->
+<!--            android:layout_gravity="center"-->
+<!--            app:cornerRadius="10dp"-->
+<!--            android:backgroundTint="@color/green"/>-->
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/addCategory"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Xoá"-->
+<!--            android:textAllCaps="false"-->
+<!--            app:icon="@drawable/x_circle"-->
+<!--            android:layout_gravity="center"-->
+<!--            app:cornerRadius="10dp"-->
+<!--            android:backgroundTint="@color/green"/>-->
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

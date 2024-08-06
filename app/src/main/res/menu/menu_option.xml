@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/modify"
+        android:icon="@drawable/note_pencil"
+        android:title="Sửa danh mục"/>
+
+    <item
+        android:id="@+id/delete"
+        android:icon="@drawable/x_circle"
+        android:title="Xoá danh mục"/>
+
+</menu>

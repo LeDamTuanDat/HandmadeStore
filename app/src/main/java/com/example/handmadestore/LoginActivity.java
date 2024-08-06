@@ -5,39 +5,46 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
+
+import com.example.handmadestore.Object.Category;
 import com.example.handmadestore.Object.DatabaseManager;
+import com.example.handmadestore.Object.Banner;
+import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.Object.User;
 import com.example.handmadestore.databinding.ActivityLoginBinding;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
     ActivityLoginBinding binding;
-    ArrayList<User> users;
+    public static ArrayList<User> users;
+    public static ArrayList<Banner> banners;
+    public static ArrayList<Category> categories;
+    public static ArrayList<Item> items;
+    public static DatabaseManager databaseManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-        init();
         getData();
+        init();
+    }
+
+    private void getData() {
+        users = new ArrayList<>();
+        banners = new ArrayList<>();
+        categories = new ArrayList<>();
+        items = new ArrayList<>();
+        databaseManager = new DatabaseManager();
+        databaseManager.getUsers(users);
+        databaseManager.getBanner(banners);
+        databaseManager.getCategory(categories);
+        databaseManager.getItems(items);
     }
 
     private void init(){
@@ -52,9 +59,16 @@ public class LoginActivity extends AppCompatActivity {
                         isExist = true;
                         if(user.getPassword().equals(password)){
                             Toast.makeText(LoginActivity.this,"Đăng nhập thành công",Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            intent.putExtra("user",user);
-                            startActivity(intent);
+                            if (user.getPriority()){
+                                Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                                intent.putExtra("user",user);
+                                startActivity(intent);
+                            }else {
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("user",user);
+                                startActivity(intent);
+                            }
+                            finish();
                         }else {
                             Toast.makeText(LoginActivity.this,"Mật khẩu không chính xác",Toast.LENGTH_LONG).show();
                         }
@@ -65,25 +79,27 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-    }
 
-    private void getData() {
-        users = new ArrayList<>();
-        DatabaseManager databaseManager = new DatabaseManager("User");
-        databaseManager.getDatabaseReference().addValueEventListener(new ValueEventListener() {
+        binding.signup.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
-                    User user = dataSnapshot.getValue(User.class);
-                    users.add(user);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivityForResult(intent, 14);
             }
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 14){
+            if(resultCode == RESULT_OK){
+                User user = (User) data.getSerializableExtra("new_user");
+                if (user != null){
+                    binding.edtUsernameLg.setText(user.getUsername());
+                    binding.edtPasswordLg.setText(user.getPassword());
+                }
+            }
+        }
+    }
 }
