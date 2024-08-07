@@ -7,9 +7,9 @@ public class Category implements Serializable {
     private String id;
     private String picUrl;
 
-    public Category(String title, String picUrl) {
+    public Category(String title) {
         this.title = title;
-        this.picUrl = picUrl;
+        this.id = "all";
     }
 
     public Category(String id, String title, String picUrl){

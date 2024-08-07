@@ -9,6 +9,7 @@ public class Item implements Serializable {
     private String categoryId;
     private String description;
     private  ArrayList<String> picUrl;
+    private int sold;
     private long price;
     private long oldPrice;
     private int review;
@@ -23,6 +24,7 @@ public class Item implements Serializable {
         this.oldPrice = oldPrice;
         this.price = price;
         this.description = description;
+        this.sold = 0;
     }
 
     public String getId() {
@@ -63,6 +65,14 @@ public class Item implements Serializable {
 
     public void setPicUrl(ArrayList<String> picUrl) {
         this.picUrl = picUrl;
+    }
+
+    public int getSold() {
+        return sold;
+    }
+
+    public void setSold(int sold) {
+        this.sold = sold;
     }
 
     public long getPrice() {

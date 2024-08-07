@@ -3,14 +3,13 @@ package com.example.handmadestore.Object;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.example.handmadestore.Adapter.AdminCategoryAdapter;
+import com.example.handmadestore.Adapter.AdminItemAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -189,11 +188,12 @@ public class DatabaseManager {
     }
 
     public void deleteCategory(Category category,AlertDialog dialog,AdminCategoryAdapter adapter,Context context){
+        databaseReference.child("Category").child(category.getId()).removeValue();
         storageReference = firebaseStorage.getReferenceFromUrl(category.getPicUrl());
         storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                databaseReference.child("Category").child(category.getId()).removeValue();
+//                databaseReference.child("Category").child(category.getId()).removeValue();
                 dialog.dismiss();
                 adapter.notifyDataSetChanged();
                 Toast.makeText(context,"Xoá danh mục thành công",Toast.LENGTH_SHORT).show();
@@ -201,7 +201,7 @@ public class DatabaseManager {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                databaseReference.child("Category").child(category.getId()).removeValue();
+//                databaseReference.child("Category").child(category.getId()).removeValue();
                 dialog.dismiss();
                 adapter.notifyDataSetChanged();
                 Toast.makeText(context,"Xoá danh mục thành công",Toast.LENGTH_SHORT).show();
@@ -209,11 +209,13 @@ public class DatabaseManager {
         });
     }
 
-    public void addItem(Item item, ArrayList<Uri> uriArrayList,AlertDialog dialog, Context context){
+    public void uploadItem(Item item, ArrayList<Uri> uriArrayList, AlertDialog dialog, Context context, boolean update){
         dialog.show();
-        ArrayList<String> picUrl = new ArrayList<>();
-        for (Uri uri : uriArrayList){
-            String randomName = UUID.randomUUID().toString();
+        ArrayList<String> picUrl = (item.getPicUrl() == null ? new ArrayList<>() : item.getPicUrl());
+        for (int i = 0 ; i < uriArrayList.size(); i++){
+            Uri uri = uriArrayList.get(i);
+            final String randomName = UUID.randomUUID().toString();
+            final int currentIndex = i;
             storageReference.child("Items/" + randomName)
                     .putFile(uri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -221,23 +223,60 @@ public class DatabaseManager {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
                             while (!uriTask.isComplete()) ;
-                            picUrl.add(uriTask.getResult().toString());
-                            if(picUrl.size() == uriArrayList.size()){
-                                String id = databaseReference.child("Items").push().getKey();
-                                item.setId(id);
-                                item.setPicUrl(picUrl);
-                                databaseReference.child("Items").child(id).setValue(item);
+                            if (picUrl.size() > 0 && update){
+                                if (currentIndex >= picUrl.size()){
+                                    picUrl.add(uriTask.getResult().toString());
+                                }else {
+                                    picUrl.set(currentIndex,uriTask.getResult().toString());
+                                }
+                            }else {
+                                picUrl.add(uriTask.getResult().toString());
+                            }
+
+                            if(currentIndex == uriArrayList.size() - 1){
+                                if (!update){
+                                    String id = databaseReference.child("Items").push().getKey();
+                                    item.setId(id);
+                                    item.setPicUrl(picUrl);
+                                }
+                                databaseReference.child("Items").child(item.getId()).setValue(item);
                                 dialog.dismiss();
-                                Toast.makeText(context,"Thêm sản phẩm thành công",Toast.LENGTH_SHORT).show();
+                                String message = update ? "Cập nhật sản phẩm thành công" : "Thêm sản phẩm thành công";
+                                Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
                                 ((Activity) context).finish();
                             }
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(context,"Thêm ảnh thất bại",Toast.LENGTH_LONG).show();
+                            if(currentIndex == uriArrayList.size() - 1){
+                                databaseReference.child("Items").child(item.getId()).setValue(item);
+                                dialog.dismiss();
+                                String message = update ? "Cập nhật sản phẩm thành công" : "Thêm sản phẩm thành công";
+                                Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
+                                ((Activity) context).finish();
+                            }
                         }
                     });
+        }
+    }
+
+    public void deleteItem(Item item, AlertDialog dialog, AdminItemAdapter adapter, Context context){
+        databaseReference.child("Items").child(item.getId()).removeValue();
+        for (int i = 0; i < item.getPicUrl().size(); i++) {
+            String url = item.getPicUrl().get(i);
+            final int currentIndex = i;
+            storageReference = firebaseStorage.getReferenceFromUrl(url);
+            storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    if (currentIndex == item.getPicUrl().size() - 1){
+                        dialog.dismiss();
+                        Toast.makeText(context,"Xoá sản phẩm thành công",Toast.LENGTH_SHORT).show();
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            });
         }
     }
 

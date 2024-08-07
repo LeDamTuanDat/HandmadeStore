@@ -25,14 +25,14 @@ public class AdminCategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityCategoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        adapter = new AdminCategoryAdapter(LoginActivity.categories);
-        handleEvent();
         initCategory();
+        handleEvent();
         handleSearch();
     }
 
 
     public void initCategory(){
+        adapter = new AdminCategoryAdapter(LoginActivity.categories);
         binding.recyclerView.setLayoutManager(new GridLayoutManager(AdminCategoryActivity.this,3));
         binding.recyclerView.setAdapter(adapter);
     }
@@ -68,20 +68,20 @@ public class AdminCategoryActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                filteredCategory(newText);
+                resultAfterSearch(newText);
                 return true;
             }
         });
     }
 
-    public void filteredCategory(String text){
-        ArrayList<Category> filtered = new ArrayList<>();
+    public void resultAfterSearch(String text){
+        ArrayList<Category> result = new ArrayList<>();
         for (Category item : LoginActivity.categories) {
             if(item.getTitle().contains(text)){
-                filtered.add(item);
+                result.add(item);
             }
         }
-        adapter.setFilteredCategory(filtered);
+        adapter.setReSultAfterSearch(result);
     }
 
 }

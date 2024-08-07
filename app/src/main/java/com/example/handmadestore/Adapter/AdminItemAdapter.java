@@ -14,41 +14,46 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.handmadestore.AdminCategory.UploadCategoryActivity;
+import com.example.handmadestore.AdminItem.UploadItemActivity;
 import com.example.handmadestore.Object.Category;
 import com.example.handmadestore.Object.DatabaseManager;
+import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.R;
-import com.example.handmadestore.databinding.CardAdminCategoryBinding;
+import com.example.handmadestore.databinding.CardAdminItemBinding;
 
 import java.util.ArrayList;
 
-public class AdminCategoryAdapter extends RecyclerView.Adapter<AdminCategoryAdapter.AdminCategoryViewHolder> {
+public class AdminItemAdapter extends RecyclerView.Adapter<AdminItemAdapter.AdminItemViewHolder>{
 
-    private ArrayList<Category> items;
-    private Context context;
+    ArrayList<Item> items;
+    Context context;
 
-    public AdminCategoryAdapter(ArrayList<Category> items){
+    public AdminItemAdapter(ArrayList<Item> items) {
         this.items = items;
     }
 
     @NonNull
     @Override
-    public AdminCategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdminItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
-        CardAdminCategoryBinding binding = CardAdminCategoryBinding.inflate(LayoutInflater.from(context),parent,false);
-        return new AdminCategoryViewHolder(binding);
+        CardAdminItemBinding binding = CardAdminItemBinding.inflate(LayoutInflater.from(context),parent,false);
+        return new AdminItemAdapter.AdminItemViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdminCategoryViewHolder holder, int position) {
-        holder.binding.title.setText(items.get(position).getTitle());
-        Glide.with(context).load(items.get(position).getPicUrl()).into(holder.binding.image);
-
-        Category category = items.get(position);
+    public void onBindViewHolder(@NonNull AdminItemViewHolder holder, int position) {
+        Item item = items.get(position);
+        Glide.with(context).load(item.getPicUrl().get(0)).into(holder.binding.image);
+        holder.binding.title.setText(item.getTitle());
+        holder.binding.ratingBar.setRating(item.getRating());
+        holder.binding.ratingTxt.setText("("+item.getRating()+")");
+        holder.binding.price.setText("đ"+item.getPrice());
+        holder.binding.sold.setText("Đã bán: "+ item.getSold());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showPopupMenu(view,category);
+                showPopupMenu(view,item);
             }
         });
     }
@@ -58,7 +63,7 @@ public class AdminCategoryAdapter extends RecyclerView.Adapter<AdminCategoryAdap
         return items.size();
     }
 
-    public void showPopupMenu(View view, Category category){
+    public void showPopupMenu(View view, Item item){
         PopupMenu popupMenu = new PopupMenu(context,view);
         popupMenu.inflate(R.menu.menu_option);
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -66,8 +71,8 @@ public class AdminCategoryAdapter extends RecyclerView.Adapter<AdminCategoryAdap
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.modify:
-                        Intent intent = new Intent(context, UploadCategoryActivity.class);
-                        intent.putExtra("category",category);
+                        Intent intent = new Intent(context, UploadItemActivity.class);
+                        intent.putExtra("item",item);
                         context.startActivity(intent);
                         break;
                     case R.id.delete:
@@ -77,7 +82,7 @@ public class AdminCategoryAdapter extends RecyclerView.Adapter<AdminCategoryAdap
                         AlertDialog dialog = builder.create();
                         dialog.show();
                         DatabaseManager databaseManager = new DatabaseManager();
-                        databaseManager.deleteCategory(category,dialog,AdminCategoryAdapter.this,context);
+                        databaseManager.deleteItem(item,dialog,AdminItemAdapter.this,context);
                         break;
                 }
                 return true;
@@ -86,18 +91,19 @@ public class AdminCategoryAdapter extends RecyclerView.Adapter<AdminCategoryAdap
         popupMenu.show();
     }
 
-    public void setReSultAfterSearch(ArrayList<Category> categories){
-        this.items = categories;
+
+    public void setResultAfterFiltered(ArrayList<Item> items){
+        this.items = items;
         notifyDataSetChanged();
     }
 
-    public class AdminCategoryViewHolder extends RecyclerView.ViewHolder {
-        CardAdminCategoryBinding binding;
+    public class AdminItemViewHolder extends RecyclerView.ViewHolder {
 
-        public AdminCategoryViewHolder(CardAdminCategoryBinding binding) {
+        CardAdminItemBinding binding;
+
+        public AdminItemViewHolder(CardAdminItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
     }
-
 }

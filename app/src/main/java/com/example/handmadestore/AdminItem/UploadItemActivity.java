@@ -16,20 +16,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.handmadestore.Adapter.ImageAdapter;
-import com.example.handmadestore.AdminCategory.AdminCategoryActivity;
-import com.example.handmadestore.AdminCategory.UploadCategoryActivity;
 import com.example.handmadestore.LoginActivity;
 import com.example.handmadestore.Object.Category;
 import com.example.handmadestore.Object.DatabaseManager;
@@ -45,16 +39,46 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
     ArrayList<Uri> uriArrayList = new ArrayList<>();
     ImageAdapter adapter;
     Category category;
+    Item item;
     DatabaseManager databaseManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityUploadItemBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        loadingCategory();
         setAdapterForImages();
+        getData();
+        loadingCategory();
         handleAddImages();
         handleUpload();
+    }
+
+
+    public void getData(){
+        item = (Item) getIntent().getSerializableExtra("item");
+        if (item != null){
+            for (int i = 0 ; i < item.getPicUrl().size(); i++){
+                Uri uri = Uri.parse(item.getPicUrl().get(i));
+                uriArrayList.add(uri);
+            }
+            adapter.notifyDataSetChanged();
+            binding.addImage.setText("Thêm ảnh (" + uriArrayList.size() + "/6)");
+            binding.title.setText(item.getTitle());
+            category = findCategory(item.getCategoryId());
+            binding.category.setText(category.getTitle());
+            binding.oldPrice.setText(""+item.getOldPrice());
+            binding.price.setText(""+item.getPrice());
+            binding.description.setText(item.getDescription());
+        }
+    }
+
+    public Category findCategory(String id){
+        for (Category category : LoginActivity.categories) {
+            if (category.getId().equals(id)) {
+                return category;
+            }
+        }
+        return null;
     }
 
     public void loadingCategory(){
@@ -176,10 +200,59 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
                     AlertDialog dialog = builder.create();
 
                     databaseManager = new DatabaseManager();
-                    Item item = new Item(title,categoryId,Long.parseLong(oldPrice),Long.parseLong(price),description);
-                    databaseManager.addItem(item,uriArrayList,dialog,UploadItemActivity.this);
+                    if (item == null){
+                        if(!checkItemForAdd(title)) {
+                            item = new Item(title, categoryId, Long.parseLong(oldPrice), Long.parseLong(price), description);
+                            databaseManager.uploadItem(item, uriArrayList, dialog, UploadItemActivity.this,false);
+                        }
+                    }else {
+                        if (!checkItemForMod(title)){
+                            item.setTitle(title);
+                            item.setCategoryId(categoryId);
+                            item.setOldPrice(Long.parseLong(oldPrice));
+                            item.setPrice(Long.parseLong(price));
+                            item.setDescription(description);
+                            getImagasAfterModify();
+                            databaseManager.uploadItem(item,uriArrayList,dialog,UploadItemActivity.this,true);
+                        }
+                    }
                 }
             }
         });
+    }
+
+    public boolean checkItemForAdd(String title){
+        for (Item item : LoginActivity.items){
+            if(item.getTitle().equals(title)){
+                Toast.makeText(this,"Sản phẩm đã tồn tại",Toast.LENGTH_LONG).show();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkItemForMod(String title){
+        for (Item item : LoginActivity.items){
+            if(item.getTitle().equals(title) && !item.getTitle().equals(title)){
+                Toast.makeText(this,"Sản phẩm đã tồn tại",Toast.LENGTH_LONG).show();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void getImagasAfterModify(){
+        ArrayList<String> newImages = new ArrayList<>();
+        for (int i = 0; i < uriArrayList.size(); i++) {
+            Uri uri = uriArrayList.get(i);
+            for (int j = 0; j < item.getPicUrl().size(); j++) {
+                String oldImage = item.getPicUrl().get(j);
+                if(uri.toString().equals(oldImage)){
+                    newImages.add(oldImage);
+                    break;
+                }
+            }
+        }
+        item.setPicUrl(newImages);
     }
 }

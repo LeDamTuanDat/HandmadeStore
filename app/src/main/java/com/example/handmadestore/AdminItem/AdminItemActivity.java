@@ -11,28 +11,50 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.GridLayoutManager;
 
+import com.example.handmadestore.Adapter.AdminItemAdapter;
 import com.example.handmadestore.LoginActivity;
 import com.example.handmadestore.Object.Category;
-import com.example.handmadestore.R;
+import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.databinding.ActivityAdminItemBinding;
 import com.example.handmadestore.databinding.DropdownSearchBinding;
 
+import java.util.ArrayList;
+
 public class AdminItemActivity extends AppCompatActivity {
     ActivityAdminItemBinding binding;
+    AdminItemAdapter adapter;
+    Category category;
+    ArrayList<Item> resultAfterFiltered = new ArrayList<>();
+    ArrayList<Item> resultAfterSearch = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityAdminItemBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        handleEvent();
+        initItems();
+        handleSelectCategory();
+        handleAddItem();
+        handleSearch();
     }
 
-    public void handleEvent(){
+    @Override
+    protected void onResume() {
+        adapter.notifyDataSetChanged();
+        super.onResume();
+    }
+
+    public void initItems(){
+        adapter = new AdminItemAdapter(LoginActivity.items);
+        binding.recyclerView.setLayoutManager(new GridLayoutManager(AdminItemActivity.this,2));
+        binding.recyclerView.setAdapter(adapter);
+    }
+
+    public void handleSelectCategory(){
         binding.filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,7 +65,9 @@ public class AdminItemActivity extends AppCompatActivity {
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
 
-                ArrayAdapter<Category> adapter = new ArrayAdapter<>(AdminItemActivity.this, android.R.layout.simple_list_item_1, LoginActivity.categories);
+                ArrayList<Category> temp = new ArrayList<>(LoginActivity.categories);
+                temp.add(0,new Category("Tất cả danh mục"));
+                ArrayAdapter<Category> adapter = new ArrayAdapter<>(AdminItemActivity.this, android.R.layout.simple_list_item_1, temp);
                 dropdownBinding.list.setAdapter(adapter);
                 dropdownBinding.search.addTextChangedListener(new TextWatcher() {
                     @Override
@@ -65,12 +89,31 @@ public class AdminItemActivity extends AppCompatActivity {
                 dropdownBinding.list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        binding.category.setText(adapter.getItem(i).toString());
+                        category = adapter.getItem(i);
+                        binding.category.setText(category.toString());
+                        resultAfterFiltered(category.getId());
                         dialog.dismiss();
                     }
                 });
             }
         });
+    }
+
+    public void resultAfterFiltered(String text){
+        if (text.equals("all")){
+            adapter.setResultAfterFiltered(LoginActivity.items);
+        }else {
+            resultAfterFiltered.clear();
+            for (Item item : LoginActivity.items) {
+                if(item.getCategoryId().equals(text)){
+                    resultAfterFiltered.add(item);
+                }
+            }
+            adapter.setResultAfterFiltered(resultAfterFiltered);
+        }
+    }
+
+    public void handleAddItem(){
         binding.addItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,5 +121,38 @@ public class AdminItemActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void handleSearch(){
+        binding.search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                resultAfterSearch(newText);
+                return true;
+            }
+        });
+    }
+
+    public void resultAfterSearch(String text){
+        resultAfterSearch.clear();
+        if(category != null && category.getId() != "all"){
+            for (Item item : resultAfterFiltered) {
+                if(item.getTitle().contains(text)){
+                    resultAfterSearch.add(item);
+                }
+            }
+        }else {
+            for (Item item : LoginActivity.items) {
+                if(item.getTitle().contains(text)){
+                    resultAfterSearch.add(item);
+                }
+            }
+        }
+        adapter.setResultAfterFiltered(resultAfterSearch);
     }
 }

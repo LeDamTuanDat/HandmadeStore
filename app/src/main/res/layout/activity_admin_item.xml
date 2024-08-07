@@ -48,7 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Chọn danh mục"
+            android:text="Tất cả danh mục"
             android:textSize="16dp"
             android:padding="10dp"
             android:drawableStart="@drawable/filter"
