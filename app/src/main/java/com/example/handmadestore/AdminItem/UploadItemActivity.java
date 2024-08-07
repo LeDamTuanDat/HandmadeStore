@@ -1,6 +1,7 @@
 package com.example.handmadestore.AdminItem;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -31,6 +32,8 @@ import com.example.handmadestore.AdminCategory.AdminCategoryActivity;
 import com.example.handmadestore.AdminCategory.UploadCategoryActivity;
 import com.example.handmadestore.LoginActivity;
 import com.example.handmadestore.Object.Category;
+import com.example.handmadestore.Object.DatabaseManager;
+import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.R;
 import com.example.handmadestore.databinding.ActivityUploadItemBinding;
 import com.example.handmadestore.databinding.DropdownSearchBinding;
@@ -41,6 +44,8 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
     ActivityUploadItemBinding binding;
     ArrayList<Uri> uriArrayList = new ArrayList<>();
     ImageAdapter adapter;
+    Category category;
+    DatabaseManager databaseManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +54,7 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
         loadingCategory();
         setAdapterForImages();
         handleAddImages();
+        handleUpload();
     }
 
     public void loadingCategory(){
@@ -85,6 +91,7 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         binding.category.setText(adapter.getItem(i).toString());
+                        category = adapter.getItem(i);
                         dialog.dismiss();
                     }
                 });
@@ -146,5 +153,33 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
     @Override
     public void clicked(int getSize) {
         binding.addImage.setText("Thêm ảnh (" + uriArrayList.size() + "/6)");
+    }
+
+    public void handleUpload(){
+        binding.save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String title = binding.title.getText().toString();
+                String categoryId = (category != null ? category.getId() : "");
+                String oldPrice = binding.oldPrice.getText().toString();
+                String price = binding.price.getText().toString();
+                String description = binding.description.getText().toString();
+
+                if (title.isEmpty() || categoryId.isEmpty() || oldPrice.isEmpty() || price.isEmpty() || description.isEmpty()){
+                    Toast.makeText(UploadItemActivity.this,"Vui lòng nhập đủ thông tin",Toast.LENGTH_LONG).show();
+                }else if (uriArrayList.size() == 0){
+                    Toast.makeText(UploadItemActivity.this,"Vui lòng thêm ảnh",Toast.LENGTH_LONG).show();
+                }else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(binding.getRoot().getContext());
+                    builder.setCancelable(false);
+                    builder.setView(R.layout.loading_activity);
+                    AlertDialog dialog = builder.create();
+
+                    databaseManager = new DatabaseManager();
+                    Item item = new Item(title,categoryId,Long.parseLong(oldPrice),Long.parseLong(price),description);
+                    databaseManager.addItem(item,uriArrayList,dialog,UploadItemActivity.this);
+                }
+            }
+        });
     }
 }

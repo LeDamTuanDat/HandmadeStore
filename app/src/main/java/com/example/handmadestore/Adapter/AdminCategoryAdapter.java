@@ -21,7 +21,7 @@ import com.example.handmadestore.databinding.CardAdminCategoryBinding;
 
 import java.util.ArrayList;
 
-public class AdminCategoryAdapter extends RecyclerView.Adapter<AdminCategoryViewHolder> {
+public class AdminCategoryAdapter extends RecyclerView.Adapter<AdminCategoryAdapter.AdminCategoryViewHolder> {
 
     private ArrayList<Category> items;
     private Context context;
@@ -91,13 +91,13 @@ public class AdminCategoryAdapter extends RecyclerView.Adapter<AdminCategoryView
         notifyDataSetChanged();
     }
 
-}
+    public class AdminCategoryViewHolder extends RecyclerView.ViewHolder {
+        CardAdminCategoryBinding binding;
 
-class AdminCategoryViewHolder extends RecyclerView.ViewHolder {
-    CardAdminCategoryBinding binding;
-
-    public AdminCategoryViewHolder(CardAdminCategoryBinding binding) {
-        super(binding.getRoot());
-        this.binding = binding;
+        public AdminCategoryViewHolder(CardAdminCategoryBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
     }
+
 }

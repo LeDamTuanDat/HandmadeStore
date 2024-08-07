@@ -3,7 +3,9 @@ package com.example.handmadestore.Object;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,6 +24,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class DatabaseManager {
     private FirebaseDatabase database;
@@ -204,6 +207,38 @@ public class DatabaseManager {
                 Toast.makeText(context,"Xoá danh mục thành công",Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void addItem(Item item, ArrayList<Uri> uriArrayList,AlertDialog dialog, Context context){
+        dialog.show();
+        ArrayList<String> picUrl = new ArrayList<>();
+        for (Uri uri : uriArrayList){
+            String randomName = UUID.randomUUID().toString();
+            storageReference.child("Items/" + randomName)
+                    .putFile(uri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                            while (!uriTask.isComplete()) ;
+                            picUrl.add(uriTask.getResult().toString());
+                            if(picUrl.size() == uriArrayList.size()){
+                                String id = databaseReference.child("Items").push().getKey();
+                                item.setId(id);
+                                item.setPicUrl(picUrl);
+                                databaseReference.child("Items").child(id).setValue(item);
+                                dialog.dismiss();
+                                Toast.makeText(context,"Thêm sản phẩm thành công",Toast.LENGTH_SHORT).show();
+                                ((Activity) context).finish();
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(context,"Thêm ảnh thất bại",Toast.LENGTH_LONG).show();
+                        }
+                    });
+        }
     }
 
 }

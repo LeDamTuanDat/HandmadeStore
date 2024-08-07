@@ -4,26 +4,33 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Item implements Serializable {
+    private String id;
     private String title;
+    private String categoryId;
     private String description;
     private  ArrayList<String> picUrl;
-    private double price;
-    private double oldPrice;
+    private long price;
+    private long oldPrice;
     private int review;
     private double rating;
-    private int NumberInCart;
 
     public Item() {
     }
 
-    public Item(String title, String description, ArrayList<String> picUrl, double rating, int review, double oldPrice, double price) {
+    public Item(String title, String categoryId, long oldPrice, long price, String description) {
         this.title = title;
-        this.description = description;
-        this.picUrl = picUrl;
-        this.rating = rating;
-        this.review = review;
+        this.categoryId = categoryId;
         this.oldPrice = oldPrice;
         this.price = price;
+        this.description = description;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -32,6 +39,14 @@ public class Item implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getDescription() {
@@ -50,19 +65,19 @@ public class Item implements Serializable {
         this.picUrl = picUrl;
     }
 
-    public double getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 
-    public double getOldPrice() {
+    public long getOldPrice() {
         return oldPrice;
     }
 
-    public void setOldPrice(double oldPrice) {
+    public void setOldPrice(long oldPrice) {
         this.oldPrice = oldPrice;
     }
 
@@ -80,13 +95,5 @@ public class Item implements Serializable {
 
     public void setRating(double rating) {
         this.rating = rating;
-    }
-
-    public int getNumberInCart() {
-        return NumberInCart;
-    }
-
-    public void setNumberInCart(int numberInCart) {
-        this.NumberInCart = numberInCart;
     }
 }

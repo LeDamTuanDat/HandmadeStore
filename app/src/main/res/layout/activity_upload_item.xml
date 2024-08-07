@@ -32,11 +32,11 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Upload Food"
+                    android:text="Thêm sản phẩm"
                     android:textSize="30dp"
                     android:textAlignment="center"
                     android:textColor="@color/green"
-                    android:layout_marginBottom="20dp"/>
+                    android:layout_marginBottom="10dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
@@ -58,6 +58,7 @@
                     android:textAllCaps="false"/>
 
                 <EditText
+                    android:id="@+id/title"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@drawable/custom_edittext"
@@ -78,25 +79,49 @@
                     android:gravity="center_vertical"
                     android:background="@drawable/custom_edittext"/>
 
-                <EditText
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/custom_edittext"
-                    android:layout_marginTop="10dp"
-                    android:paddingHorizontal="16dp"
-                    android:hint="Giá sản phẩm"
-                    android:textColor="@color/green" />
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/oldPrice"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_edittext"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:paddingHorizontal="16dp"
+                        android:hint="Giá gốc"
+                        android:inputType="number"
+                        android:textColor="@color/green" />
+
+                    <EditText
+                        android:id="@+id/price"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_edittext"
+                        android:layout_marginTop="10dp"
+                        android:paddingHorizontal="16dp"
+                        android:hint="Giá khuyến mãi"
+                        android:inputType="number"
+                        android:textColor="@color/green" />
+
+                </LinearLayout>
 
                 <EditText
+                    android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
-                    android:background="@drawable/custom_edittext"
                     android:layout_marginTop="10dp"
+                    android:background="@drawable/custom_edittext"
+                    android:hint="Mô tả"
+                    android:inputType="textMultiLine"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
-                    android:hint="Description"
-                    android:textColor="@color/green"
-                    android:inputType="textMultiLine" />
+                    android:textColor="@color/green" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -105,11 +130,12 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/save"
                         android:layout_width="0dp"
                         android:layout_height="60dp"
                         android:layout_weight="1"
-                        android:text="Save"
-                        android:id="@+id/save_food"
+                        android:text="Lưu"
+                        android:textAllCaps="false"
                         android:textSize="18dp"
                         android:backgroundTint="@color/green"
                         app:cornerRadius = "20dp"
@@ -119,7 +145,8 @@
                         android:layout_width="0dp"
                         android:layout_height="60dp"
                         android:layout_weight="1"
-                        android:text="Cancel"
+                        android:text="Thoát"
+                        android:textAllCaps="false"
                         android:id="@+id/cancel_food"
                         android:textSize="18dp"
                         android:backgroundTint="@color/green"
