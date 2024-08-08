@@ -53,9 +53,9 @@ public class CartFragment extends Fragment {
         super.onResume();
     }
 
-    protected double getTotalPrice(){
+    protected long getTotalPrice(){
         MainActivity.currentUser.getCarts();
-        double totalPrice = 0;
+        long totalPrice = 0;
         for (int i = 0 ; i < MainActivity.currentUser.getCarts().size() ; i++){
             Cart cart = MainActivity.currentUser.getCarts().get(i);
             totalPrice += cart.calculatePrice();
@@ -64,17 +64,13 @@ public class CartFragment extends Fragment {
     }
 
     private void calculatorCart() {
-        double percentTax = 0.02;
-        double delivery = 10;
-        double itemTotal = Math.round(getTotalPrice() *100)/100;
-        double tax = Math.round((itemTotal * percentTax * 100.0))/100.0;
+        long delivery = 15000;
+        long itemTotal = getTotalPrice();
+        long total = itemTotal+delivery;
 
-        double total = itemTotal+tax;
-
-        binding.totalFreeTxt.setText(itemTotal+"vnd");
-        binding.taxTxt.setText(tax+"vnd");
-        binding.deliveryTxt.setText(delivery+"vnd");
-        binding.totalTxt.setText(total+"vnd");
+        binding.totalPriceOfItem.setText(itemTotal+"vnd");
+        binding.delivery.setText(delivery+"vnd");
+        binding.total.setText(total+"vnd");
     }
 
     private void initCartList() {

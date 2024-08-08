@@ -2,23 +2,16 @@ package com.example.handmadestore.Object;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.net.Uri;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import com.example.handmadestore.Adapter.AdminCategoryAdapter;
-import com.example.handmadestore.Adapter.AdminItemAdapter;
-import com.example.handmadestore.Adapter.CartAdapter;
-import com.example.handmadestore.Adapter.OrderAdapter;
 import com.example.handmadestore.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -193,23 +186,19 @@ public class DatabaseManager {
         });
     }
 
-    public void deleteCategory(Category category,AlertDialog dialog,AdminCategoryAdapter adapter,Context context){
+    public void deleteCategory(Category category,AlertDialog dialog,Context context){
         databaseReference.child("Category").child(category.getId()).removeValue();
         storageReference = firebaseStorage.getReferenceFromUrl(category.getPicUrl());
         storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-//                databaseReference.child("Category").child(category.getId()).removeValue();
                 dialog.dismiss();
-                adapter.notifyDataSetChanged();
                 Toast.makeText(context,"Xoá danh mục thành công",Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-//                databaseReference.child("Category").child(category.getId()).removeValue();
                 dialog.dismiss();
-                adapter.notifyDataSetChanged();
                 Toast.makeText(context,"Xoá danh mục thành công",Toast.LENGTH_SHORT).show();
             }
         });
@@ -267,7 +256,7 @@ public class DatabaseManager {
         }
     }
 
-    public void deleteItem(Item item, AlertDialog dialog, AdminItemAdapter adapter, Context context){
+    public void deleteItem(Item item, AlertDialog dialog, Context context){
         databaseReference.child("Items").child(item.getId()).removeValue();
         for (int i = 0; i < item.getPicUrl().size(); i++) {
             String url = item.getPicUrl().get(i);
@@ -279,7 +268,6 @@ public class DatabaseManager {
                     if (currentIndex == item.getPicUrl().size() - 1){
                         dialog.dismiss();
                         Toast.makeText(context,"Xoá sản phẩm thành công",Toast.LENGTH_SHORT).show();
-                        adapter.notifyDataSetChanged();
                     }
                 }
             });

@@ -78,7 +78,7 @@ public class Order implements Serializable {
         this.carts = carts;
     }
 
-    public boolean isZaloPayment() {
+    public boolean getZaloPayment() {
         return zaloPayment;
     }
 
@@ -92,6 +92,6 @@ public class Order implements Serializable {
             Cart cart = this.carts.get(i);
             totalCart += cart.calculatePrice();
         }
-        return totalCart;
+        return totalCart + 15000;
     }
 }

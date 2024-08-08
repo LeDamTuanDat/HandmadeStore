@@ -77,7 +77,9 @@ public class AdminCategoryAdapter extends RecyclerView.Adapter<AdminCategoryAdap
                         AlertDialog dialog = builder.create();
                         dialog.show();
                         DatabaseManager databaseManager = new DatabaseManager();
-                        databaseManager.deleteCategory(category,dialog,AdminCategoryAdapter.this,context);
+                        databaseManager.deleteCategory(category,dialog,context);
+                        AdminCategoryAdapter.this.items.remove(category);
+                        notifyDataSetChanged();
                         break;
                 }
                 return true;

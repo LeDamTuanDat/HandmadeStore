@@ -1,5 +1,6 @@
 package com.example.handmadestore;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -47,6 +48,9 @@ public class OrderDetail extends AppCompatActivity {
         binding.phone.setText("SĐT: " + order.getPhone());
         binding.address.setText("Địa chỉ: " + order.getAddress());
         binding.status.setText("Trạng thái: " + order.getStatus());
+
+        String paymentMethod = (order.getZaloPayment() ? "ZaloPay" : "Tiền mặt");
+        binding.paymentMethod.setText("Hình thức thanh toán: " + paymentMethod);
         binding.spinner.setSelection(Arrays.asList(status).indexOf(order.getStatus()));
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
@@ -55,14 +59,25 @@ public class OrderDetail extends AppCompatActivity {
         cartAdapter = new CartAdapter(order.getCarts(),false);
         binding.recyclerView.setAdapter(cartAdapter);
 
-        binding.total.setText("Tổng thanh toán : " + order.calTotal() + "đ");
+        if (order.getZaloPayment()){
+            binding.total.setText("Tổng thanh toán : 0đ");
+            binding.zaloPrice.setText(order.calTotal() + "đ");
+            binding.zaloPrice.setPaintFlags(binding.zaloPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }else {
+            binding.total.setText("Tổng thanh toán : " + order.calTotal() + "đ");
+            binding.zaloPrice.setVisibility(View.GONE);
+        }
 
         if (MainActivity.currentUser != null) {
             binding.layoutSpinner.setVisibility(View.GONE);
             binding.save.setVisibility(View.GONE);
+            if (!order.getStatus().equals("Đã giao")){
+                binding.rate.setVisibility(View.GONE);
+            }
         }else {
             binding.layoutSpinner.setVisibility(View.VISIBLE);
             binding.save.setVisibility(View.VISIBLE);
+            binding.rate.setVisibility(View.GONE);
         }
     }
 

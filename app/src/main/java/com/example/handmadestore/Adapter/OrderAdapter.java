@@ -40,6 +40,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.binding.phone.setText("SĐT: " + order.getPhone());
         holder.binding.address.setText("Địa chỉ: " + order.getAddress());
         holder.binding.status.setText("Trạng thái: " + order.getStatus());
+
+        String paymentMethod = (order.getZaloPayment() ? "ZaloPay" : "Tiền mặt");
+        holder.binding.paymentMethod.setText("Hình thức thanh toán: " + paymentMethod);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

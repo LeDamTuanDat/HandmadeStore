@@ -102,21 +102,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholder> {
     }
 
     private void calculatorCart() {
-        double percentTax = 0.02;
-        double delivery = 10;
-        double itemTotal = Math.round(getTotalPrice() *100)/100;
-        double tax = Math.round((itemTotal * percentTax * 100.0))/100.0;
+        long delivery = 15000;
+        long itemTotal = getTotalPrice();
+        long total = itemTotal+delivery;
 
-        double total = itemTotal+tax;
-
-        binding.totalFreeTxt.setText(itemTotal+"vnd");
-        binding.taxTxt.setText(tax+"vnd");
-        binding.deliveryTxt.setText(delivery+"vnd");
-        binding.totalTxt.setText(total+"vnd");
+        binding.totalPriceOfItem.setText(itemTotal+"vnd");
+        binding.delivery.setText(delivery+"vnd");
+        binding.total.setText(total+"vnd");
     }
 
-    protected double getTotalPrice(){
-        double totalPrice = 0;
+    protected long getTotalPrice(){
+        long totalPrice = 0;
         for (int i = 0 ; i < carts.size() ; i++){
             Cart cart = carts.get(i);
             totalPrice += cart.calculatePrice();

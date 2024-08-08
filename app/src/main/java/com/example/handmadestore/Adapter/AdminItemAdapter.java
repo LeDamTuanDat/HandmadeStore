@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.handmadestore.AdminCategory.UploadCategoryActivity;
 import com.example.handmadestore.AdminItem.UploadItemActivity;
+import com.example.handmadestore.LoginActivity;
 import com.example.handmadestore.Object.Category;
 import com.example.handmadestore.Object.DatabaseManager;
 import com.example.handmadestore.Object.Item;
@@ -82,7 +83,9 @@ public class AdminItemAdapter extends RecyclerView.Adapter<AdminItemAdapter.Admi
                         AlertDialog dialog = builder.create();
                         dialog.show();
                         DatabaseManager databaseManager = new DatabaseManager();
-                        databaseManager.deleteItem(item,dialog,AdminItemAdapter.this,context);
+                        databaseManager.deleteItem(item,dialog,context);
+                        AdminItemAdapter.this.items.remove(item);
+                        notifyDataSetChanged();
                         break;
                 }
                 return true;

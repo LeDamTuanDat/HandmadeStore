@@ -47,6 +47,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Trạng thái : Chờ xác nhận"
+            android:layout_marginBottom="5dp"
+            android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/paymentMethod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hình thức thanh toán: Zalo"
             android:textSize="20sp"/>
     </LinearLayout>
 
