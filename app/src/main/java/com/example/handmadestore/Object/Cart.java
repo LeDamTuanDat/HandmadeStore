@@ -1,5 +1,7 @@
 package com.example.handmadestore.Object;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 
 public class Cart implements Serializable {
@@ -40,5 +42,11 @@ public class Cart implements Serializable {
 
     public double calculatePrice(){
         return this.item.getPrice() * this.number;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return this.item.getTitle();
     }
 }

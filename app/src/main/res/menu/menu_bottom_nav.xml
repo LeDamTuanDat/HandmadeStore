@@ -3,14 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/itHome"
-        android:title="HOME"
+        android:title="Trang Chủ"
         android:icon="@drawable/baseline_home_24" />
     <item
         android:id="@+id/itCart"
-        android:title="CART"
+        android:title="Giỏ Hàng"
         android:icon="@drawable/baseline_shopping_cart_24" />
     <item
+        android:id="@+id/itOrder"
+        android:title="Đơn Hàng"
+        android:icon="@drawable/clipboard"/>
+    <item
         android:id="@+id/itUser"
-        android:title="USER"
+        android:title="Người Dùng"
         android:icon="@drawable/baseline_person_24" />
 </menu>

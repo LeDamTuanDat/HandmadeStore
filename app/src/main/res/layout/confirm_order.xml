@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="20dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="20dp"
+    android:layout_gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Xác nhận đơn hàng"
+            android:textSize="30dp"
+            android:textAlignment="center"
+            android:textColor="@color/green"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/name"
+            android:background="@drawable/custom_edittext"
+            android:layout_marginTop="20dp"
+            android:padding="16dp"
+            android:hint="Tên người đặt"
+            android:textColor="@color/green"
+            android:layout_gravity="start|center_horizontal"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/phone"
+            android:background="@drawable/custom_edittext"
+            android:layout_marginTop="20dp"
+            android:padding="16dp"
+            android:hint="Số điện thoại"
+            android:textColor="@color/green"
+            android:inputType="phone"
+            android:layout_gravity="start|center_horizontal"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/address"
+            android:background="@drawable/custom_edittext"
+            android:layout_marginTop="20dp"
+            android:padding="16dp"
+            android:hint="Địa chỉ"
+            android:textColor="@color/green"
+            android:inputType="text"
+            android:layout_gravity="start|center_horizontal"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Thanh toán Zalo Pay"
+                android:button="@null"
+                android:drawableLeft="@drawable/checkbox"/>
+
+            <CheckBox
+                android:id="@+id/defaultInfor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Thông tin mặc định"
+                android:button="@null"
+                android:drawableLeft="@drawable/checkbox"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="Xác nhận"
+                android:id="@+id/confirm"
+                android:textSize="18dp"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/green"
+                app:cornerRadius = "20dp"
+                android:layout_marginRight="20dp"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="Thoát"
+                android:textAllCaps="false"
+                android:id="@+id/cf_cancel"
+                android:textSize="18dp"
+                android:backgroundTint="@color/green"
+                app:cornerRadius = "20dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

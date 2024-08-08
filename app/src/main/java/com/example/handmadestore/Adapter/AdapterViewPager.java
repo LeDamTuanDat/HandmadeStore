@@ -7,6 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.handmadestore.Fragment.CartFragment;
 import com.example.handmadestore.Fragment.HomeFragment;
+import com.example.handmadestore.Fragment.OrderFragment;
 import com.example.handmadestore.Fragment.UserFragment;
 
 import java.util.ArrayList;
@@ -28,6 +29,8 @@ public class AdapterViewPager extends FragmentStateAdapter {
             case 1:
                 return new CartFragment();
             case 2:
+                return new OrderFragment();
+            case 3:
                 return new UserFragment();
         }
         return null;
@@ -35,6 +38,6 @@ public class AdapterViewPager extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 4;
     }
 }

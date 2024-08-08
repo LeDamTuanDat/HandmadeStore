@@ -2,17 +2,23 @@ package com.example.handmadestore.Object;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.net.Uri;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.handmadestore.Adapter.AdminCategoryAdapter;
 import com.example.handmadestore.Adapter.AdminItemAdapter;
+import com.example.handmadestore.Adapter.CartAdapter;
+import com.example.handmadestore.Adapter.OrderAdapter;
+import com.example.handmadestore.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -280,4 +286,31 @@ public class DatabaseManager {
         }
     }
 
+    public void addOrder(Order order, Context context){
+        String keyId = databaseReference.push().getKey();
+        order.setKeyId(keyId);
+        databaseReference.child("Orders").child(order.getIdUser()).child(keyId).setValue(order);
+        MainActivity.currentUser.setCarts(new ArrayList<>());
+        databaseReference.child("Users").child(order.getIdUser()).child("carts").setValue(MainActivity.currentUser.getCarts());
+        Toast.makeText(context,"Đặt hàng thành công",Toast.LENGTH_LONG).show();
+    }
+
+    public void getOrder(String idUser, ArrayList<Order> orders){
+        databaseReference.child("Orders").child(idUser).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    orders.clear();
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        orders.add(dataSnapshot.getValue(Order.class));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 }

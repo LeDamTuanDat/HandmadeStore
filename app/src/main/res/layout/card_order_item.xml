@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="7dp"
+    android:elevation="100dp"
+    app:cardCornerRadius="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:background="@drawable/custom_edittext">
+        <TextView
+            android:id="@+id/order_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ID : -NNArkjTrZvztGUy_lIv"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Người nhận: Lan Anh"
+            android:textSize="20sp"
+            android:layout_marginBottom="5dp"/>
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SĐT : 0345320943"
+            android:textSize="20sp"
+            android:layout_marginBottom="5dp"/>
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Địa chỉ : 58-Yên Nghĩa - Hà Đông - Hà Nội"
+            android:textSize="20sp"
+            android:layout_marginBottom="5dp"/>
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Trạng thái : Chờ xác nhận"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

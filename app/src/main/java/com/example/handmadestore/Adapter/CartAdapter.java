@@ -23,12 +23,17 @@ import java.util.ArrayList;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholder> {
     private ArrayList<Cart> carts;
     private FragmentCartBinding binding;
-    private DatabaseManager databaseManager;
+    private boolean isCart;
 
-    public CartAdapter(ArrayList<Cart> carts, FragmentCartBinding binding) {
+    public CartAdapter(ArrayList<Cart> carts, FragmentCartBinding binding,boolean isCart) {
         this.carts = carts;
         this.binding = binding;
-        databaseManager = new DatabaseManager();
+        this.isCart = isCart;
+    }
+
+    public CartAdapter(ArrayList<Cart> carts,boolean isCart){
+        this.carts = carts;
+        this.isCart = isCart;
     }
 
     @NonNull
@@ -40,12 +45,19 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholder> {
 
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
+        DatabaseManager databaseManager = new DatabaseManager();
         Cart cart = carts.get(position);
         Item item = cart.getItem();
         holder.binding.titleTxt.setText(item.getTitle());
         holder.binding.freeEachitem.setText(item.getPrice()+"vnd");
-        holder.binding.totalEachitem.setText(Math.round(cart.calculatePrice())+"vnd");
-        holder.binding.numberItemTxt.setText(cart.getNumber()+"");
+        holder.binding.totalEachitem.setText("Tổng: " + Math.round(cart.calculatePrice())+"vnd");
+        if (isCart){
+            holder.binding.numberItemTxt.setText(cart.getNumber()+"");
+        }else {
+            holder.binding.plusCart.setVisibility(View.GONE);
+            holder.binding.minusCart.setVisibility(View.GONE);
+            holder.binding.numberItemTxt.setText("Số lượng: " + cart.getNumber());
+        }
 
         RequestOptions requestOptions = new RequestOptions();
         requestOptions = requestOptions.transform(new CenterCrop());
@@ -60,19 +72,19 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholder> {
             public void onClick(View view) {
                 cart.increase();
                 holder.binding.numberItemTxt.setText(cart.getNumber()+"");
-                holder.binding.totalEachitem.setText(Math.round(cart.calculatePrice())+"vnd");
+                holder.binding.totalEachitem.setText("Tổng: " +Math.round(cart.calculatePrice())+"vnd");
                 databaseManager.addCart(MainActivity.currentUser);
                 calculatorCart();
             }
         });
 
-        holder.binding.minusCartBtn.setOnClickListener(new View.OnClickListener() {
+        holder.binding.minusCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (cart.getNumber() != 1){
                     cart.decrease();
                     holder.binding.numberItemTxt.setText(cart.getNumber()+"");
-                    holder.binding.totalEachitem.setText(Math.round(cart.calculatePrice())+"vnd");
+                    holder.binding.totalEachitem.setText("Tổng: " + Math.round(cart.calculatePrice())+"vnd");
                     calculatorCart();
                 }else {
                     carts.remove(cart);

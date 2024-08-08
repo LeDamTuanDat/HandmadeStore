@@ -1,9 +1,11 @@
 package com.example.handmadestore;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
@@ -28,11 +30,17 @@ public class MainActivity extends AppCompatActivity {
         handleBottomNavigation();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
     private void init() {
         currentUser = (User) getIntent().getSerializableExtra("user");
         AdapterViewPager adapterViewPager = new AdapterViewPager(this);
         binding.pageMain.setAdapter(adapterViewPager);
         binding.pageMain.setUserInputEnabled(false);
+        binding.pageMain.setOffscreenPageLimit(4);
     }
 
     private void handleBottomNavigation() {
@@ -46,8 +54,11 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.itCart:
                         binding.pageMain.setCurrentItem(1);
                         break;
-                    case R.id.itUser:
+                    case R.id.itOrder:
                         binding.pageMain.setCurrentItem(2);
+                        break;
+                    case R.id.itUser:
+                        binding.pageMain.setCurrentItem(3);
                         break;
                 }
                 return true;

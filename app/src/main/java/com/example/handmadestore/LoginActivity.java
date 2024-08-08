@@ -13,6 +13,7 @@ import com.example.handmadestore.Object.Category;
 import com.example.handmadestore.Object.DatabaseManager;
 import com.example.handmadestore.Object.Banner;
 import com.example.handmadestore.Object.Item;
+import com.example.handmadestore.Object.Order;
 import com.example.handmadestore.Object.User;
 import com.example.handmadestore.databinding.ActivityLoginBinding;
 
@@ -24,7 +25,8 @@ public class LoginActivity extends AppCompatActivity {
     public static ArrayList<Banner> banners;
     public static ArrayList<Category> categories;
     public static ArrayList<Item> items;
-    public static DatabaseManager databaseManager;
+    public static ArrayList<Order> orders;
+    DatabaseManager databaseManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +37,18 @@ public class LoginActivity extends AppCompatActivity {
         init();
     }
 
+    @Override
+    protected void onResume() {
+        getData();
+        super.onResume();
+    }
+
     private void getData() {
         users = new ArrayList<>();
         banners = new ArrayList<>();
         categories = new ArrayList<>();
         items = new ArrayList<>();
+        orders = new ArrayList<>();
         databaseManager = new DatabaseManager();
         databaseManager.getUsers(users);
         databaseManager.getBanner(banners);
@@ -59,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                         isExist = true;
                         if(user.getPassword().equals(password)){
                             Toast.makeText(LoginActivity.this,"Đăng nhập thành công",Toast.LENGTH_LONG).show();
+                            databaseManager.getOrder(username,orders);
                             if (user.getPriority()){
                                 Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
                                 intent.putExtra("user",user);

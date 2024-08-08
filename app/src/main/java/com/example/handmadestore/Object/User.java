@@ -21,6 +21,7 @@ public class User implements Serializable {
         this.email = email;
         this.phone = phone;
         this.priority = priority;
+        this.address = address;
     }
 
     public String getEmail() {

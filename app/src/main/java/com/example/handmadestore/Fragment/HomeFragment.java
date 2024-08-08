@@ -52,7 +52,7 @@ public class HomeFragment extends Fragment {
 
 
     private void initCategories(){
-        binding.rycyclerCategory.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+        binding.rycyclerCategory.setLayoutManager(new GridLayoutManager(getContext(),5));
         binding.rycyclerCategory.setAdapter(new CategoryAdapter(LoginActivity.categories));
     }
 
