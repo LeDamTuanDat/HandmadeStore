@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -20,39 +21,53 @@
         tools:targetApi="31">
         <activity
             android:name=".AdminOrderActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".OrderDetail"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".AddOrder"
-            android:exported="false" />
+            android:exported="true"
+            android:label="Merchant Demo"
+            android:launchMode="singleTask">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="app"
+                    android:scheme="demozpdk" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".AdminItem.UploadItemActivity"
-            android:exported="false"
+            android:exported="true"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".AdminItem.AdminItemActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".AdminCategory.UploadCategoryActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".AdminCategory.AdminCategoryActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".AdminActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".SignupActivity"
-            android:exported="false"
+            android:exported="true"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".LoginActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".IntroSliderActivity"
-            android:exported="false"
+            android:exported="true"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
             android:name=".SplashScreenActivity"
@@ -65,10 +80,10 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".DetailActivity"
-            android:exported="false" />
+            android:exported="true" />
     </application>
 
 </manifest>

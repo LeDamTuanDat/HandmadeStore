@@ -35,6 +35,7 @@ public class OrderDetail extends AppCompatActivity {
         handleEvent();
     }
 
+
     public void getData(){
         order = (Order) getIntent().getSerializableExtra("order");
         statusAdapter = new ArrayAdapter<>(this,R.layout.spinner_item,status);
@@ -54,7 +55,7 @@ public class OrderDetail extends AppCompatActivity {
         cartAdapter = new CartAdapter(order.getCarts(),false);
         binding.recyclerView.setAdapter(cartAdapter);
 
-        calTotal();
+        binding.total.setText("Tổng thanh toán : " + order.calTotal() + "đ");
 
         if (MainActivity.currentUser != null) {
             binding.layoutSpinner.setVisibility(View.GONE);
@@ -63,15 +64,6 @@ public class OrderDetail extends AppCompatActivity {
             binding.layoutSpinner.setVisibility(View.VISIBLE);
             binding.save.setVisibility(View.VISIBLE);
         }
-    }
-
-    protected void calTotal(){
-        long totalCart = 0;
-        for (int i = 0 ; i < order.getCarts().size() ; i++){
-            Cart cart = order.getCarts().get(i);
-            totalCart += cart.calculatePrice();
-        }
-        binding.total.setText("Tổng thanh toán : " + totalCart + "đ");
     }
 
     public void handleEvent(){

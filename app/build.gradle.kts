@@ -42,6 +42,11 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.preference)
+    implementation(fileTree(mapOf(
+        "dir" to "C:\\source",
+        "include" to listOf("*.aar", "*.jar"),
+        "exclude" to listOf("")
+    )))
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -55,4 +60,6 @@ dependencies {
     annotationProcessor("com.github.bumptech.glide:compiler:4.11.0")
     implementation("com.makeramen:roundedimageview:2.3.0")
     implementation("com.github.denzcoskun:ImageSlideshow:0.1.2")
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation("commons-codec:commons-codec:1.14")
 }

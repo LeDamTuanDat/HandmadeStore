@@ -6,17 +6,8 @@ import java.util.ArrayList;
 public class Order implements Serializable {
     private String keyId,idUser,name,phone,address;
     private String status;
+    private boolean zaloPayment;
     private ArrayList<Cart> carts = new ArrayList<>();
-
-    public Order(String keyId,String idUser, String name, String phone, String address, ArrayList<Cart> carts) {
-        this.keyId = keyId;
-        this.idUser = idUser;
-        this.name = name;
-        this.phone = phone;
-        this.address = address;
-        this.carts = carts;
-        this.status = "Chờ xác nhận";
-    }
 
     public Order(String idUser, String name, String phone, String address, ArrayList<Cart> carts) {
         this.idUser = idUser;
@@ -25,6 +16,7 @@ public class Order implements Serializable {
         this.address = address;
         this.carts = carts;
         this.status = "Chờ xác nhận";
+        this.zaloPayment = false;
     }
 
     public Order() {
@@ -84,5 +76,22 @@ public class Order implements Serializable {
 
     public void setCarts(ArrayList<Cart> carts) {
         this.carts = carts;
+    }
+
+    public boolean isZaloPayment() {
+        return zaloPayment;
+    }
+
+    public void setZaloPayment(boolean zaloPayment) {
+        this.zaloPayment = zaloPayment;
+    }
+
+    public long calTotal(){
+        long totalCart = 0;
+        for (int i = 0 ; i < this.carts.size() ; i++){
+            Cart cart = this.carts.get(i);
+            totalCart += cart.calculatePrice();
+        }
+        return totalCart;
     }
 }
