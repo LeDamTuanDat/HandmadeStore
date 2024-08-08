@@ -18,12 +18,10 @@ import java.util.ArrayList;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
     private ArrayList<Order> orders;
-    private FragmentOrderBinding binding;
     private Context context;
 
-    public OrderAdapter(ArrayList<Order> orders, FragmentOrderBinding binding) {
+    public OrderAdapter(ArrayList<Order> orders) {
         this.orders = orders;
-        this.binding = binding;
     }
 
     @NonNull
@@ -55,6 +53,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     @Override
     public int getItemCount() {
         return orders.size();
+    }
+
+    public void setResultAfterFiltered(ArrayList<Order> orders){
+        this.orders = orders;
+        notifyDataSetChanged();
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

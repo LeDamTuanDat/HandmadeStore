@@ -12,7 +12,7 @@ import com.example.handmadestore.Object.User;
 import com.example.handmadestore.databinding.ActivityAdminBinding;
 
 public class AdminActivity extends AppCompatActivity {
-    User currentUser;
+    public static User currentUser;
     ActivityAdminBinding binding;
 
     @Override
@@ -41,6 +41,13 @@ public class AdminActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(AdminActivity.this, AdminItemActivity.class);
                 startActivity(intent);
+            }
+        });
+        binding.order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent itent = new Intent(AdminActivity.this,AdminOrderActivity.class);
+                startActivity(itent);
             }
         });
     }

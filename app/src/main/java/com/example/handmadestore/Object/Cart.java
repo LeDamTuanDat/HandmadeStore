@@ -40,7 +40,7 @@ public class Cart implements Serializable {
         this.number--;
     }
 
-    public double calculatePrice(){
+    public long calculatePrice(){
         return this.item.getPrice() * this.number;
     }
 

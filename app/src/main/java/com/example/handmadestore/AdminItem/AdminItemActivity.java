@@ -40,11 +40,14 @@ public class AdminItemActivity extends AppCompatActivity {
         handleSelectCategory();
         handleAddItem();
         handleSearch();
+        handleBack();
     }
 
     @Override
     protected void onResume() {
         adapter.notifyDataSetChanged();
+        binding.search.setQuery("",false);
+        binding.search.clearFocus();
         super.onResume();
     }
 
@@ -92,6 +95,8 @@ public class AdminItemActivity extends AppCompatActivity {
                         category = adapter.getItem(i);
                         binding.category.setText(category.toString());
                         resultAfterFiltered(category.getId());
+                        binding.search.setQuery("",false);
+                        binding.search.clearFocus();
                         dialog.dismiss();
                     }
                 });
@@ -154,5 +159,14 @@ public class AdminItemActivity extends AppCompatActivity {
             }
         }
         adapter.setResultAfterFiltered(resultAfterSearch);
+    }
+
+    public void handleBack(){
+        binding.back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }

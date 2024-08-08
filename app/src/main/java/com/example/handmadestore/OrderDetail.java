@@ -2,17 +2,17 @@ package com.example.handmadestore;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.handmadestore.Adapter.CartAdapter;
+import com.example.handmadestore.Object.Cart;
+import com.example.handmadestore.Object.DatabaseManager;
 import com.example.handmadestore.Object.Order;
 import com.example.handmadestore.databinding.ActivityOrderDetailBinding;
 
@@ -32,6 +32,7 @@ public class OrderDetail extends AppCompatActivity {
         binding = ActivityOrderDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getData();
+        handleEvent();
     }
 
     public void getData(){
@@ -53,9 +54,52 @@ public class OrderDetail extends AppCompatActivity {
         cartAdapter = new CartAdapter(order.getCarts(),false);
         binding.recyclerView.setAdapter(cartAdapter);
 
-        if (!MainActivity.currentUser.getPriority()){
+        calTotal();
+
+        if (MainActivity.currentUser != null) {
             binding.layoutSpinner.setVisibility(View.GONE);
             binding.save.setVisibility(View.GONE);
+        }else {
+            binding.layoutSpinner.setVisibility(View.VISIBLE);
+            binding.save.setVisibility(View.VISIBLE);
         }
+    }
+
+    protected void calTotal(){
+        long totalCart = 0;
+        for (int i = 0 ; i < order.getCarts().size() ; i++){
+            Cart cart = order.getCarts().get(i);
+            totalCart += cart.calculatePrice();
+        }
+        binding.total.setText("Tổng thanh toán : " + totalCart + "đ");
+    }
+
+    public void handleEvent(){
+        binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                order.setStatus(status[i]);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        binding.save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatabaseManager databaseManager = new DatabaseManager();
+                databaseManager.setOrderStatus(order);
+                Toast.makeText(OrderDetail.this,"Cập nhật trạng thái thành công",Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
+        binding.exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }

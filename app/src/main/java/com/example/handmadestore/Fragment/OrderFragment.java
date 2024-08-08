@@ -35,7 +35,6 @@ public class OrderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         binding = FragmentOrderBinding.inflate(inflater,container,false);
         view = binding.getRoot();
         initOrderList();
@@ -56,7 +55,7 @@ public class OrderFragment extends Fragment {
             binding.emptyTxt.setVisibility(View.GONE);
             binding.order.setVisibility(View.VISIBLE);
         }
-        orderAdapter = new OrderAdapter(LoginActivity.orders, binding);
+        orderAdapter = new OrderAdapter(LoginActivity.orders);
         binding.cartView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         binding.cartView.setAdapter(orderAdapter);
     }

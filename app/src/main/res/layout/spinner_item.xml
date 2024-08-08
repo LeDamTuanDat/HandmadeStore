@@ -6,6 +6,7 @@
     android:textColor="@color/green"
     android:textSize="18dp"
     android:ellipsize="marquee"
-    android:padding="10dip">
+    android:padding="10dip"
+    android:background="#F0F0F0">
 
 </TextView>

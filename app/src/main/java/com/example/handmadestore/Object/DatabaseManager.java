@@ -313,4 +313,29 @@ public class DatabaseManager {
             }
         });
     }
+
+    public void getAllOrder(ArrayList<Order> orders){
+        databaseReference.child("Orders").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    orders.clear();
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        for (DataSnapshot sub : dataSnapshot.getChildren()){
+                            orders.add(sub.getValue(Order.class));
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void setOrderStatus(Order order){
+        databaseReference.child("Orders").child(order.getIdUser()).child(order.getKeyId()).setValue(order);
+    }
 }

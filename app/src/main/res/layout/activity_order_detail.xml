@@ -81,7 +81,7 @@
             android:layout_weight="1"/>
 
         <TextView
-            android:id="@+id/order_detail_total"
+            android:id="@+id/total"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tổng thanh toán : 100000đ"
@@ -108,7 +108,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="3"
         android:layout_marginTop="10dp"
         android:gravity="center">
         <com.google.android.material.button.MaterialButton

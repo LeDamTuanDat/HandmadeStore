@@ -68,12 +68,13 @@ public class LoginActivity extends AppCompatActivity {
                         isExist = true;
                         if(user.getPassword().equals(password)){
                             Toast.makeText(LoginActivity.this,"Đăng nhập thành công",Toast.LENGTH_LONG).show();
-                            databaseManager.getOrder(username,orders);
                             if (user.getPriority()){
+                                databaseManager.getAllOrder(orders);
                                 Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
                                 intent.putExtra("user",user);
                                 startActivity(intent);
                             }else {
+                                databaseManager.getOrder(username,orders);
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("user",user);
                                 startActivity(intent);

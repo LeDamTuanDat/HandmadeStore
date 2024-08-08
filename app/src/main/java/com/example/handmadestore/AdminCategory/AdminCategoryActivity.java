@@ -40,6 +40,8 @@ public class AdminCategoryActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         adapter.notifyDataSetChanged();
+        binding.search.setQuery("",false);
+        binding.search.clearFocus();
         super.onResume();
     }
 
