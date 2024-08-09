@@ -16,9 +16,11 @@ import com.bumptech.glide.Glide;
 import com.example.handmadestore.AdminCategory.UploadCategoryActivity;
 import com.example.handmadestore.AdminItem.UploadItemActivity;
 import com.example.handmadestore.LoginActivity;
+import com.example.handmadestore.Object.Cart;
 import com.example.handmadestore.Object.Category;
 import com.example.handmadestore.Object.DatabaseManager;
 import com.example.handmadestore.Object.Item;
+import com.example.handmadestore.Object.User;
 import com.example.handmadestore.R;
 import com.example.handmadestore.databinding.CardAdminItemBinding;
 
@@ -77,12 +79,14 @@ public class AdminItemAdapter extends RecyclerView.Adapter<AdminItemAdapter.Admi
                         context.startActivity(intent);
                         break;
                     case R.id.delete:
+
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
                         builder.setCancelable(false);
                         builder.setView(R.layout.loading_activity);
                         AlertDialog dialog = builder.create();
                         dialog.show();
                         DatabaseManager databaseManager = new DatabaseManager();
+                        checkCart(item.getId(),databaseManager);
                         databaseManager.deleteItem(item,dialog,context);
                         AdminItemAdapter.this.items.remove(item);
                         notifyDataSetChanged();
@@ -98,6 +102,18 @@ public class AdminItemAdapter extends RecyclerView.Adapter<AdminItemAdapter.Admi
     public void setResultAfterFiltered(ArrayList<Item> items){
         this.items = items;
         notifyDataSetChanged();
+    }
+
+    public boolean checkCart(String text,DatabaseManager databaseManager){
+        for (User user : LoginActivity.users){
+            for (Cart cart : user.getCarts()){
+                if (cart.getItem().getId().equals(text)){
+                    user.getCarts().remove(cart);
+                    databaseManager.addCart(user);
+                }
+            }
+        }
+        return false;
     }
 
     public class AdminItemViewHolder extends RecyclerView.ViewHolder {

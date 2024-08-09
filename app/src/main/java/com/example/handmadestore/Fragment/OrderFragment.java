@@ -56,7 +56,7 @@ public class OrderFragment extends Fragment {
             binding.order.setVisibility(View.VISIBLE);
         }
         orderAdapter = new OrderAdapter(LoginActivity.orders);
-        binding.cartView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        binding.cartView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, true));
         binding.cartView.setAdapter(orderAdapter);
     }
 }

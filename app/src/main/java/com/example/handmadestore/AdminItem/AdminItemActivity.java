@@ -27,6 +27,7 @@ import java.util.ArrayList;
 
 public class AdminItemActivity extends AppCompatActivity {
     ActivityAdminItemBinding binding;
+    DropdownSearchBinding dropdownBinding;
     AdminItemAdapter adapter;
     Category category;
     ArrayList<Item> resultAfterFiltered = new ArrayList<>();
@@ -48,6 +49,9 @@ public class AdminItemActivity extends AppCompatActivity {
         initItems();
         binding.search.setQuery("",false);
         binding.search.clearFocus();
+        if (category != null) {
+            resultAfterFiltered(category.getId());
+        }
         super.onResume();
     }
 
@@ -62,7 +66,7 @@ public class AdminItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Dialog dialog = new Dialog(AdminItemActivity.this);
-                DropdownSearchBinding dropdownBinding = DropdownSearchBinding.inflate(LayoutInflater.from(AdminItemActivity.this));
+                dropdownBinding = DropdownSearchBinding.inflate(LayoutInflater.from(AdminItemActivity.this));
                 dialog.setContentView(dropdownBinding.getRoot());
                 dialog.getWindow().setLayout(750,900);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

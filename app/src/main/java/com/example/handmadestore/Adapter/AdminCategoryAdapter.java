@@ -8,14 +8,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.handmadestore.AdminCategory.UploadCategoryActivity;
+import com.example.handmadestore.LoginActivity;
 import com.example.handmadestore.Object.Category;
 import com.example.handmadestore.Object.DatabaseManager;
+import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.R;
 import com.example.handmadestore.databinding.CardAdminCategoryBinding;
 
@@ -71,15 +74,19 @@ public class AdminCategoryAdapter extends RecyclerView.Adapter<AdminCategoryAdap
                         context.startActivity(intent);
                         break;
                     case R.id.delete:
-                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                        builder.setCancelable(false);
-                        builder.setView(R.layout.loading_activity);
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
-                        DatabaseManager databaseManager = new DatabaseManager();
-                        databaseManager.deleteCategory(category,dialog,context);
-                        AdminCategoryAdapter.this.items.remove(category);
-                        notifyDataSetChanged();
+                        if (checkItem(category.getId())){
+                            Toast.makeText(context, "Không thể xoá danh mục", Toast.LENGTH_SHORT).show();
+                        }else {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setCancelable(false);
+                            builder.setView(R.layout.loading_activity);
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                            DatabaseManager databaseManager = new DatabaseManager();
+                            databaseManager.deleteCategory(category, dialog, context);
+                            AdminCategoryAdapter.this.items.remove(category);
+                            notifyDataSetChanged();
+                        }
                         break;
                 }
                 return true;
@@ -91,6 +98,15 @@ public class AdminCategoryAdapter extends RecyclerView.Adapter<AdminCategoryAdap
     public void setReSultAfterSearch(ArrayList<Category> categories){
         this.items = categories;
         notifyDataSetChanged();
+    }
+    
+    public boolean checkItem(String text){
+        for (Item item : LoginActivity.items) {
+            if(item.getCategoryId().equals(text)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public class AdminCategoryViewHolder extends RecyclerView.ViewHolder {
