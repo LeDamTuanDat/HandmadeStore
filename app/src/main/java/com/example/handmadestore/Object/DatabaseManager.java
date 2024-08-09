@@ -278,6 +278,13 @@ public class DatabaseManager {
         String keyId = databaseReference.push().getKey();
         order.setKeyId(keyId);
         databaseReference.child("Orders").child(order.getIdUser()).child(keyId).setValue(order);
+
+        for (Cart cart: order.getCarts()) {
+            Item item = cart.getItem();
+            item.setSold(cart.getNumber());
+            databaseReference.child("Items").child(item.getId()).setValue(item);
+        }
+
         MainActivity.currentUser.setCarts(new ArrayList<>());
         databaseReference.child("Users").child(order.getIdUser()).child("carts").setValue(MainActivity.currentUser.getCarts());
         Toast.makeText(context,"Đặt hàng thành công",Toast.LENGTH_LONG).show();

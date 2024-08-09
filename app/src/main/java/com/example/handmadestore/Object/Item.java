@@ -14,8 +14,6 @@ public class Item implements Serializable {
     private int sold;
     private long price;
     private long oldPrice;
-    private int review;
-    private double rating;
 
     public Item() {
     }
@@ -74,7 +72,7 @@ public class Item implements Serializable {
     }
 
     public void setSold(int sold) {
-        this.sold = sold;
+        this.sold = this.sold + sold;
     }
 
     public long getPrice() {
@@ -91,22 +89,6 @@ public class Item implements Serializable {
 
     public void setOldPrice(long oldPrice) {
         this.oldPrice = oldPrice;
-    }
-
-    public int getReview() {
-        return review;
-    }
-
-    public void setReview(int review) {
-        this.review = review;
-    }
-
-    public float getRating() {
-        return (float) rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
     }
 
     @NonNull

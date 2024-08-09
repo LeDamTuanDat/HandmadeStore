@@ -40,12 +40,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.Viewholder> {
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, @SuppressLint("RecyclerView") int position) {
         holder.binding.title.setText(items.get(position).getTitle());
-        holder.binding.reviewTxt.setText(""+items.get(position).getReview());
+//        holder.binding.reviewTxt.setText(""+items.get(position).getReview());
         holder.binding.PriceTxt.setText("đ"+items.get(position).getPrice());
-        holder.binding.ratingTxt.setText("("+items.get(position).getRating()+")");
+//        holder.binding.ratingTxt.setText("("+items.get(position).getRating()+")");
         holder.binding.oldPriceTxt.setText("đ"+items.get(position).getOldPrice());
         holder.binding.oldPriceTxt.setPaintFlags(holder.binding.oldPriceTxt.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
-        holder.binding.ratingBar.setRating((float) items.get(position).getRating());
+//        holder.binding.ratingBar.setRating((float) items.get(position).getRating());
 
         RequestOptions requestOptions = new RequestOptions();
         requestOptions = new RequestOptions().transform(new CenterCrop());
