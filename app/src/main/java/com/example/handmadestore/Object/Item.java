@@ -13,15 +13,15 @@ public class Item implements Serializable {
     private  ArrayList<String> picUrl;
     private int sold;
     private long price;
-    private long oldPrice;
+    private int inventory;
 
     public Item() {
     }
 
-    public Item(String title, String categoryId, long oldPrice, long price, String description) {
+    public Item(String title, String categoryId, int inventory, long price, String description) {
         this.title = title;
         this.categoryId = categoryId;
-        this.oldPrice = oldPrice;
+        this.inventory = inventory;
         this.price = price;
         this.description = description;
         this.sold = 0;
@@ -83,12 +83,12 @@ public class Item implements Serializable {
         this.price = price;
     }
 
-    public long getOldPrice() {
-        return oldPrice;
+    public int getInventory() {
+        return inventory;
     }
 
-    public void setOldPrice(long oldPrice) {
-        this.oldPrice = oldPrice;
+    public void setInventory(int inventory) {
+        this.inventory = inventory;
     }
 
     @NonNull

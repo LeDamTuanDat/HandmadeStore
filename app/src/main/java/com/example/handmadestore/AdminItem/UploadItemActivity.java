@@ -66,7 +66,7 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
             binding.title.setText(item.getTitle());
             category = findCategory(item.getCategoryId());
             binding.category.setText(category.getTitle());
-            binding.oldPrice.setText(""+item.getOldPrice());
+            binding.inventory.setText(""+item.getInventory());
             binding.price.setText(""+item.getPrice());
             binding.description.setText(item.getDescription());
         }
@@ -185,7 +185,7 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
             public void onClick(View view) {
                 String title = binding.title.getText().toString();
                 String categoryId = (category != null ? category.getId() : "");
-                String oldPrice = binding.oldPrice.getText().toString();
+                String oldPrice = binding.inventory.getText().toString();
                 String price = binding.price.getText().toString();
                 String description = binding.description.getText().toString();
 
@@ -202,14 +202,14 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
                     databaseManager = new DatabaseManager();
                     if (item == null){
                         if(!checkItemForAdd(title)) {
-                            item = new Item(title, categoryId, Long.parseLong(oldPrice), Long.parseLong(price), description);
+                            item = new Item(title, categoryId, Integer.parseInt(oldPrice), Long.parseLong(price), description);
                             databaseManager.uploadItem(item, uriArrayList, dialog, UploadItemActivity.this,false);
                         }
                     }else {
                         if (!checkItemForMod(title)){
                             item.setTitle(title);
                             item.setCategoryId(categoryId);
-                            item.setOldPrice(Long.parseLong(oldPrice));
+                            item.setInventory(Integer.parseInt(oldPrice));
                             item.setPrice(Long.parseLong(price));
                             item.setDescription(description);
                             getImagasAfterModify();
@@ -217,6 +217,12 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
                         }
                     }
                 }
+            }
+        });
+        binding.exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }

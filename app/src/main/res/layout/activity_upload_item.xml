@@ -85,7 +85,7 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/oldPrice"
+                        android:id="@+id/price"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_weight="1"
@@ -93,19 +93,19 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
                         android:paddingHorizontal="16dp"
-                        android:hint="Giá gốc"
+                        android:hint="Giá tiền"
                         android:inputType="number"
                         android:textColor="@color/green" />
 
                     <EditText
-                        android:id="@+id/price"
+                        android:id="@+id/inventory"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_weight="1"
                         android:background="@drawable/custom_edittext"
                         android:layout_marginTop="10dp"
                         android:paddingHorizontal="16dp"
-                        android:hint="Giá khuyến mãi"
+                        android:hint="Tồn kho"
                         android:inputType="number"
                         android:textColor="@color/green" />
 
@@ -147,7 +147,7 @@
                         android:layout_weight="1"
                         android:text="Thoát"
                         android:textAllCaps="false"
-                        android:id="@+id/cancel_food"
+                        android:id="@+id/exit"
                         android:textSize="18dp"
                         android:backgroundTint="@color/green"
                         app:cornerRadius = "20dp"/>
