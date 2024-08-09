@@ -1,6 +1,7 @@
 package com.example.handmadestore;
 
 import android.os.Bundle;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.example.handmadestore.Adapter.AdapterViewPagerForItem;
 import com.example.handmadestore.Fragment.DescriptionFragment;
 import com.example.handmadestore.Fragment.ReviewFragment;
 import com.example.handmadestore.Fragment.SoldFragment;
@@ -19,6 +21,8 @@ import com.example.handmadestore.Object.Cart;
 import com.example.handmadestore.Object.DatabaseManager;
 import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.databinding.ActivityDetailBinding;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,61 +78,68 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(){
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-
+        AdapterViewPagerForItem adapter = new AdapterViewPagerForItem(this);
         DescriptionFragment tab1 = new DescriptionFragment();
         ReviewFragment tab2 = new ReviewFragment();
-        SoldFragment tab3 = new SoldFragment();
 
         Bundle bundle1 = new Bundle();
         Bundle bundle2 = new Bundle();
-        Bundle bundle3 = new Bundle();
 
         bundle1.putString("description", object.getDescription());
 
         tab1.setArguments(bundle1);
         tab2.setArguments(bundle2);
-        tab3.setArguments(bundle3);
 
         adapter.addFrag(tab1, "Miêu tả");
         adapter.addFrag(tab2, "Đánh giá");
-        adapter.addFrag(tab3, "Đã bán");
 
         binding.viewpager.setAdapter(adapter);
-        binding.tabLayout.setupWithViewPager(binding.viewpager);
 
-
+        new TabLayoutMediator(binding.tabLayout, binding.viewpager, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                switch (position){
+                    case 0:
+                        tab.setText(adapter.getPageTitle(position));
+                        break;
+                    case 1:
+                        tab.setText(adapter.getPageTitle(position));
+                        break;
+                }
+            }
+        }).attach();
     }
 
 
-    private class ViewPagerAdapter extends FragmentPagerAdapter{
-        private final List<Fragment> mFragmentList=new ArrayList<>();
-        private final List<String> mFragmentTitleList=new ArrayList<>();
-        public ViewPagerAdapter(@NonNull FragmentManager fm) {
-            super(fm);
-        }
+//    private class ViewPagerAdapter extends FragmentPagerAdapter{
+//        private final List<Fragment> mFragmentList=new ArrayList<>();
+//        private final List<String> mFragmentTitleList=new ArrayList<>();
+//        public ViewPagerAdapter(@NonNull FragmentManager fm) {
+//            super(fm);
+//        }
+//
+//        @NonNull
+//        @Override
+//        public Fragment getItem(int position) {
+//            return mFragmentList.get(position);
+//        }
+//
+//        @Override
+//        public int getCount() {
+//            return mFragmentList.size();
+//        }
+//
+//        private void addFrag(Fragment fragment, String title){
+//            mFragmentList.add(fragment);
+//            mFragmentTitleList.add(title);
+//        }
+//        @Override
+//        public CharSequence getPageTitle(int position) {
+//            return mFragmentTitleList.get(position);
+//        }
+//    }
 
-        @NonNull
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-        private void addFrag(Fragment fragment, String title){
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
-
-    protected boolean checkCart(Item item) {//Hàm kiểm tra giỏ hàng
+    protected boolean checkCart(Item item) {
         ArrayList<Cart> carts = MainActivity.currentUser.getCarts();
         for (int i = 0; i < carts.size(); i++) {
             Item temp = carts.get(i).getItem();

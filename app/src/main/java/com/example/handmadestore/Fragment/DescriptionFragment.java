@@ -34,6 +34,5 @@ public class DescriptionFragment extends Fragment {
 
         TextView descTxt = view.findViewById(R.id.descriptionTxt);
         descTxt.setText(getArguments().getString("description", ""));
-
     }
 }

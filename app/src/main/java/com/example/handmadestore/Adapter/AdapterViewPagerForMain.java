@@ -12,11 +12,11 @@ import com.example.handmadestore.Fragment.UserFragment;
 
 import java.util.ArrayList;
 
-public class AdapterViewPager extends FragmentStateAdapter {
+public class AdapterViewPagerForMain extends FragmentStateAdapter {
 
     ArrayList<Fragment> arr;
 
-    public AdapterViewPager(@NonNull FragmentActivity fragmentActivity) {
+    public AdapterViewPagerForMain(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
 

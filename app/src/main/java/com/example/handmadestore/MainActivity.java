@@ -1,21 +1,15 @@
 package com.example.handmadestore;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.handmadestore.Adapter.AdapterViewPager;
+import com.example.handmadestore.Adapter.AdapterViewPagerForMain;
 import com.example.handmadestore.Object.User;
 import com.example.handmadestore.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationBarView;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
@@ -37,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         currentUser = (User) getIntent().getSerializableExtra("user");
-        AdapterViewPager adapterViewPager = new AdapterViewPager(this);
-        binding.pageMain.setAdapter(adapterViewPager);
+        AdapterViewPagerForMain adapterViewPagerForMain = new AdapterViewPagerForMain(this);
+        binding.pageMain.setAdapter(adapterViewPagerForMain);
         binding.pageMain.setUserInputEnabled(false);
         binding.pageMain.setOffscreenPageLimit(4);
     }
