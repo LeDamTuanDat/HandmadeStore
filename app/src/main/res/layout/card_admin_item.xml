@@ -38,6 +38,7 @@
                 android:isIndicator="true"
                 android:numStars="5"
                 android:progressTint="#ffc106"
+                android:secondaryProgressTint="@android:color/transparent"
                 android:rating="3"
                 android:stepSize="0.1" />
 

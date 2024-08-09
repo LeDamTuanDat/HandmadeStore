@@ -50,5 +50,13 @@ public class AdminActivity extends AppCompatActivity {
                 startActivity(itent);
             }
         });
+        binding.logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdminActivity.this,LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 }

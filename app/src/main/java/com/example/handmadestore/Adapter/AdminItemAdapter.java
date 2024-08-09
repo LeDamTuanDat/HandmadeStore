@@ -20,11 +20,14 @@ import com.example.handmadestore.Object.Cart;
 import com.example.handmadestore.Object.Category;
 import com.example.handmadestore.Object.DatabaseManager;
 import com.example.handmadestore.Object.Item;
+import com.example.handmadestore.Object.Rating;
 import com.example.handmadestore.Object.User;
 import com.example.handmadestore.R;
 import com.example.handmadestore.databinding.CardAdminItemBinding;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class AdminItemAdapter extends RecyclerView.Adapter<AdminItemAdapter.AdminItemViewHolder>{
 
@@ -48,9 +51,12 @@ public class AdminItemAdapter extends RecyclerView.Adapter<AdminItemAdapter.Admi
         Item item = items.get(position);
         Glide.with(context).load(item.getPicUrl().get(0)).into(holder.binding.image);
         holder.binding.title.setText(item.getTitle());
-        holder.binding.ratingBar.setRating(item.getRating());
-        holder.binding.ratingTxt.setText("("+item.getRating()+")");
-        holder.binding.price.setText("đ"+item.getPrice());
+        holder.binding.ratingBar.setRating(Math.round(calRating(item) * 10) / 10.0f);
+        holder.binding.ratingTxt.setText(Math.round(calRating(item) * 10) / 10.0f + "");
+
+        NumberFormat formatVND = NumberFormat.getCurrencyInstance(new Locale("vi","VN"));
+
+        holder.binding.price.setText(formatVND.format(item.getPrice()));
         holder.binding.sold.setText("Đã bán: "+ item.getSold());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +120,22 @@ public class AdminItemAdapter extends RecyclerView.Adapter<AdminItemAdapter.Admi
             }
         }
         return false;
+    }
+
+    public float calRating(Item item){
+        ArrayList<Rating> ratings = new ArrayList<>();
+        float ratingsAvg = 0;
+        for (Rating temp: LoginActivity.ratings) {
+            if(temp.getItemId().equals(item.getId())){
+                ratings.add(temp);
+            }
+        }
+
+        for (Rating temp: ratings) {
+            ratingsAvg += temp.getRating();
+        }
+
+        return ratingsAvg / ratings.size();
     }
 
     public class AdminItemViewHolder extends RecyclerView.ViewHolder {
