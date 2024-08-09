@@ -14,6 +14,7 @@ import com.example.handmadestore.Object.DatabaseManager;
 import com.example.handmadestore.Object.Banner;
 import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.Object.Order;
+import com.example.handmadestore.Object.Rating;
 import com.example.handmadestore.Object.User;
 import com.example.handmadestore.databinding.ActivityLoginBinding;
 
@@ -26,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     public static ArrayList<Category> categories;
     public static ArrayList<Item> items;
     public static ArrayList<Order> orders;
+    public static ArrayList<Rating> ratings;
     DatabaseManager databaseManager;
 
     @Override
@@ -49,11 +51,13 @@ public class LoginActivity extends AppCompatActivity {
         categories = new ArrayList<>();
         items = new ArrayList<>();
         orders = new ArrayList<>();
+        ratings = new ArrayList<>();
         databaseManager = new DatabaseManager();
         databaseManager.getUsers(users);
         databaseManager.getBanner(banners);
         databaseManager.getCategory(categories);
         databaseManager.getItems(items);
+        databaseManager.getRatings(ratings);
     }
 
     private void init(){

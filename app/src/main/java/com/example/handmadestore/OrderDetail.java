@@ -15,15 +15,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.handmadestore.Adapter.CartAdapter;
 import com.example.handmadestore.Object.Cart;
 import com.example.handmadestore.Object.DatabaseManager;
+import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.Object.Order;
+import com.example.handmadestore.Object.Rating;
 import com.example.handmadestore.databinding.ActivityOrderDetailBinding;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class OrderDetail extends AppCompatActivity {
 
     ActivityOrderDetailBinding binding ;
     Order order;
+    ArrayList<Item> items;
     String[] status = {"Chờ xác nhận","Đã xác nhận","Đang giao hàng","Đã giao"};
     ArrayAdapter<String> statusAdapter;
     CartAdapter cartAdapter;
@@ -112,10 +116,42 @@ public class OrderDetail extends AppCompatActivity {
         binding.rate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(OrderDetail.this,RatingActivity.class);
-                intent.putExtra("item",order.getCarts());
-                startActivity(intent);
+                if (checkRating()){
+                    Intent intent = new Intent(OrderDetail.this,RatingActivity.class);
+                    intent.putExtra("items",items);
+                    intent.putExtra("orderId",order.getKeyId());
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(OrderDetail.this, "Đơn hàng đã được đánh giá", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
+
+    public boolean checkRating(){
+
+        ArrayList<Item> check = new ArrayList<>();
+        for (Cart cart : order.getCarts()) {
+            check.add(cart.getItem());
+        }
+
+        items = new ArrayList<>(check);
+
+        for (Item item : check) {
+            for (Rating temp : LoginActivity.ratings) {
+                if (temp.getOrderId().equals(order.getKeyId())
+                        && temp.getItemId().equals(item.getId())){
+                    items.remove(item);
+                    break;
+                }
+            }
+        }
+
+        if (items.size() > 0){
+            return true;
+        }
+        return false;
+    }
+    
+    
 }

@@ -332,4 +332,23 @@ public class DatabaseManager {
         rating.setId(id);
         databaseReference.child("Ratings").child(id).setValue(rating);
     }
+
+    public void getRatings(ArrayList<Rating> ratings){
+        databaseReference.child("Ratings").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    ratings.clear();
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        ratings.add(dataSnapshot.getValue(Rating.class));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 }

@@ -26,6 +26,7 @@ public class RatingActivity extends AppCompatActivity {
     ArrayList<Item> items;
     ArrayAdapter<Item> adapter;
     Item item;
+    String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,11 +38,8 @@ public class RatingActivity extends AppCompatActivity {
     }
 
     public void getItem(){
-        items = new ArrayList<>();
-        ArrayList<Cart> carts = (ArrayList<Cart>) getIntent().getSerializableExtra("item");
-        for (Cart cart : carts) {
-            items.add(cart.getItem());
-        }
+        items = (ArrayList<Item>) getIntent().getSerializableExtra("items");
+        id = getIntent().getStringExtra("orderId");
     }
 
     public void setSpinner(){
@@ -74,13 +72,26 @@ public class RatingActivity extends AppCompatActivity {
                     Toast.makeText(RatingActivity.this, "Vui lòng điền nhận xét", Toast.LENGTH_SHORT).show();
                 }else {
                     DatabaseManager databaseManager = new DatabaseManager();
-                    Rating rating = new Rating(item.getId(),MainActivity.currentUser.getUsername(),review,ratingValue);
+                    Rating rating = new Rating(item.getId(),MainActivity.currentUser.getUsername(),id,review,ratingValue);
                     databaseManager.addRating(rating);
                     Toast.makeText(RatingActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
-                    items.remove(item);
-                    adapter.notifyDataSetChanged();
+                    if (items.size() != 1){
+                        items.remove(item);
+                        setSpinner();
+                        binding.review.setText("");
+                        binding.ratingBar.setRating(0);
+                    }else {
+                        finish();
+                    }
                 }
             }
         });
+        binding.exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
+
 }
