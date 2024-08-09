@@ -9,26 +9,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.handmadestore.Adapter.ReviewAdapter;
-import com.example.handmadestore.Object.ReviewDomain;
-import com.example.handmadestore.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
+import com.example.handmadestore.Adapter.RatingAdapter;
+import com.example.handmadestore.LoginActivity;
+import com.example.handmadestore.Object.Item;
+import com.example.handmadestore.Object.Rating;
+import com.example.handmadestore.databinding.FragmentReviewBinding;
 
 import java.util.ArrayList;
 
 
 public class ReviewFragment extends Fragment {
-
-
-
-
+    FragmentReviewBinding binding;
+    private View view;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,43 +31,29 @@ public class ReviewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_review, container, false);
+        binding = FragmentReviewBinding.inflate(inflater,container, false);
+        view = binding.getRoot();
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         initList(view);
     }
 
     private void initList(View view) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-
-        DatabaseReference myRef = database.getReference("Review");
-        ArrayList<ReviewDomain> list = new ArrayList<>();
-        Query query=myRef.orderByChild("ItemId").equalTo(4);
-
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()) {
-                    for (DataSnapshot issue: snapshot.getChildren()){
-                        list.add(issue.getValue(ReviewDomain.class));
-                    }
-                    RecyclerView descTxt = view.findViewById(R.id.reviewView);
-                    if(list.size() > 0){
-                        descTxt.setAdapter(new ReviewAdapter(list));
-                        descTxt.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-                    }
-                }
+        ArrayList<Rating> ratings = new ArrayList<>();
+        Item item = (Item) getArguments().getSerializable("item");
+        for (Rating temp: LoginActivity.ratings) {
+            if(temp.getItemId().equals(item.getId())){
+                ratings.add(temp);
             }
+        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        if (ratings.size() > 0){
+            binding.reviewView.setAdapter(new RatingAdapter(ratings));
+            binding.reviewView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        }
     }
 }

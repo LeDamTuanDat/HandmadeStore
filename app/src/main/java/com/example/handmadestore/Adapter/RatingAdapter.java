@@ -9,16 +9,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
+import com.example.handmadestore.Object.Rating;
 import com.example.handmadestore.Object.ReviewDomain;
 import com.example.handmadestore.databinding.ViewholderReviewBinding;
 
 import java.util.ArrayList;
 
-public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.Viewholder> {
-    ArrayList<ReviewDomain> items;
+public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.Viewholder> {
+    ArrayList<Rating> items;
     Context context;
 
-    public ReviewAdapter(ArrayList<ReviewDomain> items) {
+    public RatingAdapter(ArrayList<Rating> items) {
         this.items = items;
     }
 
@@ -32,14 +33,15 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.Viewholder
 
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
-        holder.binding.nameTxt.setText(items.get(position).getName());
-        holder.binding.dscTxt.setText(items.get(position).getDescription());
-        holder.binding.ratingTxt.setText(""+items.get(position).getRating());
+        Rating rating = items.get(position);
+        holder.binding.name.setText(rating.getUserId());
+        holder.binding.review.setText(rating.getReview());
+        holder.binding.rating.setText(rating.getRating() + "");
 
-        Glide.with(context)
-                .load(items.get(position).getPicUrl())
-                .transform(new GranularRoundedCorners(100, 100, 100, 100))
-                .into(holder.binding.pic);
+//        Glide.with(context)
+//                .load(items.get(position).getPicUrl())
+//                .transform(new GranularRoundedCorners(100, 100, 100, 100))
+//                .into(holder.binding.pic);
     }
 
     @Override

@@ -31,7 +31,6 @@ public class DetailActivity extends AppCompatActivity {
     DatabaseManager databaseManager;
     ActivityDetailBinding binding;
     private Item object;
-    private int numberOrder=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +85,7 @@ public class DetailActivity extends AppCompatActivity {
         Bundle bundle2 = new Bundle();
 
         bundle1.putString("description", object.getDescription());
+        bundle2.putSerializable("item",object);
 
         tab1.setArguments(bundle1);
         tab2.setArguments(bundle2);
