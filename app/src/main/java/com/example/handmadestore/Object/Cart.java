@@ -11,9 +11,9 @@ public class Cart implements Serializable {
     public Cart() {
     }
 
-    public Cart(Item item) {
+    public Cart(Item item, int number) {
         this.item = item;
-        this.number = 1;
+        this.number = number;
     }
 
     public Item getItem() {

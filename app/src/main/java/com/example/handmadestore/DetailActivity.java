@@ -1,21 +1,16 @@
 package com.example.handmadestore;
 
 import android.os.Bundle;
-import android.widget.Switch;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.handmadestore.Adapter.AdapterViewPagerForItem;
 import com.example.handmadestore.Fragment.DescriptionFragment;
 import com.example.handmadestore.Fragment.ReviewFragment;
-import com.example.handmadestore.Fragment.SoldFragment;
 import com.example.handmadestore.Object.Banner;
 import com.example.handmadestore.Object.Cart;
 import com.example.handmadestore.Object.DatabaseManager;
@@ -25,8 +20,10 @@ import com.example.handmadestore.databinding.ActivityDetailBinding;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class DetailActivity extends AppCompatActivity {
     DatabaseManager databaseManager;
@@ -51,25 +48,72 @@ public class DetailActivity extends AppCompatActivity {
 
         ArrayList<SlideModel> imageList = new ArrayList<>();
         for ( Banner banner : sliderItems) {
-            imageList.add(new SlideModel(banner.getUrl(), ScaleTypes.FIT));
+            imageList.add(new SlideModel(banner.getUrl(), ScaleTypes.CENTER_CROP));
         }
         binding.imageSlider.setImageList(imageList);
     }
 
     private void getBundles(){
         object = (Item) getIntent().getSerializableExtra("object");
-        binding.titleTxt.setText(object.getTitle());
-        binding.priceTxt.setText(object.getPrice() + "đ");
+        binding.title.setText(object.getTitle());
+        binding.inventory.setText("Kho: " + object.getInventory());
+
+        NumberFormat formatVND = NumberFormat.getCurrencyInstance(new Locale("vi","VN"));
+        binding.price.setText(formatVND.format(object.getPrice()));
+        binding.sold.setText("Đã bán: " + object.getSold());
         binding.ratingBar.setRating(Math.round(calRating() * 10) / 10.0f);
         binding.ratingTxt.setText(Math.round(calRating() * 10) / 10.0f+ "/5");
 
+
+        if (!checkCart(object)){
+            binding.layout.setVisibility(View.GONE);
+        }
+        binding.plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String amount = binding.amount.getText().toString();
+                binding.amount.clearFocus();
+                if (amount.isEmpty()){
+                    binding.amount.setText("1");
+                }else {
+                    int i = Integer.parseInt(amount) + 1;
+                    binding.amount.setText("" + i);
+                }
+            }
+        });
+
+        binding.minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String amount = binding.amount.getText().toString();
+                binding.amount.clearFocus();
+                if (amount.isEmpty()){
+                    binding.amount.setText("1");
+                }else {
+                    int i = Integer.parseInt(amount);
+                    if (i > 1){
+                        binding.amount.setText("" + (i-1));
+                    }
+                }
+            }
+        });
+
         binding.addtoCart.setOnClickListener(view -> {
             if(checkCart(object)) {
-                ArrayList<Cart> carts = MainActivity.currentUser.getCarts();
-                Cart cart = new Cart(object);
-                carts.add(cart);
-                databaseManager.addCart(MainActivity.currentUser);
-                Toast.makeText(DetailActivity.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                String amount = binding.amount.getText().toString();
+                if (amount.isEmpty()){
+                    Toast.makeText(DetailActivity.this, "Vui lòng nhập số lượng", Toast.LENGTH_SHORT).show();
+                }else {
+                    if (Integer.parseInt(amount) > object.getInventory()){
+                        Toast.makeText(DetailActivity.this, "Số lượng nhiều hơn tồn kho", Toast.LENGTH_SHORT).show();
+                    }else {
+                        ArrayList<Cart> carts = MainActivity.currentUser.getCarts();
+                        Cart cart = new Cart(object, Integer.parseInt(amount));
+                        carts.add(cart);
+                        databaseManager.addCart(MainActivity.currentUser);
+                        Toast.makeText(DetailActivity.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }else {
                 Toast.makeText(DetailActivity.this, "Đã có sản phẩm trong giỏ hàng", Toast.LENGTH_SHORT).show();
             }
