@@ -1,5 +1,6 @@
 package com.example.handmadestore;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
@@ -106,6 +107,14 @@ public class OrderDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+        binding.rate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OrderDetail.this,RatingActivity.class);
+                intent.putExtra("item",order.getCarts());
+                startActivity(intent);
             }
         });
     }

@@ -1,5 +1,7 @@
 package com.example.handmadestore.Object;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -105,5 +107,11 @@ public class Item implements Serializable {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return this.getTitle();
     }
 }

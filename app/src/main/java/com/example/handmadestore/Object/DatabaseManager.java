@@ -326,4 +326,10 @@ public class DatabaseManager {
     public void setOrderStatus(Order order){
         databaseReference.child("Orders").child(order.getIdUser()).child(order.getKeyId()).setValue(order);
     }
+
+    public void addRating(Rating rating){
+        String id = databaseReference.push().getKey();
+        rating.setId(id);
+        databaseReference.child("Ratings").child(id).setValue(rating);
+    }
 }
