@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +11,11 @@ import android.view.ViewGroup;
 
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
-import com.example.handmadestore.Adapter.CartAdapter;
-import com.example.handmadestore.Adapter.CategoryAdapter;
 import com.example.handmadestore.Adapter.ItemAdapter;
+import com.example.handmadestore.Adapter.CategoryAdapter;
 import com.example.handmadestore.LoginActivity;
+import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Banner;
-import com.example.handmadestore.Object.DatabaseManager;
 import com.example.handmadestore.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
@@ -58,6 +56,6 @@ public class HomeFragment extends Fragment {
 
     private void initItems(){
         binding.rycyclerItems.setLayoutManager(new GridLayoutManager(getContext(),2));
-        binding.rycyclerItems.setAdapter(new ItemAdapter(LoginActivity.items));
+        binding.rycyclerItems.setAdapter(new ItemAdapter(LoginActivity.items, MainActivity.currentUser));
     }
 }

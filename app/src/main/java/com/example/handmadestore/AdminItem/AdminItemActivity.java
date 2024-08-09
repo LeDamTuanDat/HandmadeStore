@@ -16,7 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.example.handmadestore.Adapter.AdminItemAdapter;
+import com.example.handmadestore.Adapter.ItemAdapter;
+import com.example.handmadestore.AdminActivity;
 import com.example.handmadestore.LoginActivity;
 import com.example.handmadestore.Object.Category;
 import com.example.handmadestore.Object.Item;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 public class AdminItemActivity extends AppCompatActivity {
     ActivityAdminItemBinding binding;
     DropdownSearchBinding dropdownBinding;
-    AdminItemAdapter adapter;
+    ItemAdapter adapter;
     Category category;
     ArrayList<Item> resultAfterFiltered = new ArrayList<>();
     ArrayList<Item> resultAfterSearch = new ArrayList<>();
@@ -56,7 +57,7 @@ public class AdminItemActivity extends AppCompatActivity {
     }
 
     public void initItems(){
-        adapter = new AdminItemAdapter(LoginActivity.items);
+        adapter = new ItemAdapter(LoginActivity.items, AdminActivity.currentUser);
         binding.recyclerView.setLayoutManager(new GridLayoutManager(AdminItemActivity.this,2));
         binding.recyclerView.setAdapter(adapter);
     }
