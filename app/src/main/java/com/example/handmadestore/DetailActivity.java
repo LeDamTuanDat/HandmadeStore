@@ -20,6 +20,7 @@ import com.example.handmadestore.Object.Banner;
 import com.example.handmadestore.Object.Cart;
 import com.example.handmadestore.Object.DatabaseManager;
 import com.example.handmadestore.Object.Item;
+import com.example.handmadestore.Object.Rating;
 import com.example.handmadestore.databinding.ActivityDetailBinding;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -56,24 +57,24 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void getBundles(){
-    object = (Item) getIntent().getSerializableExtra("object");
-    binding.titleTxt.setText(object.getTitle());
-    binding.priceTxt.setText(object.getPrice() + "đ");
-    binding.ratingBar.setRating(object.getRating());
-    binding.ratingTxt.setText(object.getRating()+ "/5");
+        object = (Item) getIntent().getSerializableExtra("object");
+        binding.titleTxt.setText(object.getTitle());
+        binding.priceTxt.setText(object.getPrice() + "đ");
+        binding.ratingBar.setRating(Math.round(calRating() * 10) / 10.0f);
+        binding.ratingTxt.setText(Math.round(calRating() * 10) / 10.0f+ "/5");
 
-    binding.addtoCart.setOnClickListener(view -> {
-        if(checkCart(object)) {
-            ArrayList<Cart> carts = MainActivity.currentUser.getCarts();
-            Cart cart = new Cart(object);
-            carts.add(cart);
-            databaseManager.addCart(MainActivity.currentUser);
-            Toast.makeText(DetailActivity.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
-        }else {
-            Toast.makeText(DetailActivity.this, "Đã có sản phẩm trong giỏ hàng", Toast.LENGTH_SHORT).show();
-        }
-    });
-    binding.back.setOnClickListener(view -> finish());
+        binding.addtoCart.setOnClickListener(view -> {
+            if(checkCart(object)) {
+                ArrayList<Cart> carts = MainActivity.currentUser.getCarts();
+                Cart cart = new Cart(object);
+                carts.add(cart);
+                databaseManager.addCart(MainActivity.currentUser);
+                Toast.makeText(DetailActivity.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(DetailActivity.this, "Đã có sản phẩm trong giỏ hàng", Toast.LENGTH_SHORT).show();
+            }
+        });
+        binding.back.setOnClickListener(view -> finish());
     }
 
     private void setupViewPager(){
@@ -111,34 +112,6 @@ public class DetailActivity extends AppCompatActivity {
     }
 
 
-//    private class ViewPagerAdapter extends FragmentPagerAdapter{
-//        private final List<Fragment> mFragmentList=new ArrayList<>();
-//        private final List<String> mFragmentTitleList=new ArrayList<>();
-//        public ViewPagerAdapter(@NonNull FragmentManager fm) {
-//            super(fm);
-//        }
-//
-//        @NonNull
-//        @Override
-//        public Fragment getItem(int position) {
-//            return mFragmentList.get(position);
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return mFragmentList.size();
-//        }
-//
-//        private void addFrag(Fragment fragment, String title){
-//            mFragmentList.add(fragment);
-//            mFragmentTitleList.add(title);
-//        }
-//        @Override
-//        public CharSequence getPageTitle(int position) {
-//            return mFragmentTitleList.get(position);
-//        }
-//    }
-
     protected boolean checkCart(Item item) {
         ArrayList<Cart> carts = MainActivity.currentUser.getCarts();
         for (int i = 0; i < carts.size(); i++) {
@@ -148,5 +121,21 @@ public class DetailActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    public float calRating(){
+        ArrayList<Rating> ratings = new ArrayList<>();
+        float ratingsAvg = 0;
+        for (Rating temp: LoginActivity.ratings) {
+            if(temp.getItemId().equals(object.getId())){
+                ratings.add(temp);
+            }
+        }
+
+        for (Rating temp: ratings) {
+            ratingsAvg += temp.getRating();
+        }
+
+        return ratingsAvg / ratings.size();
     }
 }
