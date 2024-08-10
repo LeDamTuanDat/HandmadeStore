@@ -14,6 +14,7 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.handmadestore.Adapter.ItemAdapter;
 import com.example.handmadestore.Adapter.CategoryAdapter;
+import com.example.handmadestore.AdminCategory.AdminCategoryActivity;
 import com.example.handmadestore.CartActivity;
 import com.example.handmadestore.LoginActivity;
 import com.example.handmadestore.MainActivity;
@@ -41,6 +42,7 @@ public class HomeFragment extends Fragment {
         initCategories();
         initItems();
         openCart();
+        openCategory();
         return view;
     }
 
@@ -53,7 +55,7 @@ public class HomeFragment extends Fragment {
         super.onResume();
     }
 
-    public void initUser(){
+    private void initUser(){
         binding.name.setText(MainActivity.currentUser.getUsername());
         if (MainActivity.currentUser.getCarts().size() > 0){
             binding.number.setVisibility(View.VISIBLE);
@@ -65,7 +67,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    public void initBanners(){
+    private void initBanners(){
         ArrayList<SlideModel> imageList = new ArrayList<>();
         for ( Banner banner : LoginActivity.banners) {
             imageList.add(new SlideModel(banner.getUrl(), ScaleTypes.FIT));
@@ -84,11 +86,21 @@ public class HomeFragment extends Fragment {
         binding.rycyclerItems.setAdapter(new ItemAdapter(LoginActivity.items, MainActivity.currentUser));
     }
 
-    public void openCart(){
+    private void openCart(){
         binding.cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(binding.getRoot().getContext(), CartActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void openCategory() {
+        binding.category.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(binding.getRoot().getContext(), AdminCategoryActivity.class);
                 startActivity(intent);
             }
         });

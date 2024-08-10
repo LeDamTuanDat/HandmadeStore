@@ -19,18 +19,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Viewho
     private Context context;
 
     public CategoryAdapter(ArrayList<Category> items) {
-//        if (items.size() <= 5){
+        if (items.size() <= 5){
             this.items = items;
-//        }else {
-//            ArrayList<Category> sub = new ArrayList<>();
-//            for (int i = 0; i < items.size(); i++) {
-//                sub.add(items.get(i));
-//                if (i == 4){
-//                    break;
-//                }
-//            }
-//            this.items = sub;
-//        }
+        }else {
+            ArrayList<Category> sub = new ArrayList<>();
+            for (int i = 0; i < items.size(); i++) {
+                sub.add(items.get(i));
+                if (i == 4){
+                    break;
+                }
+            }
+            this.items = sub;
+        }
     }
 
     @NonNull
