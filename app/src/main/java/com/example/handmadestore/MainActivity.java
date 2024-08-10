@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         AdapterViewPagerForMain adapterViewPagerForMain = new AdapterViewPagerForMain(this);
         binding.pageMain.setAdapter(adapterViewPagerForMain);
         binding.pageMain.setUserInputEnabled(false);
-        binding.pageMain.setOffscreenPageLimit(4);
+        binding.pageMain.setOffscreenPageLimit(2);
     }
 
     private void handleBottomNavigation() {
@@ -45,14 +45,14 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.itHome:
                         binding.pageMain.setCurrentItem(0);
                         break;
-                    case R.id.itCart:
+//                    case R.id.itCart:
+//                        binding.pageMain.setCurrentItem(1);
+//                        break;
+                    case R.id.itOrder:
                         binding.pageMain.setCurrentItem(1);
                         break;
-                    case R.id.itOrder:
-                        binding.pageMain.setCurrentItem(2);
-                        break;
                     case R.id.itUser:
-                        binding.pageMain.setCurrentItem(3);
+                        binding.pageMain.setCurrentItem(2);
                         break;
                 }
                 return true;

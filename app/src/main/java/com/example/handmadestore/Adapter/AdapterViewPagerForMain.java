@@ -26,11 +26,11 @@ public class AdapterViewPagerForMain extends FragmentStateAdapter {
         switch (position){
             case 0:
                 return new HomeFragment();
+//            case 1:
+//                return new CartFragment();
             case 1:
-                return new CartFragment();
-            case 2:
                 return new OrderFragment();
-            case 3:
+            case 2:
                 return new UserFragment();
         }
         return null;
@@ -38,6 +38,6 @@ public class AdapterViewPagerForMain extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 3;
     }
 }
