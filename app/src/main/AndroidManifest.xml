@@ -86,6 +86,9 @@
         <activity
             android:name=".DetailActivity"
             android:exported="true" />
+        <activity
+            android:name=".CartActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

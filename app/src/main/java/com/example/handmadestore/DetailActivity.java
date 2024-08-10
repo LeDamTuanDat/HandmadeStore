@@ -1,5 +1,6 @@
 package com.example.handmadestore;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -40,6 +41,14 @@ public class DetailActivity extends AppCompatActivity {
         setupViewPager();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getBundles();
+        initBanners();
+        setupViewPager();
+    }
+
     private void initBanners() {
        ArrayList<Banner> sliderItems = new ArrayList<>();
         for (int i = 0; i < object.getPicUrl().size(); i++) {
@@ -67,6 +76,10 @@ public class DetailActivity extends AppCompatActivity {
 
         if (!checkCart(object)){
             binding.layout.setVisibility(View.GONE);
+            binding.addtoCart.setText("Kiểm tra giỏ hàng");
+        }else {
+            binding.layout.setVisibility(View.VISIBLE);
+            binding.addtoCart.setText("Thêm vào giỏi hàng");
         }
         binding.plus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +114,7 @@ public class DetailActivity extends AppCompatActivity {
         binding.addtoCart.setOnClickListener(view -> {
             if(checkCart(object)) {
                 String amount = binding.amount.getText().toString();
-                if (amount.isEmpty()){
+                if (amount.isEmpty() || Integer.parseInt(amount) == 0){
                     Toast.makeText(DetailActivity.this, "Vui lòng nhập số lượng", Toast.LENGTH_SHORT).show();
                 }else {
                     if (Integer.parseInt(amount) > object.getInventory()){
@@ -112,12 +125,16 @@ public class DetailActivity extends AppCompatActivity {
                         carts.add(cart);
                         databaseManager.addCart(MainActivity.currentUser);
                         Toast.makeText(DetailActivity.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(DetailActivity.this,CartActivity.class);
+                        startActivity(intent);
                     }
                 }
             }else {
-                Toast.makeText(DetailActivity.this, "Đã có sản phẩm trong giỏ hàng", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(DetailActivity.this,CartActivity.class);
+                startActivity(intent);
             }
         });
+
         binding.back.setOnClickListener(view -> finish());
     }
 

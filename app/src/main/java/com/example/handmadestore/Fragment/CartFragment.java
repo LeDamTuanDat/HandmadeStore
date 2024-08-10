@@ -74,17 +74,17 @@ public class CartFragment extends Fragment {
     }
 
     private void initCartList() {
-        calculatorCart();
-        if(MainActivity.currentUser.getCarts().isEmpty()){
-            binding.emptyTxt.setVisibility(View.VISIBLE);
-            binding.acceptOrder.setVisibility(View.GONE);
-        }else{
-            binding.emptyTxt.setVisibility(View.GONE);
-            binding.acceptOrder.setVisibility(View.VISIBLE);
-        }
-        cartAdapter = new CartAdapter(MainActivity.currentUser.getCarts(), binding,true);
-        binding.cartView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        binding.cartView.setAdapter(cartAdapter);
+//        calculatorCart();
+//        if(MainActivity.currentUser.getCarts().isEmpty()){
+//            binding.emptyTxt.setVisibility(View.VISIBLE);
+//            binding.acceptOrder.setVisibility(View.GONE);
+//        }else{
+//            binding.emptyTxt.setVisibility(View.GONE);
+//            binding.acceptOrder.setVisibility(View.VISIBLE);
+//        }
+//        cartAdapter = new CartAdapter(MainActivity.currentUser.getCarts(), binding,true);
+//        binding.cartView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+//        binding.cartView.setAdapter(cartAdapter);
     }
 
     private void confirmOrder(){
