@@ -19,15 +19,19 @@ import com.example.handmadestore.CartActivity;
 import com.example.handmadestore.LoginActivity;
 import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Banner;
+import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class HomeFragment extends Fragment {
 
     FragmentHomeBinding binding;
     public static ArrayList<Banner> items;
     private View view;
+    ArrayList<Item> bestSelling;
 
     public HomeFragment() {
     }
@@ -82,8 +86,10 @@ public class HomeFragment extends Fragment {
     }
 
     private void initItems(){
+        getBestSelling();
         binding.rycyclerItems.setLayoutManager(new GridLayoutManager(getContext(),2));
-        binding.rycyclerItems.setAdapter(new ItemAdapter(LoginActivity.items, MainActivity.currentUser));
+//        binding.rycyclerItems.setAdapter(new ItemAdapter(LoginActivity.items, MainActivity.currentUser));
+        binding.rycyclerItems.setAdapter(new ItemAdapter(bestSelling, MainActivity.currentUser));
     }
 
     private void openCart(){
@@ -104,5 +110,19 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+    }
+
+    private void getBestSelling(){
+        ArrayList<Item> temp = new ArrayList<>(LoginActivity.items);
+        Collections.sort(temp, new Comparator<Item>() {
+            @Override
+            public int compare(Item j, Item i) {
+                return Integer.compare(i.getSold(), j.getSold());
+            }
+        });
+        bestSelling = new ArrayList();
+        for (int i = 0 ; i < 6 ; i++){
+            bestSelling.add(temp.get(i));
+        }
     }
 }

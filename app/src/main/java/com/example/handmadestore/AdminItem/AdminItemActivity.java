@@ -68,6 +68,14 @@ public class AdminItemActivity extends AppCompatActivity {
         }
     }
 
+    private void checkItems(ArrayList<Item> items){
+        if (items.size() == 0){
+            binding.notification.setVisibility(View.VISIBLE);
+        }else {
+            binding.notification.setVisibility(View.GONE);
+        }
+    }
+
     private void initItems(){
         if (MainActivity.currentUser != null){
             adapter = new ItemAdapter(LoginActivity.items, MainActivity.currentUser);
@@ -76,6 +84,7 @@ public class AdminItemActivity extends AppCompatActivity {
         }
         binding.recyclerView.setLayoutManager(new GridLayoutManager(AdminItemActivity.this,2));
         binding.recyclerView.setAdapter(adapter);
+        checkItems(LoginActivity.items);
     }
 
     private void handleSelectCategory(){
@@ -91,8 +100,8 @@ public class AdminItemActivity extends AppCompatActivity {
 
                 ArrayList<Category> temp = new ArrayList<>(LoginActivity.categories);
                 temp.add(0,new Category("Tất cả danh mục"));
-                ArrayAdapter<Category> adapter = new ArrayAdapter<>(AdminItemActivity.this, android.R.layout.simple_list_item_1, temp);
-                dropdownBinding.list.setAdapter(adapter);
+                ArrayAdapter<Category> arrayAdapter = new ArrayAdapter<>(AdminItemActivity.this, android.R.layout.simple_list_item_1, temp);
+                dropdownBinding.list.setAdapter(arrayAdapter);
                 dropdownBinding.search.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -101,7 +110,7 @@ public class AdminItemActivity extends AppCompatActivity {
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        adapter.getFilter().filter(charSequence);
+                        arrayAdapter.getFilter().filter(charSequence);
                     }
 
                     @Override
@@ -113,7 +122,7 @@ public class AdminItemActivity extends AppCompatActivity {
                 dropdownBinding.list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        category = adapter.getItem(i);
+                        category = arrayAdapter.getItem(i);
                         binding.category.setText(category.toString());
                         resultAfterFiltered(category.getId());
                         binding.search.setQuery("",false);
@@ -136,6 +145,7 @@ public class AdminItemActivity extends AppCompatActivity {
                 }
             }
             adapter.setResultAfterFiltered(resultAfterFiltered);
+            checkItems(resultAfterFiltered);
         }
     }
 
@@ -180,6 +190,7 @@ public class AdminItemActivity extends AppCompatActivity {
             }
         }
         adapter.setResultAfterFiltered(resultAfterSearch);
+        checkItems(resultAfterSearch);
     }
 
     private void handleBack(){
