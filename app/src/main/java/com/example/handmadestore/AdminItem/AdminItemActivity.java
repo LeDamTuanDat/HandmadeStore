@@ -32,6 +32,7 @@ public class AdminItemActivity extends AppCompatActivity {
     DropdownSearchBinding dropdownBinding;
     ItemAdapter adapter;
     Category category;
+    boolean isSearch;
     ArrayList<Item> resultAfterFiltered = new ArrayList<>();
     ArrayList<Item> resultAfterSearch = new ArrayList<>();
     @Override
@@ -41,6 +42,7 @@ public class AdminItemActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         category = (Category) getIntent().getSerializableExtra("category");
+        isSearch = getIntent().getBooleanExtra("search",false);
 
         checkUser();
         initItems();
@@ -63,8 +65,10 @@ public class AdminItemActivity extends AppCompatActivity {
 
     private void checkUser() {
         if (MainActivity.currentUser != null){
-            binding.filter.setVisibility(View.GONE);
             binding.addItem.setVisibility(View.GONE);
+            if (isSearch == false){
+                binding.filter.setVisibility(View.GONE);
+            }
         }
     }
 

@@ -59,4 +59,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+//    public void switchToFragment(int position) {
+//        binding.pageMain.setCurrentItem(position);
+//        if(position == 1){
+//            binding.bottomNav.setSelectedItemId(R.id.itCart);
+//        }
+//    }
 }

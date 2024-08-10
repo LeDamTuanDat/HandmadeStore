@@ -15,6 +15,7 @@ import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.handmadestore.Adapter.ItemAdapter;
 import com.example.handmadestore.Adapter.CategoryAdapter;
 import com.example.handmadestore.AdminCategory.AdminCategoryActivity;
+import com.example.handmadestore.AdminItem.AdminItemActivity;
 import com.example.handmadestore.CartActivity;
 import com.example.handmadestore.LoginActivity;
 import com.example.handmadestore.MainActivity;
@@ -47,8 +48,10 @@ public class HomeFragment extends Fragment {
         initItems();
         openCart();
         openCategory();
+        openItem();
         return view;
     }
+
 
     @Override
     public void onResume() {
@@ -124,5 +127,24 @@ public class HomeFragment extends Fragment {
         for (int i = 0 ; i < 6 ; i++){
             bestSelling.add(temp.get(i));
         }
+    }
+
+    private void openItem() {
+//        binding.item.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (getActivity() instanceof MainActivity) {
+//                    ((MainActivity) getActivity()).switchToFragment(1); // Chuyển sang fragment ở vị trí 1 (CartFragment)
+//                }
+//            }
+//        });
+        binding.item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(binding.getRoot().getContext(), AdminItemActivity.class);
+                intent.putExtra("search",true);
+                startActivity(intent);
+            }
+        });
     }
 }
