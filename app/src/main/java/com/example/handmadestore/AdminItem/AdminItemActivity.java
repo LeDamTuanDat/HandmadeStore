@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import com.example.handmadestore.Adapter.ItemAdapter;
 import com.example.handmadestore.AdminActivity;
 import com.example.handmadestore.LoginActivity;
+import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Category;
 import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.databinding.ActivityAdminItemBinding;
@@ -38,6 +39,10 @@ public class AdminItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityAdminItemBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        category = (Category) getIntent().getSerializableExtra("category");
+
+        checkUser();
         initItems();
         handleSelectCategory();
         handleAddItem();
@@ -56,13 +61,24 @@ public class AdminItemActivity extends AppCompatActivity {
         super.onResume();
     }
 
-    public void initItems(){
-        adapter = new ItemAdapter(LoginActivity.items, AdminActivity.currentUser);
+    private void checkUser() {
+        if (MainActivity.currentUser != null){
+            binding.filter.setVisibility(View.GONE);
+            binding.addItem.setVisibility(View.GONE);
+        }
+    }
+
+    private void initItems(){
+        if (MainActivity.currentUser != null){
+            adapter = new ItemAdapter(LoginActivity.items, MainActivity.currentUser);
+        }else {
+            adapter = new ItemAdapter(LoginActivity.items, AdminActivity.currentUser);
+        }
         binding.recyclerView.setLayoutManager(new GridLayoutManager(AdminItemActivity.this,2));
         binding.recyclerView.setAdapter(adapter);
     }
 
-    public void handleSelectCategory(){
+    private void handleSelectCategory(){
         binding.filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,7 +125,7 @@ public class AdminItemActivity extends AppCompatActivity {
         });
     }
 
-    public void resultAfterFiltered(String text){
+    private void resultAfterFiltered(String text){
         if (text.equals("all")){
             adapter.setResultAfterFiltered(LoginActivity.items);
         }else {
@@ -123,7 +139,7 @@ public class AdminItemActivity extends AppCompatActivity {
         }
     }
 
-    public void handleAddItem(){
+    private void handleAddItem(){
         binding.addItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,7 +149,7 @@ public class AdminItemActivity extends AppCompatActivity {
         });
     }
 
-    public void handleSearch(){
+    private void handleSearch(){
         binding.search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -148,7 +164,7 @@ public class AdminItemActivity extends AppCompatActivity {
         });
     }
 
-    public void resultAfterSearch(String text){
+    private void resultAfterSearch(String text){
         resultAfterSearch.clear();
         if(category != null && category.getId() != "all"){
             for (Item item : resultAfterFiltered) {
@@ -166,7 +182,7 @@ public class AdminItemActivity extends AppCompatActivity {
         adapter.setResultAfterFiltered(resultAfterSearch);
     }
 
-    public void handleBack(){
+    private void handleBack(){
         binding.back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

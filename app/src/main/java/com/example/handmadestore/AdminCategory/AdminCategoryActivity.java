@@ -9,7 +9,9 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.handmadestore.Adapter.AdminCategoryAdapter;
+import com.example.handmadestore.AdminActivity;
 import com.example.handmadestore.LoginActivity;
+import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Category;
 import com.example.handmadestore.databinding.ActivityCategoryBinding;
 
@@ -25,13 +27,20 @@ public class AdminCategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityCategoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        checkUser();
         initCategory();
         handleEvent();
         handleSearch();
     }
 
+    private void checkUser() {
+        if (MainActivity.currentUser != null){
+            binding.addCategory.setVisibility(View.GONE);
+        }
+    }
 
-    public void initCategory(){
+
+    private void initCategory(){
         adapter = new AdminCategoryAdapter(LoginActivity.categories);
         binding.recyclerView.setLayoutManager(new GridLayoutManager(AdminCategoryActivity.this,3));
         binding.recyclerView.setAdapter(adapter);
@@ -45,7 +54,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         super.onResume();
     }
 
-    public void handleEvent(){
+    private void handleEvent(){
         binding.addCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,7 +70,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         });
     }
 
-    public void handleSearch(){
+    private void handleSearch(){
         binding.search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -76,7 +85,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         });
     }
 
-    public void resultAfterSearch(String text){
+    private void resultAfterSearch(String text){
         ArrayList<Category> result = new ArrayList<>();
         for (Category item : LoginActivity.categories) {
             if(item.getTitle().contains(text)){

@@ -112,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Danh mục n    ổi bật"
+                android:text="Danh mục nổi bật"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />

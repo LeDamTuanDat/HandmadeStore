@@ -15,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.handmadestore.AdminCategory.UploadCategoryActivity;
+import com.example.handmadestore.AdminItem.AdminItemActivity;
 import com.example.handmadestore.LoginActivity;
+import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Category;
 import com.example.handmadestore.Object.DatabaseManager;
 import com.example.handmadestore.Object.Item;
@@ -51,7 +53,13 @@ public class AdminCategoryAdapter extends RecyclerView.Adapter<AdminCategoryAdap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showPopupMenu(view,category);
+                if (MainActivity.currentUser != null){
+                    Intent intent = new Intent(context, AdminItemActivity.class);
+                    intent.putExtra("category",category);
+                    context.startActivity(intent);
+                }else {
+                    showPopupMenu(view,category);
+                }
             }
         });
     }

@@ -30,15 +30,8 @@ import java.util.Locale;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholder> {
     private ArrayList<Cart> carts;
-//    private FragmentCartBinding binding;
     private ActivityCartBinding binding;
     private boolean isCart;
-
-//    public CartAdapter(ArrayList<Cart> carts, FragmentCartBinding binding,boolean isCart) {
-//        this.carts = carts;
-//        this.binding = binding;
-//        this.isCart = isCart;
-//    }
 
     public CartAdapter(ArrayList<Cart> carts, ActivityCartBinding binding,boolean isCart) {
         this.carts = carts;
@@ -75,6 +68,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholder> {
             holder.binding.minus.setVisibility(View.GONE);
             holder.binding.amount.setVisibility(View.GONE);
             holder.binding.amountTxt.setVisibility(View.VISIBLE);
+            holder.binding.delete.setVisibility(View.GONE);
             holder.binding.amountTxt.setText("x" + cart.getNumber());
         }
 

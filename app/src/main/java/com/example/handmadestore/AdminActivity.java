@@ -55,6 +55,7 @@ public class AdminActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(AdminActivity.this,LoginActivity.class);
                 startActivity(intent);
+                currentUser = null;
                 finish();
             }
         });
