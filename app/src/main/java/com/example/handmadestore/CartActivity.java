@@ -32,6 +32,12 @@ public class CartActivity extends AppCompatActivity {
         back();
     }
 
+    @Override
+    protected void onResume() {
+        initCartList();
+        super.onResume();
+    }
+
     protected long getTotalPrice(){
         MainActivity.currentUser.getCarts();
         long totalPrice = 0;
