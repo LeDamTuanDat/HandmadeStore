@@ -36,6 +36,7 @@ public class AddOrder extends AppCompatActivity {
         setContentView(binding.getRoot());
         handleAddInfor();
         handleConfirm();
+        handleExit();
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -123,5 +124,14 @@ public class AddOrder extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         ZaloPaySDK.getInstance().onResult(intent);
+    }
+
+    public void handleExit(){
+        binding.exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }

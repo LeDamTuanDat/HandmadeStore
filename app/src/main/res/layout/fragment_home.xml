@@ -39,6 +39,7 @@
                     android:textColor="@color/white"/>
 
                 <TextView
+                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Lê Đàm Tuấn Đạt"
@@ -48,12 +49,40 @@
 
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/baseline_shopping_cart_24"
-                android:tint="@color/white"/>
+                android:id="@+id/cart">
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/cart"
+                    android:tint="@color/white"
+                    tools:ignore="MissingConstraints" />
+
+                <ImageView
+                    android:id="@+id/cart2"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/red_circle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/cart2"
+                    app:layout_constraintTop_toTopOf="@id/cart2"
+                    app:layout_constraintEnd_toEndOf="@id/cart2"
+                    app:layout_constraintStart_toStartOf="@id/cart2"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 
