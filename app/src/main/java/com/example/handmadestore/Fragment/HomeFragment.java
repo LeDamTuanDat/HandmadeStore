@@ -63,7 +63,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void initUser(){
-        binding.name.setText(MainActivity.currentUser.getUsername());
+        binding.name.setText(MainActivity.currentUser.getRealname());
         if (MainActivity.currentUser.getCarts().size() > 0){
             binding.number.setVisibility(View.VISIBLE);
             binding.cart2.setVisibility(View.VISIBLE);

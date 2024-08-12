@@ -2,6 +2,10 @@ package com.example.handmadestore;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 
@@ -36,6 +40,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void init(){
+        disableSpace();
         binding.btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,11 +48,19 @@ public class SignupActivity extends AppCompatActivity {
                 String phone = binding.edtPhone.getText().toString();
                 String username = binding.edtUsername.getText().toString();
                 String password = binding.edtPassword.getText().toString();
+                String realname = binding.edtRealName.getText().toString();
                 String address = binding.edtAddress.getText().toString();
                 boolean isExist = false;
-                if(email.isEmpty() || phone.isEmpty() || username.isEmpty() || password.isEmpty() || address.isEmpty()){
+                if(email.isEmpty() || phone.isEmpty() || username.isEmpty() || password.isEmpty() || address.isEmpty() || realname.isEmpty()){
                     Toast.makeText(SignupActivity.this,"Vui lòng nhập đầy đủ thông tin",Toast.LENGTH_LONG).show();
-                }else {
+                } else if (!email.contains("@gmail.com")) {
+                    Toast.makeText(SignupActivity.this,"Vui lòng nhập đúng định dạng email",Toast.LENGTH_LONG).show();
+                } else if (phone.length() < 10 || !phone.startsWith("0")) {
+                    Toast.makeText(SignupActivity.this,"Vui lòng nhập đúng định dạng số điện thoại",Toast.LENGTH_LONG).show();
+                } else if (password.length() < 6) {
+                    Toast.makeText(SignupActivity.this,"Mật khẩu phải tối thiểu 6 ký tự",Toast.LENGTH_LONG).show();
+                }
+                else {
                     for (User user : users) {
                         if (user.getUsername().equals(username)) {
                             isExist = true;
@@ -55,9 +68,9 @@ public class SignupActivity extends AppCompatActivity {
                         }
                     }
                     if (!isExist){
-                        User user = new User(email,phone,username,password,address,false);
+                        User user = new User(email,phone,username,password,realname,address,false);
                         databaseManager.addUser(user);
-                        Toast.makeText(SignupActivity.this,"Dang ki thanh cong",Toast.LENGTH_LONG).show();
+                        Toast.makeText(SignupActivity.this,"Đăng kí thành công",Toast.LENGTH_LONG).show();
                         Intent intent = new Intent();
                         intent.putExtra("new_user",user);
                         setResult(RESULT_OK, intent);
@@ -75,6 +88,13 @@ public class SignupActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void disableSpace(){
+        binding.edtEmail.addTextChangedListener(new NoWhitespaceTextWatcher(binding.edtEmail));
+        binding.edtPhone.addTextChangedListener(new NoWhitespaceTextWatcher(binding.edtPhone));
+        binding.edtUsername.addTextChangedListener(new NoWhitespaceTextWatcher(binding.edtUsername));
+        binding.edtPassword.addTextChangedListener(new NoWhitespaceTextWatcher(binding.edtPassword));
     }
 
 }

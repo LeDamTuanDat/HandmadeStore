@@ -49,7 +49,7 @@ public class AddOrder extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (binding.defaultInfor.isChecked()){
-                    binding.name.setText(MainActivity.currentUser.getUsername());
+                    binding.name.setText(MainActivity.currentUser.getRealname());
                     binding.phone.setText(MainActivity.currentUser.getPhone());
                     binding.address.setText(MainActivity.currentUser.getAddress());
                 }else {
