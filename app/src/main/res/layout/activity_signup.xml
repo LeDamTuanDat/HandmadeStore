@@ -116,7 +116,7 @@
                 android:id="@+id/login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Đã có tài khoản ? Đăng nhập ngay !"
+                android:text="Đã có tài khoản? Đăng nhập ngay!"
                 android:gravity="right"
                 android:layout_marginVertical="20dp"
                 android:textColor="@color/login_btn"
