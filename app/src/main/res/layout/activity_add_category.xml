@@ -26,9 +26,10 @@
 
 
             <TextView
+                android:id="@+id/label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Upload Category"
+                android:text="Thêm danh mục"
                 android:textSize="30dp"
                 android:textAlignment="center"
                 android:textColor="@color/green"/>
@@ -50,7 +51,7 @@
                 android:background="@drawable/custom_edittext"
                 android:layout_marginTop="20dp"
                 android:padding="16dp"
-                android:hint="Category"
+                android:hint="Tên danh mục"
                 android:textColor="@color/green"
                 android:layout_gravity="start|center_horizontal"/>
 
@@ -64,7 +65,7 @@
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:text="Save"
+                    android:text="Lưu"
                     android:id="@+id/save"
                     android:textSize="18dp"
                     android:backgroundTint="@color/green"
@@ -75,7 +76,7 @@
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:text="Cancel"
+                    android:text="Thoát"
                     android:id="@+id/cancel"
                     android:textSize="18dp"
                     android:backgroundTint="@color/green"

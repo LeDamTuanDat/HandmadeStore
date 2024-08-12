@@ -71,17 +71,17 @@ public class AdminCategoryAdapter extends RecyclerView.Adapter<AdminCategoryAdap
 
     public void showPopupMenu(View view, Category category){
         PopupMenu popupMenu = new PopupMenu(context,view);
-        popupMenu.inflate(R.menu.menu_option);
+        popupMenu.inflate(R.menu.menu_option_categories);
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()){
-                    case R.id.modify:
+                    case R.id.modify_category:
                         Intent intent = new Intent(context, UploadCategoryActivity.class);
                         intent.putExtra("category",category);
                         context.startActivity(intent);
                         break;
-                    case R.id.delete:
+                    case R.id.delete_category:
                         if (checkItem(category.getId())){
                             Toast.makeText(context, "Không thể xoá danh mục", Toast.LENGTH_SHORT).show();
                         }else {

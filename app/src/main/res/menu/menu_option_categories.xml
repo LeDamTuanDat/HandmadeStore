@@ -2,13 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/modify"
-        android:icon="@drawable/note_pencil"
+        android:id="@+id/modify_category"
         android:title="Sửa danh mục"/>
 
     <item
-        android:id="@+id/delete"
-        android:icon="@drawable/x_circle"
+        android:id="@+id/delete_category"
         android:title="Xoá danh mục"/>
 
 </menu>

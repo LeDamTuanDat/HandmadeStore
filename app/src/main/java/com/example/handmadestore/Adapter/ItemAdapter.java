@@ -81,17 +81,17 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.AdminItemViewH
 
     public void showPopupMenu(View view, Item item){
         PopupMenu popupMenu = new PopupMenu(context,view);
-        popupMenu.inflate(R.menu.menu_option);
+        popupMenu.inflate(R.menu.menu_option_items);
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()){
-                    case R.id.modify:
+                    case R.id.modify_item:
                         Intent intent = new Intent(context, UploadItemActivity.class);
                         intent.putExtra("item",item);
                         context.startActivity(intent);
                         break;
-                    case R.id.delete:
+                    case R.id.delete_item:
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
                         builder.setCancelable(false);

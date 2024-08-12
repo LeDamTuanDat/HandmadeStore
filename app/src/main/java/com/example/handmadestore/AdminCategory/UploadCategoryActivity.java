@@ -42,6 +42,7 @@ public class UploadCategoryActivity extends AppCompatActivity {
             uri = Uri.parse(category.getPicUrl());
             Glide.with(this).load(uri).into(binding.image);
             binding.title.setText(category.getTitle());
+            binding.label.setText("Chỉnh sửa danh mục");
         }
     }
 

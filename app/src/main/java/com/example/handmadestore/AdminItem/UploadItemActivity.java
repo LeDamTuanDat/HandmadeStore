@@ -69,6 +69,7 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
             binding.inventory.setText(""+item.getInventory());
             binding.price.setText(""+item.getPrice());
             binding.description.setText(item.getDescription());
+            binding.label.setText("Chỉnh sửa sản phẩm");
         }
     }
 

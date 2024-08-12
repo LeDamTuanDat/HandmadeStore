@@ -79,7 +79,7 @@ public class DetailActivity extends AppCompatActivity {
             binding.addtoCart.setText("Kiểm tra giỏ hàng");
         }else {
             binding.layout.setVisibility(View.VISIBLE);
-            binding.addtoCart.setText("Thêm vào giỏi hàng");
+            binding.addtoCart.setText("Thêm vào giỏ hàng");
         }
         binding.plus.setOnClickListener(new View.OnClickListener() {
             @Override
