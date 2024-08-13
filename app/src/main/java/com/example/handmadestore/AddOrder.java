@@ -83,7 +83,7 @@ public class AddOrder extends AppCompatActivity {
                         CreateOrder orderApi = new CreateOrder();
 
                         try {
-                            JSONObject data = orderApi.createOrder(""+order.calTotal());
+                            JSONObject data = orderApi.createOrder(""+ (order.calTotal() + 15000));
                             String code = data.getString("return_code");
 
                             if (code.equals("1")) {

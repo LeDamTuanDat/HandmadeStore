@@ -1,6 +1,9 @@
 package com.example.handmadestore.Object;
 
+import com.google.firebase.database.Exclude;
+
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -89,6 +92,7 @@ public class Order implements Serializable {
         this.zaloPayment = zaloPayment;
     }
 
+    @Exclude
     public Date getOrderTime() {
         return orderTime;
     }
@@ -97,12 +101,26 @@ public class Order implements Serializable {
         this.orderTime = orderTime;
     }
 
+    public void setOrderTimeFormatted(String orderTimeFormatted) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("mm/HH dd/MM/yyyy");
+            this.orderTime = sdf.parse(orderTimeFormatted);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getOrderTimeFormatted() {
+        SimpleDateFormat sdf = new SimpleDateFormat("mm/HH dd/MM/yyyy");
+        return sdf.format(orderTime);
+    }
+
     public long calTotal(){
         long totalCart = 0;
         for (int i = 0 ; i < this.carts.size() ; i++){
             Cart cart = this.carts.get(i);
             totalCart += cart.calculatePrice();
         }
-        return totalCart + 15000;
+        return totalCart;
     }
 }

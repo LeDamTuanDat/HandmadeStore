@@ -71,10 +71,10 @@ public class OrderDetail extends AppCompatActivity {
 
         if (order.getZaloPayment()){
             binding.total.setText("Tổng thanh toán : 0đ");
-            binding.zaloPrice.setText(order.calTotal() + "đ");
+            binding.zaloPrice.setText((order.calTotal() + 15000) + "đ");
             binding.zaloPrice.setPaintFlags(binding.zaloPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }else {
-            binding.total.setText("Tổng thanh toán : " + order.calTotal() + "đ");
+            binding.total.setText("Tổng thanh toán : " + (order.calTotal() + 15000) + "đ");
             binding.zaloPrice.setVisibility(View.GONE);
         }
 

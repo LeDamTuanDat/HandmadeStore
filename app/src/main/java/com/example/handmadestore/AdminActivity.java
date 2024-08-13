@@ -54,6 +54,14 @@ public class AdminActivity extends AppCompatActivity {
                 startActivity(itent);
             }
         });
+        binding.statistic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent itent = new Intent(AdminActivity.this,StatisticActivity.class);
+                startActivity(itent);
+            }
+        });
+
         binding.logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

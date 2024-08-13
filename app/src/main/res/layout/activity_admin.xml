@@ -168,7 +168,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/metrics"
+                    android:id="@+id/statistic"
                     android:layout_width="130dp"
                     android:layout_height="130dp"
                     app:cardBackgroundColor="#387F39"
