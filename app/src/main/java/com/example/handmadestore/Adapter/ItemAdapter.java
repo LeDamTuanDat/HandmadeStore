@@ -2,6 +2,7 @@ package com.example.handmadestore.Adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.example.handmadestore.AdminItem.UploadItemActivity;
 import com.example.handmadestore.DetailActivity;
 import com.example.handmadestore.LoginActivity;
+import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Cart;
 import com.example.handmadestore.Object.DatabaseManager;
 import com.example.handmadestore.Object.Item;
@@ -92,17 +94,26 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.AdminItemViewH
                         context.startActivity(intent);
                         break;
                     case R.id.delete_item:
-
-                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                        builder.setCancelable(false);
-                        builder.setView(R.layout.loading_activity);
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
-                        DatabaseManager databaseManager = new DatabaseManager();
-                        checkCart(item.getId(),databaseManager);
-                        databaseManager.deleteItem(item,dialog,context);
-                        ItemAdapter.this.items.remove(item);
-                        notifyDataSetChanged();
+                        new androidx.appcompat.app.AlertDialog.Builder(context)
+                                .setTitle("Xác nhận thoát")
+                                .setMessage("Bạn có chắc chắn muốn thoát ứng dụng không?")
+                                .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                        builder.setCancelable(false);
+                                        builder.setView(R.layout.loading_activity);
+                                        AlertDialog loading = builder.create();
+                                        loading.show();
+                                        DatabaseManager databaseManager = new DatabaseManager();
+                                        checkCart(item.getId(),databaseManager);
+                                        databaseManager.deleteItem(item,loading,context);
+                                        ItemAdapter.this.items.remove(item);
+                                        notifyDataSetChanged();
+                                    }
+                                })
+                                .setNegativeButton("Không", null)
+                                .show();
                         break;
                 }
                 return true;

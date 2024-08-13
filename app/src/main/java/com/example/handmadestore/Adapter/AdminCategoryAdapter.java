@@ -2,6 +2,7 @@ package com.example.handmadestore.Adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -85,15 +86,25 @@ public class AdminCategoryAdapter extends RecyclerView.Adapter<AdminCategoryAdap
                         if (checkItem(category.getId())){
                             Toast.makeText(context, "Không thể xoá danh mục", Toast.LENGTH_SHORT).show();
                         }else {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                            builder.setCancelable(false);
-                            builder.setView(R.layout.loading_activity);
-                            AlertDialog dialog = builder.create();
-                            dialog.show();
-                            DatabaseManager databaseManager = new DatabaseManager();
-                            databaseManager.deleteCategory(category, dialog, context);
-                            AdminCategoryAdapter.this.items.remove(category);
-                            notifyDataSetChanged();
+                            new AlertDialog.Builder(context)
+                                    .setTitle("Xác nhận thoát")
+                                    .setMessage("Bạn có chắc chắn muốn thoát ứng dụng không?")
+                                    .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                            builder.setCancelable(false);
+                                            builder.setView(R.layout.loading_activity);
+                                            AlertDialog loading = builder.create();
+                                            loading.show();
+                                            DatabaseManager databaseManager = new DatabaseManager();
+                                            databaseManager.deleteCategory(category, loading, context);
+                                            AdminCategoryAdapter.this.items.remove(category);
+                                            notifyDataSetChanged();
+                                        }
+                                    })
+                                    .setNegativeButton("Không", null)
+                                    .show();
                         }
                         break;
                 }
