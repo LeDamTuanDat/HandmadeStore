@@ -77,6 +77,31 @@ public class DatabaseManager {
         databaseReference.child("Users").child(user.getUsername()).setValue(user);
     }
 
+    public void updateUser(User user, Uri uri, Context context){
+        if (uri == null){
+            databaseReference.child("Users").child(user.getUsername()).setValue(user);
+            ((Activity) context).finish();
+        }else {
+            storageReference.child("Users").child(uri.getLastPathSegment()).putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                    while (!uriTask.isComplete()) ;
+                    Uri uriImg = uriTask.getResult();
+                    user.setImage(uriImg.toString());
+                    databaseReference.child("Users").child(user.getUsername()).setValue(user);
+//                dialog.dismiss();
+                    Toast.makeText(context,"Cập nhật thông tin thành công",Toast.LENGTH_SHORT).show();
+                    ((Activity) context).finish();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                }
+            });
+        }
+    }
+
     public void getBanner(ArrayList<Banner> banners){
         databaseReference.child("Banner").addValueEventListener(new ValueEventListener() {
             @Override

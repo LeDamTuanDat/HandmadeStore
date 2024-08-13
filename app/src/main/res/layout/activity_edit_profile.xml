@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".EditProfileActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp"
+        android:background="@drawable/custom_edittext">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:padding="24dp">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cập nhật thông tin"
+                android:textSize="25dp"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textColor="@color/green"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="10dp">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/avatar"
+                    app:layout_constraintDimensionRatio="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:riv_corner_radius="20dp"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteY="1dp"
+                    android:layout_marginEnd="10dp"/>
+
+                <ImageView
+                    android:id="@+id/delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/x_circle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <EditText
+                android:id="@+id/edtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="textEmailAddress"
+                android:background="@drawable/custom_edittext"
+                android:drawableLeft="@drawable/baseline_email_24"
+                android:drawablePadding="10dp"
+                android:padding="10dp"
+
+                android:maxLines="1"
+                android:hint="Email"/>
+
+            <EditText
+                android:id="@+id/edtPhone"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="number"
+                android:maxLength="10"
+                android:background="@drawable/custom_edittext"
+                android:drawableLeft="@drawable/baseline_phone_24"
+                android:drawablePadding="10dp"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:hint="Điện thoại"/>
+
+            <EditText
+                android:id="@+id/edtRealName"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="textPersonName"
+                android:background="@drawable/custom_edittext"
+                android:drawableLeft="@drawable/baseline_account_circle_24"
+                android:digits="aáàảãạăắằẳẵặâấầẩẫậbcdđeéèẻẽẹêếềểễệfghiiíìịklmnoóòỏõọôốồổỗộơớờởỡợpqrstuúùủũụưứừửữựvxyAÁÀẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬBCDĐEÉÈẺẼẸÊẾỀỂỄỆFGHIJKLMNOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢPQRSTUÚÙỦŨỤƯỨỪỬỮỰVXY "
+                android:drawablePadding="10dp"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:maxLines="1"
+                android:hint="Họ và tên"/>
+
+            <EditText
+                android:id="@+id/edtAddress"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="text"
+                android:background="@drawable/custom_edittext"
+                android:drawableLeft="@drawable/baseline_location_on_24"
+                android:drawablePadding="10dp"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:maxLines="1"
+                android:hint="Địa chỉ"/>
+
+            <CheckBox
+                android:id="@+id/changePass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Đổi mật khẩu"
+                android:button="@null"
+                android:drawableLeft="@drawable/checkbox"/>
+
+            <LinearLayout
+                android:id="@+id/passwordLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/edtPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:inputType="textPassword"
+                    android:background="@drawable/custom_edittext"
+                    android:drawableLeft="@drawable/baseline_lock_24"
+                    android:drawablePadding="10dp"
+                    android:padding="10dp"
+                    android:hint="Mật khẩu mới"/>
+
+                <EditText
+                    android:id="@+id/edtCfPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:inputType="textPassword"
+                    android:background="@drawable/custom_edittext"
+                    android:drawableLeft="@drawable/baseline_wifi_protected_setup_24"
+                    android:drawablePadding="10dp"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="Xác nhận lại mật khẩu"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+                <Button
+                    android:layout_marginRight="10dp"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:id="@+id/save"
+                    android:text="Xác nhận"
+                    android:textSize="18sp"
+                    android:backgroundTint="@color/green"
+                    app:cornerRadius = "20dp"/>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:id="@+id/exit"
+                    android:text="Hủy"
+                    android:textSize="18sp"
+                    android:backgroundTint="@color/green"
+                    app:cornerRadius = "20dp"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.handmadestore.Adapter.ItemAdapter;
@@ -17,10 +18,12 @@ import com.example.handmadestore.Adapter.CategoryAdapter;
 import com.example.handmadestore.AdminCategory.AdminCategoryActivity;
 import com.example.handmadestore.AdminItem.AdminItemActivity;
 import com.example.handmadestore.CartActivity;
+import com.example.handmadestore.EditProfileActivity;
 import com.example.handmadestore.LoginActivity;
 import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Banner;
 import com.example.handmadestore.Object.Item;
+import com.example.handmadestore.R;
 import com.example.handmadestore.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
@@ -71,6 +74,11 @@ public class HomeFragment extends Fragment {
         }else {
             binding.number.setVisibility(View.GONE);
             binding.cart2.setVisibility(View.GONE);
+        }
+        if (!MainActivity.currentUser.getImage().isEmpty()){
+            Glide.with(getContext()).load(MainActivity.currentUser.getImage()).into(binding.image);
+        }else {
+            binding.image.setImageResource(R.drawable.avatar);
         }
     }
 

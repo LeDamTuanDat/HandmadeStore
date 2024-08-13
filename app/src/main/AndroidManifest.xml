@@ -20,6 +20,9 @@
         android:theme="@style/Theme.HandmadeStore"
         tools:targetApi="31">
         <activity
+            android:name=".EditProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".RatingActivity"
             android:exported="false" />
         <activity

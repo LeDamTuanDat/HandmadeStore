@@ -9,10 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.example.handmadestore.AddOrder;
 import com.example.handmadestore.AdminActivity;
 import com.example.handmadestore.CartActivity;
+import com.example.handmadestore.EditProfileActivity;
 import com.example.handmadestore.LoginActivity;
 import com.example.handmadestore.MainActivity;
+import com.example.handmadestore.R;
 import com.example.handmadestore.databinding.FragmentUserBinding;
 
 public class UserFragment extends Fragment {
@@ -31,6 +35,7 @@ public class UserFragment extends Fragment {
         openCart();
         openOrder();
         logout();
+        edit();
         return view;
     }
 
@@ -51,6 +56,11 @@ public class UserFragment extends Fragment {
         binding.phone.setText(MainActivity.currentUser.getPhone());
         binding.address.setText(MainActivity.currentUser.getAddress());
         binding.password.setText(MainActivity.currentUser.getPassword());
+        if (!MainActivity.currentUser.getImage().isEmpty()){
+            Glide.with(getContext()).load(MainActivity.currentUser.getImage()).into(binding.image);
+        }else {
+            binding.image.setImageResource(R.drawable.avatar);
+        }
     }
 
     private void openCart(){
@@ -74,6 +84,16 @@ public class UserFragment extends Fragment {
         });
     }
 
+    private void edit(){
+        binding.edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), EditProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
     private void logout(){
         binding.logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,5 +105,6 @@ public class UserFragment extends Fragment {
             }
         });
     }
+
 
 }

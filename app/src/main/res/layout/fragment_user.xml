@@ -301,7 +301,8 @@
             android:letterSpacing="0.1"
             android:paddingHorizontal="30dp"
             android:paddingVertical="10dp"
-            android:text="Edit"
+            android:text="Cập nhật"
+            android:textAllCaps="false"
             android:textSize="20dp"
             app:cornerRadius="20dp" />
 
@@ -314,7 +315,8 @@
             android:letterSpacing="0.1"
             android:paddingHorizontal="30dp"
             android:paddingVertical="10dp"
-            android:text="Log out"
+            android:text="Đăng xuất"
+            android:textAllCaps="false"
             android:textSize="20dp"
             app:cornerRadius="20dp" />
     </LinearLayout>
