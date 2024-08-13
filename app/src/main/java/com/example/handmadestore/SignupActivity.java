@@ -70,7 +70,7 @@ public class SignupActivity extends AppCompatActivity {
                     if (!isExist){
                         User user = new User(email,phone,username,password,realname,address,false);
                         databaseManager.addUser(user);
-                        Toast.makeText(SignupActivity.this,"Đăng kí thành công",Toast.LENGTH_LONG).show();
+                        Toast.makeText(SignupActivity.this,"Đăng ký thành công",Toast.LENGTH_LONG).show();
                         Intent intent = new Intent();
                         intent.putExtra("new_user",user);
                         setResult(RESULT_OK, intent);

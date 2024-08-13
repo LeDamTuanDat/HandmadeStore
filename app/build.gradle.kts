@@ -62,4 +62,5 @@ dependencies {
     implementation("com.github.denzcoskun:ImageSlideshow:0.1.2")
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
     implementation("commons-codec:commons-codec:1.14")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }
