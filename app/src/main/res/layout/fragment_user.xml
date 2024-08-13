@@ -18,6 +18,7 @@
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/avatar"
+        android:scaleType="centerCrop"
         app:riv_corner_radius="50dp"
         android:layout_marginTop="50dp"/>
 

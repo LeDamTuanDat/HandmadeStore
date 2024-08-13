@@ -308,6 +308,7 @@ public class DatabaseManager {
         for (Cart cart: order.getCarts()) {
             Item item = cart.getItem();
             item.setSold(cart.getNumber());
+            item.setInventory(item.getInventory() - cart.getNumber());
             databaseReference.child("Items").child(item.getId()).setValue(item);
         }
 
