@@ -14,6 +14,7 @@ import com.example.handmadestore.OrderDetail;
 import com.example.handmadestore.databinding.CardOrderItemBinding;
 import com.example.handmadestore.databinding.FragmentOrderBinding;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
@@ -39,6 +40,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.binding.name.setText("Người nhận: "+ order.getName());
         holder.binding.phone.setText("SĐT: " + order.getPhone());
         holder.binding.address.setText("Địa chỉ: " + order.getAddress());
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm dd-MM-yyyy");
+        String formattedDate = dateFormat.format(order.getOrderTime());
+        holder.binding.timeOrder.setText("Thời gian đặt hàng: " + formattedDate);
         holder.binding.status.setText("Trạng thái: " + order.getStatus());
 
         String paymentMethod = (order.getZaloPayment() ? "ZaloPay" : "Tiền mặt");

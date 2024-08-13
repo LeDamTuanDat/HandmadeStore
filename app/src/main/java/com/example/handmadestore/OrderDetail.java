@@ -20,6 +20,7 @@ import com.example.handmadestore.Object.Order;
 import com.example.handmadestore.Object.Rating;
 import com.example.handmadestore.databinding.ActivityOrderDetailBinding;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -53,6 +54,10 @@ public class OrderDetail extends AppCompatActivity {
         binding.phone.setText("SĐT: " + order.getPhone());
         binding.address.setText("Địa chỉ: " + order.getAddress());
         binding.status.setText("Trạng thái: " + order.getStatus());
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm dd-MM-yyyy");
+        String formattedDate = dateFormat.format(order.getOrderTime());
+        binding.timeOrder.setText("Thời gian đặt hàng: " + formattedDate);
 
         String paymentMethod = (order.getZaloPayment() ? "ZaloPay" : "Tiền mặt");
         binding.paymentMethod.setText("Hình thức thanh toán: " + paymentMethod);

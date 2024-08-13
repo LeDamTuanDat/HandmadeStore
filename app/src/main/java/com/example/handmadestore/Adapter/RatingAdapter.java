@@ -9,8 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
+import com.example.handmadestore.LoginActivity;
+import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Rating;
 import com.example.handmadestore.Object.ReviewDomain;
+import com.example.handmadestore.Object.User;
+import com.example.handmadestore.R;
 import com.example.handmadestore.databinding.ViewholderReviewBinding;
 
 import java.util.ArrayList;
@@ -38,15 +42,27 @@ public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.Viewholder
         holder.binding.review.setText(rating.getReview());
         holder.binding.rating.setText(rating.getRating() + "");
 
-//        Glide.with(context)
-//                .load(items.get(position).getPicUrl())
-//                .transform(new GranularRoundedCorners(100, 100, 100, 100))
-//                .into(holder.binding.pic);
+        String image = getUserImage(rating);
+        if (image.isEmpty()){
+            holder.binding.pic.setImageResource(R.drawable.avatar);
+        }else {
+            Glide.with(context).load(image).into(holder.binding.pic);
+        }
     }
 
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    public String getUserImage(Rating rating){
+        String userImage = "";
+        for (User temp : LoginActivity.users) {
+            if (temp.getUsername().equals(rating.getUserId())){
+                userImage = temp.getImage();
+            }
+        }
+        return userImage;
     }
 
     public class Viewholder extends RecyclerView.ViewHolder{
@@ -56,4 +72,5 @@ public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.Viewholder
             this.binding=binding;
         }
     }
+
 }

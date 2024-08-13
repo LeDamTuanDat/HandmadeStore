@@ -2,12 +2,14 @@ package com.example.handmadestore.Object;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Order implements Serializable {
     private String keyId,idUser,name,phone,address;
     private String status;
     private boolean zaloPayment;
     private ArrayList<Cart> carts = new ArrayList<>();
+    private Date orderTime;
 
     public Order(String idUser, String name, String phone, String address, ArrayList<Cart> carts) {
         this.idUser = idUser;
@@ -17,6 +19,7 @@ public class Order implements Serializable {
         this.carts = carts;
         this.status = "Chờ xác nhận";
         this.zaloPayment = false;
+        this.orderTime = new Date();
     }
 
     public Order() {
@@ -84,6 +87,14 @@ public class Order implements Serializable {
 
     public void setZaloPayment(boolean zaloPayment) {
         this.zaloPayment = zaloPayment;
+    }
+
+    public Date getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(Date orderTime) {
+        this.orderTime = orderTime;
     }
 
     public long calTotal(){
