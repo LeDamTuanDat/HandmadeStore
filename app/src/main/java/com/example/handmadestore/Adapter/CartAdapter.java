@@ -119,7 +119,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholder> {
 
     public void confirmDelete(Cart cart){
         new AlertDialog.Builder(binding.getRoot().getContext())
-                .setTitle("Xác nhận")
+                .setTitle("Xác nhận xóa")
                 .setMessage("Bạn có chắc chắn muốn xoá sản phẩm khỏi giỏ hàng ?")
                 .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     @Override

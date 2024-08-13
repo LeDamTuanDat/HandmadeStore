@@ -87,8 +87,8 @@ public class AdminCategoryAdapter extends RecyclerView.Adapter<AdminCategoryAdap
                             Toast.makeText(context, "Không thể xoá danh mục", Toast.LENGTH_SHORT).show();
                         }else {
                             new AlertDialog.Builder(context)
-                                    .setTitle("Xác nhận thoát")
-                                    .setMessage("Bạn có chắc chắn muốn thoát ứng dụng không?")
+                                    .setTitle("Xác nhận xóa")
+                                    .setMessage("Bạn có chắc chắn muốn xóa danh mục không?")
                                     .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {

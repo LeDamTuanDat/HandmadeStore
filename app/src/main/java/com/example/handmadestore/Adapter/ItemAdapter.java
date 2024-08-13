@@ -95,8 +95,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.AdminItemViewH
                         break;
                     case R.id.delete_item:
                         new androidx.appcompat.app.AlertDialog.Builder(context)
-                                .setTitle("Xác nhận thoát")
-                                .setMessage("Bạn có chắc chắn muốn thoát ứng dụng không?")
+                                .setTitle("Xác nhận xóa")
+                                .setMessage("Bạn có chắc chắn muốn xóa sản phẩm không?")
                                 .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
