@@ -77,7 +77,8 @@ public class DatabaseManager {
         databaseReference.child("Users").child(user.getUsername()).setValue(user);
     }
 
-    public void updateUser(User user, Uri uri, Context context){
+    public void updateUser(User user, Uri uri, Context context,AlertDialog dialog){
+        dialog.show();
         if (uri == null){
             databaseReference.child("Users").child(user.getUsername()).setValue(user);
             ((Activity) context).finish();
@@ -90,7 +91,7 @@ public class DatabaseManager {
                     Uri uriImg = uriTask.getResult();
                     user.setImage(uriImg.toString());
                     databaseReference.child("Users").child(user.getUsername()).setValue(user);
-//                dialog.dismiss();
+                    dialog.dismiss();
                     Toast.makeText(context,"Cập nhật thông tin thành công",Toast.LENGTH_SHORT).show();
                     ((Activity) context).finish();
                 }

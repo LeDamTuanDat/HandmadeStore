@@ -1,6 +1,8 @@
 package com.example.handmadestore;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -25,6 +28,7 @@ import com.example.handmadestore.databinding.ActivityEditProfileBinding;
 public class EditProfileActivity extends AppCompatActivity {
     ActivityEditProfileBinding binding;
     Uri uri;
+    String currentUserImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +40,8 @@ public class EditProfileActivity extends AppCompatActivity {
         disableSpace();
         hideChangePass();
         save();
+        cancel();
+        this.getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     private void getData(){
@@ -48,6 +54,7 @@ public class EditProfileActivity extends AppCompatActivity {
         binding.edtPhone.setText(MainActivity.currentUser.getPhone());
         binding.edtRealName.setText(MainActivity.currentUser.getRealname());
         binding.edtAddress.setText(MainActivity.currentUser.getAddress());
+        currentUserImage = MainActivity.currentUser.getImage();
     }
 
     private void setImage(){
@@ -66,6 +73,7 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 uri = null;
+                MainActivity.currentUser.setImage("");
                 binding.image.setImageResource(R.drawable.avatar);
                 binding.delete.setVisibility(View.GONE);
             }
@@ -126,6 +134,23 @@ public class EditProfileActivity extends AppCompatActivity {
                 } else if (phone.length() < 10 || !phone.startsWith("0")) {
                     Toast.makeText(EditProfileActivity.this,"Vui lòng nhập đúng định dạng số điện thoại",Toast.LENGTH_LONG).show();
                 } else {
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(binding.getRoot().getContext());
+                    builder.setCancelable(false);
+                    builder.setView(R.layout.loading_activity);
+                    AlertDialog dialog = builder.create();
+
+                    DatabaseManager databaseManager = new DatabaseManager();
+
+                    MainActivity.currentUser.setEmail(email);
+                    MainActivity.currentUser.setPhone(phone);
+                    MainActivity.currentUser.setRealname(realname);
+                    MainActivity.currentUser.setAddress(address);
+
+                    if (uri != null){
+                        MainActivity.currentUser.setImage(uri.toString());
+                    }
+
                     if (binding.changePass.isChecked()){
                         if (password.isEmpty() || cfpassword.isEmpty()){
                             Toast.makeText(EditProfileActivity.this,"Vui lòng nhập đầy đủ thông tin",Toast.LENGTH_LONG).show();
@@ -135,23 +160,32 @@ public class EditProfileActivity extends AppCompatActivity {
                             Toast.makeText(EditProfileActivity.this,"Mật khẩu phải tối thiểu 6 ký tự",Toast.LENGTH_LONG).show();
                         }else {
                             MainActivity.currentUser.setPassword(password);
+                            databaseManager.updateUser(MainActivity.currentUser,uri,EditProfileActivity.this,dialog);
                         }
                     }else {
-                        if (uri != null){
-                            MainActivity.currentUser.setImage(uri.toString());
-                        }else {
-                            MainActivity.currentUser.setImage("");
-                        }
+                        databaseManager.updateUser(MainActivity.currentUser,uri,EditProfileActivity.this,dialog);
                     }
-                    MainActivity.currentUser.setEmail(email);
-                    MainActivity.currentUser.setPhone(phone);
-                    MainActivity.currentUser.setRealname(realname);
-                    MainActivity.currentUser.setAddress(address);
-                    DatabaseManager databaseManager = new DatabaseManager();
-                    databaseManager.updateUser(MainActivity.currentUser,uri,EditProfileActivity.this);
                 }
 
             }
         });
     }
+
+    public void cancel(){
+        binding.exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.currentUser.setImage(currentUserImage);
+                finish();
+            }
+        });
+    }
+
+    OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+        @Override
+        public void handleOnBackPressed() {
+            MainActivity.currentUser.setImage(currentUserImage);
+            finish();
+        }
+    };
 }

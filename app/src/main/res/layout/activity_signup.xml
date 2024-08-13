@@ -71,7 +71,7 @@
                 android:id="@+id/edtUsername"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:inputType="text"
+                android:inputType="textVisiblePassword"
                 android:maxLines="1"
                 android:background="@drawable/custom_edittext"
                 android:drawableLeft="@drawable/baseline_person_24"
