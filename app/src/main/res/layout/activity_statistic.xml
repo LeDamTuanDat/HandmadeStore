@@ -9,6 +9,15 @@
     android:padding="16dp"
     tools:context=".StatisticActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thống kê tổng doanh thu\nhàng tháng trong năm 2024"
+        android:gravity="center"
+        android:textSize="24dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/green"/>
+
     <com.github.mikephil.charting.charts.BarChart
         android:layout_width="match_parent"
         android:layout_height="match_parent"

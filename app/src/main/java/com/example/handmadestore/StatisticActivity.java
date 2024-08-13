@@ -10,6 +10,7 @@ import com.example.handmadestore.Object.Order;
 import com.example.handmadestore.databinding.ActivityStatisticBinding;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -48,25 +49,32 @@ public class StatisticActivity extends AppCompatActivity {
 
         BarDataSet barDataSet = new BarDataSet(entries, "Doanh thu hàng tháng");
         barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        barDataSet.setValueTextSize(12f);
 //        barDataSet.setDrawValues(false);
         Description description= new Description();
         description.setText("VNĐ");
         binding.chart.setDescription(description);
+
+
         BarData barData = new BarData(barDataSet);
+//        binding.chart.setFitBars(true);
         binding.chart.setData(barData);
 
         XAxis xAxis = binding.chart.getXAxis();
         xAxis.setValueFormatter(new IndexAxisValueFormatter(lables));
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setPosition(XAxis.XAxisPosition.TOP);
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(false);
         xAxis.setGranularity(1f);
         xAxis.setGranularityEnabled(true);
-        xAxis.setLabelCount(lables.size());
-        xAxis.setLabelRotationAngle(0);//
-        xAxis.setAxisLineColor(Color.BLACK);//
-        xAxis.setSpaceMin(0.5f); // Thêm khoảng trống trước nhãn đầu tiên
-        xAxis.setSpaceMax(0.5f);
+//        xAxis.setLabelCount(lables.size());
+        xAxis.setLabelRotationAngle(270);
+        xAxis.setAxisLineColor(Color.BLACK);
+
+        YAxis leftAxis = binding.chart.getAxisLeft();
+        YAxis rightAxis = binding.chart.getAxisRight();
+        leftAxis.setAxisMinimum(0f);
+        rightAxis.setAxisMinimum(0f);
 
         binding.chart.animateY(1000);
         binding.chart.getAxisLeft().setDrawLabels(false);//
@@ -80,11 +88,13 @@ public class StatisticActivity extends AppCompatActivity {
         for (int i = 0; i < currentMonth; i++) {
             long money = 0;
             for (Order order: LoginActivity.orders) {
-                Date orderTime = order.getOrderTime();
-                calendar.setTime(orderTime);
-                int month = calendar.get(Calendar.MONTH) + 1;
-                if ((i+1) == month){
-                    money += order.calTotal();
+                if (order.getStatus().equals("Đã giao")) {
+                    Date orderTime = order.getOrderTime();
+                    calendar.setTime(orderTime);
+                    int month = calendar.get(Calendar.MONTH) + 1;
+                    if ((i + 1) == month) {
+                        money += order.calTotal();
+                    }
                 }
             }
             MonthlyRevenue monthlyRevenue = new MonthlyRevenue(i,money);
