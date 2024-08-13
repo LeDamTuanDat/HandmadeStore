@@ -1,9 +1,12 @@
 package com.example.handmadestore;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.handmadestore.AdminCategory.AdminCategoryActivity;
@@ -22,6 +25,7 @@ public class AdminActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         getData();
         handleEvent();
+        this.getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     public void getData(){
@@ -60,4 +64,22 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
     }
+
+    OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+        @Override
+        public void handleOnBackPressed() {
+            new AlertDialog.Builder(AdminActivity.this)
+                    .setTitle("Xác nhận thoát")
+                    .setMessage("Bạn có chắc chắn muốn thoát ứng dụng không?")
+                    .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finishAffinity();
+                            System.exit(0);
+                        }
+                    })
+                    .setNegativeButton("Không", null)
+                    .show();
+        }
+    };
 }

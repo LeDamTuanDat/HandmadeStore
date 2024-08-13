@@ -61,7 +61,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     public void setResultAfterFiltered(ArrayList<Order> orders){
         this.orders = orders;
         notifyDataSetChanged();
-
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

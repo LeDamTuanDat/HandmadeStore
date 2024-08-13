@@ -1,12 +1,17 @@
 package com.example.handmadestore;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.handmadestore.Adapter.AdapterViewPagerForMain;
+import com.example.handmadestore.Object.DatabaseManager;
 import com.example.handmadestore.Object.User;
 import com.example.handmadestore.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationBarView;
@@ -21,8 +26,27 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         init();
+        this.getOnBackPressedDispatcher().addCallback(this, callback);
         handleBottomNavigation();
     }
+
+    OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+        @Override
+        public void handleOnBackPressed() {
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("Xác nhận thoát")
+                    .setMessage("Bạn có chắc chắn muốn thoát ứng dụng không?")
+                    .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finishAffinity();
+                            System.exit(0);
+                        }
+                    })
+                    .setNegativeButton("Không", null)
+                    .show();
+        }
+    };
 
     @Override
     protected void onResume() {
@@ -60,10 +84,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-//    public void switchToFragment(int position) {
-//        binding.pageMain.setCurrentItem(position);
-//        if(position == 1){
-//            binding.bottomNav.setSelectedItemId(R.id.itCart);
-//        }
-//    }
+    public void switchToFragment(int position) {
+        binding.pageMain.setCurrentItem(position);
+        if(position == 2){
+            binding.bottomNav.setSelectedItemId(R.id.itOrder);
+        }
+    }
 }

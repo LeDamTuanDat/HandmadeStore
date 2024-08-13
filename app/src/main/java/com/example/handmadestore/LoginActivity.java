@@ -1,11 +1,14 @@
 package com.example.handmadestore;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -37,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         getData();
         init();
+        this.getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     @Override
@@ -61,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void init(){
+        disableSpace();
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,4 +122,27 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+
+    private void disableSpace(){
+        binding.edtUsernameLg.addTextChangedListener(new NoWhitespaceTextWatcher(binding.edtUsernameLg));
+        binding.edtPasswordLg.addTextChangedListener(new NoWhitespaceTextWatcher(binding.edtPasswordLg));
+    }
+
+    OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+        @Override
+        public void handleOnBackPressed() {
+            new AlertDialog.Builder(LoginActivity.this)
+                    .setTitle("Xác nhận thoát")
+                    .setMessage("Bạn có chắc chắn muốn thoát ứng dụng không?")
+                    .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finishAffinity();
+                            System.exit(0);
+                        }
+                    })
+                    .setNegativeButton("Không", null)
+                    .show();
+        }
+    };
 }
