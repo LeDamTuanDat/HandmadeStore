@@ -71,7 +71,9 @@ public class AddOrder extends AppCompatActivity {
 
                 if (name.isEmpty() || phone.isEmpty() || address.isEmpty()){
                     Toast.makeText(AddOrder.this,"Vui lòng điền đủ thông tin",Toast.LENGTH_LONG).show();
-                }else {
+                }else if (phone.length() < 10 || !phone.startsWith("0")) {
+                    Toast.makeText(AddOrder.this,"Vui lòng nhập đúng định dạng số điện thoại",Toast.LENGTH_LONG).show();
+                } else {
 
                     String idUser = MainActivity.currentUser.getUsername();
                     Order order = new Order(idUser,name,phone,address,MainActivity.currentUser.getCarts());

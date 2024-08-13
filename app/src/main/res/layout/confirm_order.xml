@@ -30,8 +30,10 @@
             android:background="@drawable/custom_edittext"
             android:layout_marginTop="20dp"
             android:padding="16dp"
-            android:hint="Tên người đặt"
+            android:hint="Tên người nhận"
             android:textColor="@color/green"
+            android:digits="aáàảãạăắằẳẵặâấầẩẫậbcdđeéèẻẽẹêếềểễệfghiíìịklmnoóòỏõọôốồổỗộơớờởỡợpqrstuúùủũụưứừửữựvxyAÁÀẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬBCDĐEÉÈẺẼẸÊẾỀỂỄỆFGHIJKLMNOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢPQRSTUÚÙỦŨỤƯỨỪỬỮỰVXY "
+            android:maxLines="1"
             android:layout_gravity="start|center_horizontal"/>
 
         <EditText
@@ -43,7 +45,8 @@
             android:padding="16dp"
             android:hint="Số điện thoại"
             android:textColor="@color/green"
-            android:inputType="phone"
+            android:inputType="number"
+            android:maxLength="10"
             android:layout_gravity="start|center_horizontal"/>
 
         <EditText
