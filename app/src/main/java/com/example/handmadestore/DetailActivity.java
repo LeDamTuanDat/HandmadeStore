@@ -47,6 +47,7 @@ public class DetailActivity extends AppCompatActivity {
         getBundles();
         initBanners();
         setupViewPager();
+        binding.amount.setText("1");
     }
 
     private void initBanners() {
@@ -177,7 +178,7 @@ public class DetailActivity extends AppCompatActivity {
         ArrayList<Cart> carts = MainActivity.currentUser.getCarts();
         for (int i = 0; i < carts.size(); i++) {
             Item temp = carts.get(i).getItem();
-            if (temp.getTitle().equals(item.getTitle())) {
+            if (temp.getId().equals(item.getId())) {
                 return false;
             }
         }

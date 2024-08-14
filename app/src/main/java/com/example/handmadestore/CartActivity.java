@@ -3,16 +3,14 @@ package com.example.handmadestore;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.handmadestore.Adapter.CartAdapter;
 import com.example.handmadestore.Object.Cart;
+import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.databinding.ActivityCartBinding;
 
 import java.text.NumberFormat;
@@ -39,7 +37,6 @@ public class CartActivity extends AppCompatActivity {
     }
 
     protected long getTotalPrice(){
-        MainActivity.currentUser.getCarts();
         long totalPrice = 0;
         for (int i = 0 ; i < MainActivity.currentUser.getCarts().size() ; i++){
             Cart cart = MainActivity.currentUser.getCarts().get(i);
@@ -77,8 +74,12 @@ public class CartActivity extends AppCompatActivity {
         binding.checkOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CartActivity.this, AddOrder.class);
-                startActivity(intent);
+                if (checkCarts()){
+                    Intent intent = new Intent(CartActivity.this, AddOrder.class);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(CartActivity.this, "Số lượng nhiều hơn tồn kho", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -90,5 +91,19 @@ public class CartActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    public boolean checkCarts(){
+        for (Cart cart : MainActivity.currentUser.getCarts()) {
+            Item temp = cart.getItem();
+            for (Item item : LoginActivity.items) {
+                if (item.getId().equals(temp.getId())){
+                    if (cart.getNumber() > item.getInventory()){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 }
