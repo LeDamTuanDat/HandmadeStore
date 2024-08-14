@@ -20,9 +20,11 @@ import com.example.handmadestore.Object.Order;
 import com.example.handmadestore.Object.Rating;
 import com.example.handmadestore.databinding.ActivityOrderDetailBinding;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 
 public class OrderDetail extends AppCompatActivity {
 
@@ -69,12 +71,14 @@ public class OrderDetail extends AppCompatActivity {
         cartAdapter = new CartAdapter(order.getCarts(),false);
         binding.recyclerView.setAdapter(cartAdapter);
 
+        NumberFormat formatVND = NumberFormat.getCurrencyInstance(new Locale("vi","VN"));
+        binding.delivery.setText("Phí vận chuyển: " + formatVND.format(15000));
         if (order.getZaloPayment()){
-            binding.total.setText("Tổng thanh toán : 0đ");
-            binding.zaloPrice.setText((order.calTotal() + 15000) + "đ");
+            binding.total.setText("Tổng thanh toán : " + formatVND.format(0));
+            binding.zaloPrice.setText(formatVND.format(order.calTotal() + 15000));
             binding.zaloPrice.setPaintFlags(binding.zaloPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }else {
-            binding.total.setText("Tổng thanh toán : " + (order.calTotal() + 15000) + "đ");
+            binding.total.setText("Tổng thanh toán : " + formatVND.format(order.calTotal() + 15000));
             binding.zaloPrice.setVisibility(View.GONE);
         }
 
