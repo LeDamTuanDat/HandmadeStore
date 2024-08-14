@@ -150,7 +150,15 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(binding.getRoot().getContext(), AdminItemActivity.class);
-                intent.putExtra("search",true);
+//                intent.putExtra("search",true);
+                startActivity(intent);
+            }
+        });
+        binding.search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(binding.getRoot().getContext(), AdminItemActivity.class);
+//                intent.putExtra("search",true);
                 startActivity(intent);
             }
         });

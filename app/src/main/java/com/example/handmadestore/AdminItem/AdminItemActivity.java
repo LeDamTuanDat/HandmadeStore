@@ -42,7 +42,7 @@ public class AdminItemActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         category = (Category) getIntent().getSerializableExtra("category");
-        isSearch = getIntent().getBooleanExtra("search",false);
+//        isSearch = getIntent().getBooleanExtra("search",false);
 
         checkUser();
         initItems();
@@ -66,9 +66,9 @@ public class AdminItemActivity extends AppCompatActivity {
     private void checkUser() {
         if (MainActivity.currentUser != null){
             binding.addItem.setVisibility(View.GONE);
-            if (isSearch == false){
-                binding.filter.setVisibility(View.GONE);
-            }
+//            if (isSearch == false){
+//                binding.filter.setVisibility(View.GONE);
+//            }
         }
     }
 
