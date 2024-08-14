@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.handmadestore.CreateUserForAdminActivity;
 import com.example.handmadestore.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -77,10 +78,35 @@ public class DatabaseManager {
         databaseReference.child("Users").child(user.getUsername()).setValue(user);
     }
 
+    public void addUserForAdmin(User user, AlertDialog dialog,Context context){
+        dialog.show();
+        if (user.getImage().isEmpty()) {
+            databaseReference.child("Users").child(user.getUsername()).setValue(user);
+            Toast.makeText(context,"Đăng ký thành công",Toast.LENGTH_LONG).show();
+            ((Activity) context).finish();
+        }else {
+            storageReference.child("Users").child(Uri.parse(user.getImage()).getLastPathSegment()).putFile(Uri.parse(user.getImage())).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                    while (!uriTask.isComplete());
+                    Uri uriImg = uriTask.getResult();
+                    user.setImage(uriImg.toString());
+                    dialog.dismiss();
+                    databaseReference.child("Users").child(user.getUsername()).setValue(user);
+                    Toast.makeText(context,"Đăng ký thành công",Toast.LENGTH_LONG).show();
+                    ((Activity) context).finish();
+                }
+            });
+        }
+    }
+
+
     public void updateUser(User user, Uri uri, Context context,AlertDialog dialog){
         dialog.show();
         if (uri == null){
             databaseReference.child("Users").child(user.getUsername()).setValue(user);
+            Toast.makeText(context,"Cập nhật thông tin thành công",Toast.LENGTH_SHORT).show();
             ((Activity) context).finish();
         }else {
             storageReference.child("Users").child(uri.getLastPathSegment()).putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

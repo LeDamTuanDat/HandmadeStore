@@ -1,9 +1,14 @@
 package com.example.handmadestore;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.PopupMenu;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +22,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.handmadestore.Adapter.ItemAdapter;
 import com.example.handmadestore.Adapter.UserAdapter;
 import com.example.handmadestore.AdminItem.AdminItemActivity;
+import com.example.handmadestore.AdminItem.UploadItemActivity;
+import com.example.handmadestore.Object.DatabaseManager;
 import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.Object.User;
 import com.example.handmadestore.databinding.ActivityManageUserBinding;
@@ -31,15 +38,27 @@ public class ManageUserActivity extends AppCompatActivity {
     ArrayAdapter<String> optionsAdapter;
     ArrayList<User> resultAfterFiltered = new ArrayList<>();
     ArrayList<User> resultAfterSearch = new ArrayList<>();
+    int currentSelect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityManageUserBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        currentSelect = 0;
         init();
         handleFilter();
         handleSearch();
+        handleAdd();
+    }
+
+    @Override
+    protected void onResume() {
+        init();
+        binding.search.setQuery("",false);
+        binding.search.clearFocus();
+        resultAfterFiltered(currentSelect);
+        super.onResume();
     }
 
     private void init(){
@@ -59,6 +78,7 @@ public class ManageUserActivity extends AppCompatActivity {
                 resultAfterFiltered(i);
                 binding.search.setQuery("",false);
                 binding.search.clearFocus();
+                currentSelect = i;
             }
 
             @Override
@@ -129,5 +149,37 @@ public class ManageUserActivity extends AppCompatActivity {
         }else {
             binding.notification.setVisibility(View.GONE);
         }
+    }
+
+    private void handleAdd(){
+        binding.addUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPopUpMenu(view);
+            }
+        });
+    }
+
+    private void showPopUpMenu(View view){
+        PopupMenu popupMenu = new PopupMenu(ManageUserActivity.this, view);
+        popupMenu.inflate(R.menu.menu_option_user);
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent intent = new Intent(ManageUserActivity.this, CreateUserForAdminActivity.class);
+                switch (menuItem.getItemId()){
+                    case R.id.addAdmin:
+                        intent.putExtra("priority",true);
+                        startActivity(intent);
+                        break;
+                    case R.id.addUser:
+                        intent.putExtra("priority",false);
+                        startActivity(intent);
+                        break;
+                }
+                return true;
+            }
+        });
+        popupMenu.show();
     }
 }
