@@ -51,7 +51,7 @@
             android:drawableStart="@drawable/filter"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Tất cả người dùng"
+            android:text="Tất cả danh mục"
             android:textSize="16dp" />
 
     </LinearLayout>
