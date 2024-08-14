@@ -182,13 +182,17 @@ public class AdminItemActivity extends AppCompatActivity {
         resultAfterSearch.clear();
         if(category != null && category.getId() != "all"){
             for (Item item : resultAfterFiltered) {
-                if(item.getTitle().contains(text)){
+                String normalTitle = item.getTitle().toLowerCase();
+                String normalText = text.toLowerCase();
+                if(normalTitle.contains(normalText)){
                     resultAfterSearch.add(item);
                 }
             }
         }else {
             for (Item item : LoginActivity.items) {
-                if(item.getTitle().contains(text)){
+                String normalTitle = item.getTitle().toLowerCase();
+                String normalText = text.toLowerCase();
+                if(normalTitle.contains(normalText)){
                     resultAfterSearch.add(item);
                 }
             }

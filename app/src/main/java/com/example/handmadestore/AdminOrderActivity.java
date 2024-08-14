@@ -111,7 +111,9 @@ public class AdminOrderActivity extends AppCompatActivity {
             temp = new ArrayList<>(resultAfterFiltered);
         }
         for (Order order : temp) {
-            if(order.getKeyId().contains(text)){
+            String normalId = order.getKeyId().toLowerCase();
+            String normalText = text.toLowerCase();
+            if(normalId.contains(normalText)){
                 resultAfterSearch.add(order);
             }
         }

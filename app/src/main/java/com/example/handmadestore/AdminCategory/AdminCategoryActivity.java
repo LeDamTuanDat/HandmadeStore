@@ -88,7 +88,9 @@ public class AdminCategoryActivity extends AppCompatActivity {
     private void resultAfterSearch(String text){
         ArrayList<Category> result = new ArrayList<>();
         for (Category item : LoginActivity.categories) {
-            if(item.getTitle().contains(text)){
+            String normalTitle = item.getTitle().toLowerCase();
+            String normalText = text.toLowerCase();
+            if(normalTitle.contains(normalText)){
                 result.add(item);
             }
         }

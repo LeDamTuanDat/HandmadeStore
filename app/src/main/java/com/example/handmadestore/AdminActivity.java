@@ -9,6 +9,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.handmadestore.AdminCategory.AdminCategoryActivity;
 import com.example.handmadestore.AdminItem.AdminItemActivity;
 import com.example.handmadestore.Object.User;
@@ -29,7 +30,12 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     public void getData(){
+
         currentUser = (User) getIntent().getSerializableExtra("user");
+        if (!currentUser.getImage().isEmpty()){
+            Glide.with(AdminActivity.this).load(currentUser.getImage()).into(binding.image);
+        }
+        binding.name.setText("Xin chào " + currentUser.getRealname()+ "!");
     }
 
     public void handleEvent(){
