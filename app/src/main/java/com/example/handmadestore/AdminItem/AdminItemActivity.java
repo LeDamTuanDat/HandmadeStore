@@ -72,14 +72,6 @@ public class AdminItemActivity extends AppCompatActivity {
         }
     }
 
-    private void checkItems(ArrayList<Item> items){
-        if (items.size() == 0){
-            binding.notification.setVisibility(View.VISIBLE);
-        }else {
-            binding.notification.setVisibility(View.GONE);
-        }
-    }
-
     private void initItems(){
         if (MainActivity.currentUser != null){
             adapter = new ItemAdapter(LoginActivity.items, MainActivity.currentUser);
@@ -89,6 +81,14 @@ public class AdminItemActivity extends AppCompatActivity {
         binding.recyclerView.setLayoutManager(new GridLayoutManager(AdminItemActivity.this,2));
         binding.recyclerView.setAdapter(adapter);
         checkItems(LoginActivity.items);
+    }
+
+    private void checkItems(ArrayList<Item> items){
+        if (items.size() == 0){
+            binding.notification.setVisibility(View.VISIBLE);
+        }else {
+            binding.notification.setVisibility(View.GONE);
+        }
     }
 
     private void handleSelectCategory(){
