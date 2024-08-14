@@ -9,7 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.Object.User;
+import com.example.handmadestore.R;
 import com.example.handmadestore.databinding.CardUserBinding;
 
 import java.util.ArrayList;
@@ -36,6 +38,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         User user = users.get(position);
         if (!user.getImage().isEmpty()){
             Glide.with(context).load(user.getImage()).into(holder.binding.image);
+        }else {
+            holder.binding.image.setImageResource(R.drawable.avatar);
         }
         holder.binding.username.setText("Tài khoản: " + user.getUsername());
         holder.binding.realName.setText("Họ tên: " + user.getRealname());
@@ -52,6 +56,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     @Override
     public int getItemCount() {
         return users.size();
+    }
+
+    public void setResultAfterFiltered(ArrayList<User> users){
+        this.users = users;
+        notifyDataSetChanged();
     }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {

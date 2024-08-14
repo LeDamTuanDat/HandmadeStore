@@ -32,6 +32,25 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/layout_spinner"
+        android:layout_width="230dp"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="20dp"
+        android:paddingVertical="3dp"
+        android:layout_gravity="end"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/custom_edittext">
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_gravity="center"
+            android:outlineAmbientShadowColor="@color/green"
+            android:outlineSpotShadowColor="@color/green"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/notification"
         android:layout_width="match_parent"

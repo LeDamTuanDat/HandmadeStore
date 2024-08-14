@@ -32,7 +32,7 @@ public class AdminItemActivity extends AppCompatActivity {
     DropdownSearchBinding dropdownBinding;
     ItemAdapter adapter;
     Category category;
-    boolean isSearch;
+//    boolean isSearch;
     ArrayList<Item> resultAfterFiltered = new ArrayList<>();
     ArrayList<Item> resultAfterSearch = new ArrayList<>();
     @Override
