@@ -102,9 +102,12 @@ public class DatabaseManager {
     }
 
 
-    public void updateUser(User user, Uri uri, Context context,AlertDialog dialog){
+    public void updateUser(User user, Uri uri, Context context,AlertDialog dialog, boolean normal){
         dialog.show();
         if (uri == null){
+            if (normal){
+                MainActivity.currentUser.setImage("");// Phải có đoạn này để sau khi người dùng thực hiện xóa ảnh và cập nhật thì các fragment của người dùng mới cập nhật lại
+            }
             databaseReference.child("Users").child(user.getUsername()).setValue(user);
             Toast.makeText(context,"Cập nhật thông tin thành công",Toast.LENGTH_SHORT).show();
             ((Activity) context).finish();
@@ -117,6 +120,9 @@ public class DatabaseManager {
                     Uri uriImg = uriTask.getResult();
                     user.setImage(uriImg.toString());
                     databaseReference.child("Users").child(user.getUsername()).setValue(user);
+                    if (normal){
+                        MainActivity.currentUser.setImage(user.getImage());
+                    }
                     dialog.dismiss();
                     Toast.makeText(context,"Cập nhật thông tin thành công",Toast.LENGTH_SHORT).show();
                     ((Activity) context).finish();
@@ -126,6 +132,24 @@ public class DatabaseManager {
                 public void onFailure(@NonNull Exception e) {
                 }
             });
+        }
+    }
+
+    public void deleteUser(User user,AlertDialog dialog,Context context){
+        dialog.show();
+        databaseReference.child("Users").child(user.getUsername()).removeValue();
+        if (!user.getImage().isEmpty()){
+            storageReference = firebaseStorage.getReferenceFromUrl(user.getImage());
+            storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    dialog.dismiss();
+                    Toast.makeText(context, "Xóa người dùng thành công", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else {
+            dialog.dismiss();
+            Toast.makeText(context, "Xóa người dùng thành công", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -45,6 +45,7 @@ public class StatisticActivity extends AppCompatActivity {
 
         init();
         handleSelectMonth();
+        handleBack();
     }
 
     private void init(){
@@ -218,6 +219,15 @@ public class StatisticActivity extends AppCompatActivity {
                 break;
         }
         return monthName;
+    }
+
+    private void handleBack(){
+        binding.back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
 }

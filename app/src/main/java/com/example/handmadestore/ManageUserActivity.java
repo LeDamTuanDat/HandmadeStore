@@ -1,7 +1,5 @@
 package com.example.handmadestore;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -10,21 +8,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.PopupMenu;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.handmadestore.Adapter.ItemAdapter;
 import com.example.handmadestore.Adapter.UserAdapter;
-import com.example.handmadestore.AdminItem.AdminItemActivity;
-import com.example.handmadestore.AdminItem.UploadItemActivity;
-import com.example.handmadestore.Object.DatabaseManager;
-import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.Object.User;
 import com.example.handmadestore.databinding.ActivityManageUserBinding;
 
@@ -50,6 +38,7 @@ public class ManageUserActivity extends AppCompatActivity {
         handleFilter();
         handleSearch();
         handleAdd();
+        handleBack();
     }
 
     @Override
@@ -57,7 +46,7 @@ public class ManageUserActivity extends AppCompatActivity {
         init();
         binding.search.setQuery("",false);
         binding.search.clearFocus();
-        resultAfterFiltered(currentSelect);
+        binding.spinner.setSelection(currentSelect);
         super.onResume();
     }
 
@@ -162,7 +151,7 @@ public class ManageUserActivity extends AppCompatActivity {
 
     private void showPopUpMenu(View view){
         PopupMenu popupMenu = new PopupMenu(ManageUserActivity.this, view);
-        popupMenu.inflate(R.menu.menu_option_user);
+        popupMenu.inflate(R.menu.menu_option_create_user);
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
@@ -181,5 +170,14 @@ public class ManageUserActivity extends AppCompatActivity {
             }
         });
         popupMenu.show();
+    }
+
+    private void handleBack(){
+        binding.back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }

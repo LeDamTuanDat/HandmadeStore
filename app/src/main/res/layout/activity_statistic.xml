@@ -9,12 +9,18 @@
     android:padding="16dp"
     tools:context=".StatisticActivity">
 
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/back" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Thống kê tổng doanh thu\nhàng tháng trong năm 2024"
         android:gravity="center"
-        android:textSize="24dp"
+        android:textSize="20dp"
         android:layout_marginBottom="5dp"
         android:textColor="@color/green"/>
 

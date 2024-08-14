@@ -89,6 +89,8 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), EditProfileActivity.class);
+                intent.putExtra("user",MainActivity.currentUser);
+                intent.putExtra("normal",true);
                 startActivity(intent);
             }
         });

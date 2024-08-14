@@ -23,12 +23,16 @@ import androidx.core.view.WindowInsetsCompat;
 import com.bumptech.glide.Glide;
 import com.example.handmadestore.AdminCategory.UploadCategoryActivity;
 import com.example.handmadestore.Object.DatabaseManager;
+import com.example.handmadestore.Object.User;
 import com.example.handmadestore.databinding.ActivityEditProfileBinding;
 
 public class EditProfileActivity extends AppCompatActivity {
     ActivityEditProfileBinding binding;
     Uri uri;
     String currentUserImage;
+    User user;
+    boolean normal;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,16 +49,20 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void getData(){
-        if (!MainActivity.currentUser.getImage().isEmpty()) {
-            Glide.with(EditProfileActivity.this).load(MainActivity.currentUser.getImage()).into(binding.image);
+
+        normal = getIntent().getBooleanExtra("normal",false);
+        user = (User) getIntent().getSerializableExtra("user");
+
+        if (!user.getImage().isEmpty()) {
+            Glide.with(EditProfileActivity.this).load(user.getImage()).into(binding.image);
         }else {
             binding.delete.setVisibility(View.GONE);
         }
-        binding.edtEmail.setText(MainActivity.currentUser.getEmail());
-        binding.edtPhone.setText(MainActivity.currentUser.getPhone());
-        binding.edtRealName.setText(MainActivity.currentUser.getRealname());
-        binding.edtAddress.setText(MainActivity.currentUser.getAddress());
-        currentUserImage = MainActivity.currentUser.getImage();
+        binding.edtEmail.setText(user.getEmail());
+        binding.edtPhone.setText(user.getPhone());
+        binding.edtRealName.setText(user.getRealname());
+        binding.edtAddress.setText(user.getAddress());
+        currentUserImage = user.getImage();
     }
 
     private void setImage(){
@@ -73,7 +81,7 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 uri = null;
-                MainActivity.currentUser.setImage("");
+                user.setImage("");
                 binding.image.setImageResource(R.drawable.avatar);
                 binding.delete.setVisibility(View.GONE);
             }
@@ -142,13 +150,13 @@ public class EditProfileActivity extends AppCompatActivity {
 
                     DatabaseManager databaseManager = new DatabaseManager();
 
-                    MainActivity.currentUser.setEmail(email);
-                    MainActivity.currentUser.setPhone(phone);
-                    MainActivity.currentUser.setRealname(realname);
-                    MainActivity.currentUser.setAddress(address);
+                    user.setEmail(email);
+                    user.setPhone(phone);
+                    user.setRealname(realname);
+                    user.setAddress(address);
 
                     if (uri != null){
-                        MainActivity.currentUser.setImage(uri.toString());
+                        user.setImage(uri.toString());
                     }
 
                     if (binding.changePass.isChecked()){
@@ -159,11 +167,11 @@ public class EditProfileActivity extends AppCompatActivity {
                         } else if (password.length() < 6) {
                             Toast.makeText(EditProfileActivity.this,"Mật khẩu phải tối thiểu 6 ký tự",Toast.LENGTH_LONG).show();
                         }else {
-                            MainActivity.currentUser.setPassword(password);
-                            databaseManager.updateUser(MainActivity.currentUser,uri,EditProfileActivity.this,dialog);
+                            user.setPassword(password);
+                            databaseManager.updateUser(user,uri,EditProfileActivity.this,dialog,normal);
                         }
                     }else {
-                        databaseManager.updateUser(MainActivity.currentUser,uri,EditProfileActivity.this,dialog);
+                        databaseManager.updateUser(user,uri,EditProfileActivity.this,dialog,normal);
                     }
                 }
 
@@ -175,7 +183,7 @@ public class EditProfileActivity extends AppCompatActivity {
         binding.exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.currentUser.setImage(currentUserImage);
+                user.setImage(currentUserImage);
                 finish();
             }
         });
@@ -184,7 +192,7 @@ public class EditProfileActivity extends AppCompatActivity {
     OnBackPressedCallback callback = new OnBackPressedCallback(true) {
         @Override
         public void handleOnBackPressed() {
-            MainActivity.currentUser.setImage(currentUserImage);
+            user.setImage(currentUserImage);
             finish();
         }
     };

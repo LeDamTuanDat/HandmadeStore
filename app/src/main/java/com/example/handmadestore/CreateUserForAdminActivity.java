@@ -36,6 +36,7 @@ public class CreateUserForAdminActivity extends AppCompatActivity {
         deleteImage();
         disableSpace();
         save();
+        back();
     }
 
     public void init(){
@@ -133,32 +134,17 @@ public class CreateUserForAdminActivity extends AppCompatActivity {
 
                         databaseManager.addUserForAdmin(user,dialog,CreateUserForAdminActivity.this);
                     }
-
-//                    MainActivity.currentUser.setEmail(email);
-//                    MainActivity.currentUser.setPhone(phone);
-//                    MainActivity.currentUser.setRealname(realname);
-//                    MainActivity.currentUser.setAddress(address);
-//
-//                    if (uri != null){
-//                        MainActivity.currentUser.setImage(uri.toString());
-//                    }
-
-//                    if (binding.changePass.isChecked()){
-//                        if (password.isEmpty() || cfpassword.isEmpty()){
-//                            Toast.makeText(EditProfileActivity.this,"Vui lòng nhập đầy đủ thông tin",Toast.LENGTH_LONG).show();
-//                        }else if (!password.equals(cfpassword)) {
-//                            Toast.makeText(EditProfileActivity.this,"Mật khẩu xác nhận không trùng khớp",Toast.LENGTH_LONG).show();
-//                        } else if (password.length() < 6) {
-//                            Toast.makeText(EditProfileActivity.this,"Mật khẩu phải tối thiểu 6 ký tự",Toast.LENGTH_LONG).show();
-//                        }else {
-//                            MainActivity.currentUser.setPassword(password);
-//                            databaseManager.updateUser(MainActivity.currentUser,uri,EditProfileActivity.this,dialog);
-//                        }
-//                    }else {
-//                        databaseManager.updateUser(MainActivity.currentUser,uri,EditProfileActivity.this,dialog);
-//                    }
                 }
 
+            }
+        });
+    }
+
+    private void back(){
+        binding.exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }
