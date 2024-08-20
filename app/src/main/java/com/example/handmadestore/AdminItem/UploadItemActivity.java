@@ -120,6 +120,7 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
                         dialog.dismiss();
                     }
                 });
+                
             }
         });
     }

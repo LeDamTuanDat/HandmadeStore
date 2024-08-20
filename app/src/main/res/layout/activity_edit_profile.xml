@@ -63,58 +63,162 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <EditText
-                android:id="@+id/edtEmail"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:inputType="textEmailAddress"
-                android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/baseline_email_24"
-                android:drawablePadding="10dp"
-                android:padding="10dp"
+<!--            <EditText-->
+<!--                android:id="@+id/edtEmail"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:inputType="textEmailAddress"-->
+<!--                android:background="@drawable/custom_edittext"-->
+<!--                android:drawableLeft="@drawable/baseline_email_24"-->
+<!--                android:drawablePadding="10dp"-->
+<!--                android:padding="10dp"-->
+<!--                android:maxLines="1"-->
+<!--                android:hint="Email"/>-->
 
-                android:maxLines="1"
-                android:hint="Email"/>
-
-            <EditText
-                android:id="@+id/edtPhone"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:inputType="number"
-                android:maxLength="10"
-                android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/baseline_phone_24"
-                android:drawablePadding="10dp"
-                android:padding="10dp"
+                android:layout_height="wrap_content"
+                app:boxStrokeColor="@color/textinput_stroke_color"
+                app:hintTextColor="@color/green"
+                android:textColorHint="@color/green"
+                app:cursorColor="@color/green"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                android:hint="Địa chỉ Email"
+                app:startIconDrawable="@drawable/baseline_email_24"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!--            <EditText-->
+<!--                android:id="@+id/edtPhone"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:inputType="number"-->
+<!--                android:maxLength="10"-->
+<!--                android:background="@drawable/custom_edittext"-->
+<!--                android:drawableLeft="@drawable/baseline_phone_24"-->
+<!--                android:drawablePadding="10dp"-->
+<!--                android:padding="10dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:hint="Điện thoại"/>-->
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeColor="@color/textinput_stroke_color"
+                app:hintTextColor="@color/green"
+                android:textColorHint="@color/green"
+                app:cursorColor="@color/green"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusBottomEnd="10dp"
                 android:layout_marginTop="10dp"
-                android:hint="Điện thoại"/>
+                android:hint="Số điện thoại"
+                app:startIconDrawable="@drawable/baseline_phone_24"
+                app:endIconMode="clear_text">
 
-            <EditText
-                android:id="@+id/edtRealName"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:inputType="textPersonName"
-                android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/baseline_account_circle_24"
-                android:digits="aáàảãạăắằẳẵặâấầẩẫậbcdđeéèẻẽẹêếềểễệfghiiíìịklmnoóòỏõọôốồổỗộơớờởỡợpqrstuúùủũụưứừửữựvxyAÁÀẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬBCDĐEÉÈẺẼẸÊẾỀỂỄỆFGHIJKLMNOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢPQRSTUÚÙỦŨỤƯỨỪỬỮỰVXY "
-                android:drawablePadding="10dp"
-                android:padding="10dp"
-                android:layout_marginTop="10dp"
-                android:maxLines="1"
-                android:hint="Họ và tên"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:maxLength="10"/>
 
-            <EditText
-                android:id="@+id/edtAddress"
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!--            <EditText-->
+<!--                android:id="@+id/edtRealName"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:inputType="textPersonName"-->
+<!--                android:background="@drawable/custom_edittext"-->
+<!--                android:drawableLeft="@drawable/baseline_account_circle_24"-->
+<!--                android:digits="aáàảãạăắằẳẵặâấầẩẫậbcdđeéèẻẽẹêếềểễệfghiiíìịklmnoóòỏõọôốồổỗộơớờởỡợpqrstuúùủũụưứừửữựvxyAÁÀẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬBCDĐEÉÈẺẼẸÊẾỀỂỄỆFGHIJKLMNOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢPQRSTUÚÙỦŨỤƯỨỪỬỮỰVXY "-->
+<!--                android:drawablePadding="10dp"-->
+<!--                android:padding="10dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:maxLines="1"-->
+<!--                android:hint="Họ và tên"/>-->
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:inputType="text"
-                android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/baseline_location_on_24"
-                android:drawablePadding="10dp"
-                android:padding="10dp"
+                android:layout_height="wrap_content"
+                app:boxStrokeColor="@color/textinput_stroke_color"
+                app:hintTextColor="@color/green"
+                android:textColorHint="@color/green"
+                app:cursorColor="@color/green"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusBottomEnd="10dp"
                 android:layout_marginTop="10dp"
-                android:maxLines="1"
-                android:hint="Địa chỉ"/>
+                android:hint="Họ và tên"
+                app:startIconDrawable="@drawable/baseline_account_circle_24"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtRealName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:digits="aáàảãạăắằẳẵặâấầẩẫậbcdđeéèẻẽẹêếềểễệfghiíìịklmnoóòỏõọôốồổỗộơớờởỡợpqrstuúùủũụưứừửữựvxyAÁÀẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬBCDĐEÉÈẺẼẸÊẾỀỂỄỆFGHIJKLMNOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢPQRSTUÚÙỦŨỤƯỨỪỬỮỰVXY "
+                    android:maxLines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!--            <EditText-->
+<!--                android:id="@+id/edtAddress"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:inputType="text"-->
+<!--                android:background="@drawable/custom_edittext"-->
+<!--                android:drawableLeft="@drawable/baseline_location_on_24"-->
+<!--                android:drawablePadding="10dp"-->
+<!--                android:padding="10dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:maxLines="1"-->
+<!--                android:hint="Địa chỉ"/>-->
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeColor="@color/textinput_stroke_color"
+                app:hintTextColor="@color/green"
+                android:textColorHint="@color/green"
+                app:cursorColor="@color/green"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                android:layout_marginTop="10dp"
+                android:hint="Địa chỉ"
+                app:startIconDrawable="@drawable/baseline_location_on_24"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <CheckBox
                 android:id="@+id/changePass"
@@ -131,28 +235,77 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-                <EditText
-                    android:id="@+id/edtPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:inputType="textPassword"
-                    android:background="@drawable/custom_edittext"
-                    android:drawableLeft="@drawable/baseline_lock_24"
-                    android:drawablePadding="10dp"
-                    android:padding="10dp"
-                    android:hint="Mật khẩu mới"/>
+<!--                <EditText-->
+<!--                    android:id="@+id/edtPassword"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:inputType="textPassword"-->
+<!--                    android:background="@drawable/custom_edittext"-->
+<!--                    android:drawableLeft="@drawable/baseline_lock_24"-->
+<!--                    android:drawablePadding="10dp"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:hint="Mật khẩu mới"/>-->
 
-                <EditText
-                    android:id="@+id/edtCfPassword"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:inputType="textPassword"
-                    android:background="@drawable/custom_edittext"
-                    android:drawableLeft="@drawable/baseline_wifi_protected_setup_24"
-                    android:drawablePadding="10dp"
-                    android:padding="10dp"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/textinput_stroke_color"
+                    app:hintTextColor="@color/green"
+                    android:textColorHint="@color/green"
+                    app:cursorColor="@color/green"
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    android:hint="Mật khẩu mới"
+                    app:startIconDrawable="@drawable/baseline_lock_24"
+                    app:endIconMode="password_toggle">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+<!--                <EditText-->
+<!--                    android:id="@+id/edtCfPassword"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:inputType="textPassword"-->
+<!--                    android:background="@drawable/custom_edittext"-->
+<!--                    android:drawableLeft="@drawable/baseline_wifi_protected_setup_24"-->
+<!--                    android:drawablePadding="10dp"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:hint="Xác nhận lại mật khẩu"/>-->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/textinput_stroke_color"
+                    app:hintTextColor="@color/green"
+                    android:textColorHint="@color/green"
+                    app:cursorColor="@color/green"
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusBottomEnd="10dp"
                     android:layout_marginTop="10dp"
-                    android:hint="Xác nhận lại mật khẩu"/>
+                    android:hint="Xác nhận lại mật khẩu"
+                    app:startIconDrawable="@drawable/baseline_wifi_protected_setup_24"
+                    app:endIconMode="password_toggle">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtCfPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 

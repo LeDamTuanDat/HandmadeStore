@@ -23,43 +23,123 @@
             android:textAlignment="center"
             android:textColor="@color/green"/>
 
-        <EditText
+<!--        <EditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:id="@+id/name"-->
+<!--            android:background="@drawable/custom_edittext"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:padding="16dp"-->
+<!--            android:hint="Tên người nhận"-->
+<!--            android:textColor="@color/green"-->
+<!--            android:digits="aáàảãạăắằẳẵặâấầẩẫậbcdđeéèẻẽẹêếềểễệfghiíìịklmnoóòỏõọôốồổỗộơớờởỡợpqrstuúùủũụưứừửữựvxyAÁÀẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬBCDĐEÉÈẺẼẸÊẾỀỂỄỆFGHIJKLMNOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢPQRSTUÚÙỦŨỤƯỨỪỬỮỰVXY "-->
+<!--            android:maxLines="1"-->
+<!--            android:layout_gravity="start|center_horizontal"/>-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:id="@+id/name"
-            android:background="@drawable/custom_edittext"
-            android:layout_marginTop="20dp"
-            android:padding="16dp"
+            android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/textinput_stroke_color"
+            app:hintTextColor="@color/green"
+            android:textColorHint="@color/green"
+            app:cursorColor="@color/green"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            android:layout_marginTop="10dp"
             android:hint="Tên người nhận"
-            android:textColor="@color/green"
-            android:digits="aáàảãạăắằẳẵặâấầẩẫậbcdđeéèẻẽẹêếềểễệfghiíìịklmnoóòỏõọôốồổỗộơớờởỡợpqrstuúùủũụưứừửữựvxyAÁÀẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬBCDĐEÉÈẺẼẸÊẾỀỂỄỆFGHIJKLMNOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢPQRSTUÚÙỦŨỤƯỨỪỬỮỰVXY "
-            android:maxLines="1"
-            android:layout_gravity="start|center_horizontal"/>
+            app:startIconDrawable="@drawable/baseline_account_circle_24"
+            app:endIconMode="clear_text">
 
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:digits="aáàảãạăắằẳẵặâấầẩẫậbcdđeéèẻẽẹêếềểễệfghiíìịklmnoóòỏõọôốồổỗộơớờởỡợpqrstuúùủũụưứừửữựvxyAÁÀẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬBCDĐEÉÈẺẼẸÊẾỀỂỄỆFGHIJKLMNOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢPQRSTUÚÙỦŨỤƯỨỪỬỮỰVXY "
+                android:maxLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+<!--        <EditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:id="@+id/phone"-->
+<!--            android:background="@drawable/custom_edittext"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:padding="16dp"-->
+<!--            android:hint="Số điện thoại"-->
+<!--            android:textColor="@color/green"-->
+<!--            android:inputType="number"-->
+<!--            android:maxLength="10"-->
+<!--            android:layout_gravity="start|center_horizontal"/>-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:id="@+id/phone"
-            android:background="@drawable/custom_edittext"
-            android:layout_marginTop="20dp"
-            android:padding="16dp"
+            android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/textinput_stroke_color"
+            app:hintTextColor="@color/green"
+            android:textColorHint="@color/green"
+            app:cursorColor="@color/green"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            android:layout_marginTop="10dp"
             android:hint="Số điện thoại"
-            android:textColor="@color/green"
-            android:inputType="number"
-            android:maxLength="10"
-            android:layout_gravity="start|center_horizontal"/>
+            app:startIconDrawable="@drawable/baseline_phone_24"
+            app:endIconMode="clear_text">
 
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLines="1"
+                android:maxLength="10"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+<!--        <EditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:id="@+id/address"-->
+<!--            android:background="@drawable/custom_edittext"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:padding="16dp"-->
+<!--            android:hint="Địa chỉ"-->
+<!--            android:textColor="@color/green"-->
+<!--            android:inputType="text"-->
+<!--            android:layout_gravity="start|center_horizontal"/>-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:id="@+id/address"
-            android:background="@drawable/custom_edittext"
-            android:layout_marginTop="20dp"
-            android:padding="16dp"
+            android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/textinput_stroke_color"
+            app:hintTextColor="@color/green"
+            android:textColorHint="@color/green"
+            app:cursorColor="@color/green"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            android:layout_marginTop="10dp"
             android:hint="Địa chỉ"
-            android:textColor="@color/green"
-            android:inputType="text"
-            android:layout_gravity="start|center_horizontal"/>
+            app:startIconDrawable="@drawable/baseline_location_on_24"
+            app:endIconMode="clear_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

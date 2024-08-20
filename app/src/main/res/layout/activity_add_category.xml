@@ -44,21 +44,45 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/cloud_arrow_up"/>
 
-            <EditText
+<!--            <EditText-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:id="@+id/title"-->
+<!--                android:background="@drawable/custom_edittext"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:padding="16dp"-->
+<!--                android:hint="Tên danh mục"-->
+<!--                android:textColor="@color/green"-->
+<!--                android:layout_gravity="start|center_horizontal"/>-->
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:id="@+id/title"
-                android:background="@drawable/custom_edittext"
-                android:layout_marginTop="20dp"
-                android:padding="16dp"
+                android:layout_height="wrap_content"
+                app:boxStrokeColor="@color/textinput_stroke_color"
+                app:hintTextColor="@color/green"
+                android:textColorHint="@color/green"
+                app:cursorColor="@color/green"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                android:layout_marginTop="10dp"
                 android:hint="Tên danh mục"
-                android:textColor="@color/green"
-                android:layout_gravity="start|center_horizontal"/>
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <Button
