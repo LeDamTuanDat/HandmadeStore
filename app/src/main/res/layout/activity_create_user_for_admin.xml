@@ -94,7 +94,7 @@
                 app:startIconDrawable="@drawable/baseline_email_24">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtEmail"
+                    android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
@@ -133,7 +133,7 @@
                 app:startIconDrawable="@drawable/baseline_phone_24">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtPhone"
+                    android:id="@+id/phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
@@ -174,7 +174,7 @@
                 app:startIconDrawable="@drawable/baseline_account_circle_24">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtRealName"
+                    android:id="@+id/realname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:digits="aáàảãạăắằẳẵặâấầẩẫậbcdđeéèẻẽẹêếềểễệfghiíìịklmnoóòỏõọôốồổỗộơớờởỡợpqrstuúùủũụưứừửữựvxyAÁÀẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬBCDĐEÉÈẺẼẸÊẾỀỂỄỆFGHIJKLMNOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢPQRSTUÚÙỦŨỤƯỨỪỬỮỰVXY "
@@ -214,7 +214,7 @@
                 app:startIconDrawable="@drawable/baseline_person_24">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtUsername"
+                    android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textVisiblePassword"
@@ -252,7 +252,7 @@
                 app:startIconDrawable="@drawable/baseline_lock_24">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtPassword"
+                    android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword" />
@@ -290,7 +290,7 @@
                 app:startIconDrawable="@drawable/baseline_location_on_24">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtAddress"
+                    android:id="@+id/address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"

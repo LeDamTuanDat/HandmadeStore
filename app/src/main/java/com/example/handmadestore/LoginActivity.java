@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     public static ArrayList<Item> items;
     public static ArrayList<Order> orders;
     public static ArrayList<Rating> ratings;
+    User user;
     DatabaseManager databaseManager;
 
     @Override
@@ -38,18 +39,18 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        getData();
         init();
+        handleEvent();
         this.getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     @Override
     protected void onResume() {
-        getData();
+        init();
         super.onResume();
     }
 
-    private void getData() {
+    private void init() {
         users = new ArrayList<>();
         banners = new ArrayList<>();
         categories = new ArrayList<>();
@@ -64,43 +65,58 @@ public class LoginActivity extends AppCompatActivity {
         databaseManager.getRatings(ratings);
     }
 
-    private void init(){
+    private void handleEvent(){
         disableSpace();
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = binding.edtUsernameLg.getText().toString();
-                String password = binding.edtPasswordLg.getText().toString();
-                boolean isExist = false;
-                if (username.isEmpty() || password.isEmpty()){
-                    Toast.makeText(LoginActivity.this,"Vui lòng điền đầy đủ thông tin",Toast.LENGTH_LONG).show();
-                }else {
-                    for (User user : users) {
-                        if (user.getUsername().equals(username)) {
-                            isExist = true;
-                            if(user.getPassword().equals(password)){
-                                Toast.makeText(LoginActivity.this,"Đăng nhập thành công",Toast.LENGTH_LONG).show();
-                                if (user.getPriority()){
-                                    databaseManager.getAllOrder(orders);
-                                    Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
-                                    intent.putExtra("user",user);
-                                    startActivity(intent);
-                                }else {
-                                    databaseManager.getOrder(username,orders);
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    intent.putExtra("user",user);
-                                    startActivity(intent);
-                                }
-                                finish();
-                            }else {
-                                Toast.makeText(LoginActivity.this,"Mật khẩu không chính xác",Toast.LENGTH_LONG).show();
-                            }
-                        }
+                String username = binding.username.getText().toString();
+                String password = binding.password.getText().toString();
+                if (check(username,password)){
+                    Toast.makeText(LoginActivity.this,"Đăng nhập thành công",Toast.LENGTH_LONG).show();
+                    if (user.getPriority()){
+                        databaseManager.getAllOrder(orders);
+                        Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                        intent.putExtra("user",user);
+                        startActivity(intent);
+                    }else {
+                        databaseManager.getOrder(username,orders);
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra("user",user);
+                        startActivity(intent);
                     }
-                    if (!isExist){
-                        Toast.makeText(LoginActivity.this,"Tài khoản không tồn tại",Toast.LENGTH_LONG).show();
-                    }
+                    finish();
                 }
+//                boolean isExist = false;
+//                if (username.isEmpty() || password.isEmpty()){
+//                    Toast.makeText(LoginActivity.this,"Vui lòng điền đầy đủ thông tin",Toast.LENGTH_LONG).show();
+//                }else {
+//                    for (User user : users) {
+//                        if (user.getUsername().equals(username)) {
+//                            isExist = true;
+//                            if(user.getPassword().equals(password)){
+//                                Toast.makeText(LoginActivity.this,"Đăng nhập thành công",Toast.LENGTH_LONG).show();
+//                                if (user.getPriority()){
+//                                    databaseManager.getAllOrder(orders);
+//                                    Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+//                                    intent.putExtra("user",user);
+//                                    startActivity(intent);
+//                                }else {
+//                                    databaseManager.getOrder(username,orders);
+//                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                                    intent.putExtra("user",user);
+//                                    startActivity(intent);
+//                                }
+//                                finish();
+//                            }else {
+//                                Toast.makeText(LoginActivity.this,"Mật khẩu không chính xác",Toast.LENGTH_LONG).show();
+//                            }
+//                        }
+//                    }
+//                    if (!isExist){
+//                        Toast.makeText(LoginActivity.this,"Tài khoản không tồn tại",Toast.LENGTH_LONG).show();
+//                    }
+//                }
             }
         });
 
@@ -111,6 +127,42 @@ public class LoginActivity extends AppCompatActivity {
                 startActivityForResult(intent, 14);
             }
         });
+        binding.username.addTextChangedListener(new ClearError(binding.username,binding.usernameLayout));
+        binding.password.addTextChangedListener(new ClearError(binding.password,binding.passwordLayout));
+    }
+
+    private boolean check(String username, String password){
+        boolean check = true;
+        if (username.isEmpty()){
+            binding.usernameLayout.setError("Không được để trống");
+            check = false;
+        }
+        if (password.isEmpty()){
+            binding.passwordLayout.setError("Không được để trống");
+            check = false;
+        }
+
+        if (check){
+            boolean isExist = false;
+            for (User temp : users) {
+                if (temp.getUsername().equals(username)) {
+                    isExist = true;
+                    if(!temp.getPassword().equals(password)){
+                        binding.passwordLayout.setError("Mật khẩu không chính xác");
+                        check = false;
+                    }else {
+                        user = temp;
+                    }
+                    break;
+                }
+            }
+            if (!isExist){
+                binding.usernameLayout.setError("Tài khoản không tồn tại");
+                check = false;
+            }
+        }
+
+        return check;
     }
 
     @Override
@@ -120,16 +172,16 @@ public class LoginActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK){
                 User user = (User) data.getSerializableExtra("new_user");
                 if (user != null){
-                    binding.edtUsernameLg.setText(user.getUsername());
-                    binding.edtPasswordLg.setText(user.getPassword());
+                    binding.username.setText(user.getUsername());
+                    binding.password.setText(user.getPassword());
                 }
             }
         }
     }
 
     private void disableSpace(){
-        binding.edtUsernameLg.addTextChangedListener(new NoWhitespaceTextWatcher(binding.edtUsernameLg));
-        binding.edtPasswordLg.addTextChangedListener(new NoWhitespaceTextWatcher(binding.edtPasswordLg));
+        binding.username.addTextChangedListener(new NoWhitespaceTextWatcher(binding.username));
+        binding.password.addTextChangedListener(new NoWhitespaceTextWatcher(binding.password));
     }
 
     OnBackPressedCallback callback = new OnBackPressedCallback(true) {

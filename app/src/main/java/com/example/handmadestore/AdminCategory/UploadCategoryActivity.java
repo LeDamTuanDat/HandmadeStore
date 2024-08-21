@@ -15,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.handmadestore.ClearError;
 import com.example.handmadestore.LoginActivity;
 import com.example.handmadestore.Object.Category;
 import com.example.handmadestore.Object.DatabaseManager;
@@ -67,6 +68,7 @@ public class UploadCategoryActivity extends AppCompatActivity {
                 finish();
             }
         });
+        binding.title.addTextChangedListener(new ClearError(binding.title,binding.titleLayout));
     }
 
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
@@ -87,11 +89,11 @@ public class UploadCategoryActivity extends AppCompatActivity {
     public void savaData(){
         String title = binding.title.getText().toString().trim();
         if (title.isEmpty()){
-            Toast.makeText(this,"Vui lòng nhập danh mục",Toast.LENGTH_LONG).show();
+//            Toast.makeText(this,"Vui lòng nhập danh mục",Toast.LENGTH_LONG).show();
+            binding.titleLayout.setError("Chưa nhập danh mục");
         }else if(uri == null){
             Toast.makeText(this,"Vui lòng chọn ảnh",Toast.LENGTH_LONG).show();
         }else {
-
             AlertDialog.Builder builder = new AlertDialog.Builder(binding.getRoot().getContext());
             builder.setCancelable(false);
             builder.setView(R.layout.loading_activity);
@@ -110,9 +112,11 @@ public class UploadCategoryActivity extends AppCompatActivity {
     }
 
     public boolean checkCategoryForAdd(String title){
+        title = title.toLowerCase();
         for (Category item : LoginActivity.categories){
-            if(item.getTitle().equals(title)){
-                Toast.makeText(this,"Danh mục đã tồn tại",Toast.LENGTH_LONG).show();
+            if(item.getTitle().toLowerCase().equals(title)){
+//                Toast.makeText(this,"Danh mục đã tồn tại",Toast.LENGTH_LONG).show();
+                binding.titleLayout.setError("Danh mục đã tồn tại");
                 return true;
             }
         }
@@ -120,9 +124,11 @@ public class UploadCategoryActivity extends AppCompatActivity {
     }
 
     public boolean checkCategoryForMod(String title){
+        title = title.toLowerCase();
         for (Category item : LoginActivity.categories){
-            if(item.getTitle().equals(title) && !category.getTitle().equals(title)){
-                Toast.makeText(this,"Danh mục đã tồn tại",Toast.LENGTH_LONG).show();
+            if(item.getTitle().toLowerCase().equals(title) && !category.getTitle().equals(title)){
+//                Toast.makeText(this,"Danh mục đã tồn tại",Toast.LENGTH_LONG).show();
+                binding.titleLayout.setError("Danh mục đã tồn tại");
                 return true;
             }
         }

@@ -83,21 +83,21 @@ public class CreateUserForAdminActivity extends AppCompatActivity {
             });
 
     private void disableSpace(){
-        binding.edtEmail.addTextChangedListener(new NoWhitespaceTextWatcher(binding.edtEmail));
-        binding.edtPassword.addTextChangedListener(new NoWhitespaceTextWatcher(binding.edtPassword));
-        binding.edtUsername.addTextChangedListener(new NoWhitespaceTextWatcher(binding.edtUsername));
+        binding.email.addTextChangedListener(new NoWhitespaceTextWatcher(binding.email));
+        binding.password.addTextChangedListener(new NoWhitespaceTextWatcher(binding.password));
+        binding.username.addTextChangedListener(new NoWhitespaceTextWatcher(binding.username));
     }
 
     private void save(){
         binding.save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = binding.edtEmail.getText().toString();
-                String phone = binding.edtPhone.getText().toString();
-                String realname = binding.edtRealName.getText().toString();
-                String username = binding.edtUsername.getText().toString();
-                String password = binding.edtPassword.getText().toString();
-                String address = binding.edtAddress.getText().toString();
+                String email = binding.email.getText().toString();
+                String phone = binding.phone.getText().toString();
+                String realname = binding.realname.getText().toString();
+                String username = binding.username.getText().toString();
+                String password = binding.password.getText().toString();
+                String address = binding.address.getText().toString();
                 boolean isExist = false;
 
                 if(email.isEmpty() || phone.isEmpty() || realname.isEmpty() || username.isEmpty() || password.isEmpty() || address.isEmpty()){

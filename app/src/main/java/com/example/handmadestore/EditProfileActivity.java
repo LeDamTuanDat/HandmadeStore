@@ -58,10 +58,10 @@ public class EditProfileActivity extends AppCompatActivity {
         }else {
             binding.delete.setVisibility(View.GONE);
         }
-        binding.edtEmail.setText(user.getEmail());
-        binding.edtPhone.setText(user.getPhone());
-        binding.edtRealName.setText(user.getRealname());
-        binding.edtAddress.setText(user.getAddress());
+        binding.email.setText(user.getEmail());
+        binding.phone.setText(user.getPhone());
+        binding.realname.setText(user.getRealname());
+        binding.address.setText(user.getAddress());
         currentUserImage = user.getImage();
     }
 
@@ -105,9 +105,9 @@ public class EditProfileActivity extends AppCompatActivity {
             });
 
     private void disableSpace(){
-        binding.edtEmail.addTextChangedListener(new NoWhitespaceTextWatcher(binding.edtEmail));
-        binding.edtPhone.addTextChangedListener(new NoWhitespaceTextWatcher(binding.edtPhone));
-        binding.edtPassword.addTextChangedListener(new NoWhitespaceTextWatcher(binding.edtPassword));
+        binding.email.addTextChangedListener(new NoWhitespaceTextWatcher(binding.email));
+        binding.phone.addTextChangedListener(new NoWhitespaceTextWatcher(binding.phone));
+        binding.password.addTextChangedListener(new NoWhitespaceTextWatcher(binding.password));
         binding.edtCfPassword.addTextChangedListener(new NoWhitespaceTextWatcher(binding.edtCfPassword));
     }
 
@@ -128,12 +128,12 @@ public class EditProfileActivity extends AppCompatActivity {
         binding.save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = binding.edtEmail.getText().toString();
-                String phone = binding.edtPhone.getText().toString();
-                String password = binding.edtPassword.getText().toString();
+                String email = binding.email.getText().toString();
+                String phone = binding.phone.getText().toString();
+                String password = binding.password.getText().toString();
                 String cfpassword = binding.edtCfPassword.getText().toString();
-                String realname = binding.edtRealName.getText().toString();
-                String address = binding.edtAddress.getText().toString();
+                String realname = binding.realname.getText().toString();
+                String address = binding.address.getText().toString();
 
                 if(email.isEmpty() || phone.isEmpty() || address.isEmpty() || realname.isEmpty()){
                     Toast.makeText(EditProfileActivity.this,"Vui lòng nhập đầy đủ thông tin",Toast.LENGTH_LONG).show();
