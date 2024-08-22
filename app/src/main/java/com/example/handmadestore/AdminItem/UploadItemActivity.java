@@ -24,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.handmadestore.Adapter.ImageAdapter;
+import com.example.handmadestore.ClearError;
 import com.example.handmadestore.LoginActivity;
 import com.example.handmadestore.Object.Category;
 import com.example.handmadestore.Object.DatabaseManager;
@@ -51,10 +52,11 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
         loadingCategory();
         handleAddImages();
         handleUpload();
+        clearError();
     }
 
 
-    public void getData(){
+    private void getData(){
         item = (Item) getIntent().getSerializableExtra("item");
         if (item != null){
             for (int i = 0 ; i < item.getPicUrl().size(); i++){
@@ -82,7 +84,7 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
         return null;
     }
 
-    public void loadingCategory(){
+    private void loadingCategory(){
         binding.category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,13 +127,13 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
         });
     }
 
-    public void setAdapterForImages(){
+    private void setAdapterForImages(){
         adapter = new ImageAdapter(uriArrayList,this);
         binding.recyclerView.setLayoutManager(new GridLayoutManager(UploadItemActivity.this,3));
         binding.recyclerView.setAdapter(adapter);
     }
 
-    public void handleAddImages(){
+    private void handleAddImages(){
         binding.addImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -181,21 +183,17 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
         binding.addImage.setText("Thêm ảnh (" + uriArrayList.size() + "/6)");
     }
 
-    public void handleUpload(){
+    private void handleUpload(){
         binding.save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String title = binding.title.getText().toString();
                 String categoryId = (category != null ? category.getId() : "");
-                String oldPrice = binding.inventory.getText().toString();
+                String inventory = binding.inventory.getText().toString();
                 String price = binding.price.getText().toString();
                 String description = binding.description.getText().toString();
 
-                if (title.isEmpty() || categoryId.isEmpty() || oldPrice.isEmpty() || price.isEmpty() || description.isEmpty()){
-                    Toast.makeText(UploadItemActivity.this,"Vui lòng nhập đủ thông tin",Toast.LENGTH_LONG).show();
-                }else if (uriArrayList.size() == 0){
-                    Toast.makeText(UploadItemActivity.this,"Vui lòng thêm ảnh",Toast.LENGTH_LONG).show();
-                }else {
+                if (checkEmpty(title,categoryId,inventory,price,description)){
                     AlertDialog.Builder builder = new AlertDialog.Builder(binding.getRoot().getContext());
                     builder.setCancelable(false);
                     builder.setView(R.layout.loading_activity);
@@ -204,14 +202,14 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
                     databaseManager = new DatabaseManager();
                     if (item == null){
                         if(!checkItemForAdd(title)) {
-                            item = new Item(title, categoryId, Integer.parseInt(oldPrice), Long.parseLong(price), description);
+                            item = new Item(title, categoryId, Integer.parseInt(inventory), Long.parseLong(price), description);
                             databaseManager.uploadItem(item, uriArrayList, dialog, UploadItemActivity.this,false);
                         }
                     }else {
                         if (!checkItemForMod(title)){
                             item.setTitle(title);
                             item.setCategoryId(categoryId);
-                            item.setInventory(Integer.parseInt(oldPrice));
+                            item.setInventory(Integer.parseInt(inventory));
                             item.setPrice(Long.parseLong(price));
                             item.setDescription(description);
                             getImagasAfterModify();
@@ -219,6 +217,34 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
                         }
                     }
                 }
+//                if (title.isEmpty() || categoryId.isEmpty() || inventory.isEmpty() || price.isEmpty() || description.isEmpty()){
+//                    Toast.makeText(UploadItemActivity.this,"Vui lòng nhập đủ thông tin",Toast.LENGTH_LONG).show();
+//                }else if (uriArrayList.size() == 0){
+//                    Toast.makeText(UploadItemActivity.this,"Vui lòng thêm ảnh",Toast.LENGTH_LONG).show();
+//                }else {
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(binding.getRoot().getContext());
+//                    builder.setCancelable(false);
+//                    builder.setView(R.layout.loading_activity);
+//                    AlertDialog dialog = builder.create();
+//
+//                    databaseManager = new DatabaseManager();
+//                    if (item == null){
+//                        if(!checkItemForAdd(title)) {
+//                            item = new Item(title, categoryId, Integer.parseInt(inventory), Long.parseLong(price), description);
+//                            databaseManager.uploadItem(item, uriArrayList, dialog, UploadItemActivity.this,false);
+//                        }
+//                    }else {
+//                        if (!checkItemForMod(title)){
+//                            item.setTitle(title);
+//                            item.setCategoryId(categoryId);
+//                            item.setInventory(Integer.parseInt(inventory));
+//                            item.setPrice(Long.parseLong(price));
+//                            item.setDescription(description);
+//                            getImagasAfterModify();
+//                            databaseManager.uploadItem(item,uriArrayList,dialog,UploadItemActivity.this,true);
+//                        }
+//                    }
+//                }
             }
         });
         binding.exit.setOnClickListener(new View.OnClickListener() {
@@ -229,27 +255,64 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
         });
     }
 
-    public boolean checkItemForAdd(String title){
+    private boolean checkEmpty(String title, String categoryId, String inventory, String price, String description){
+        boolean check = true;
+        if (title.isEmpty()){
+            binding.titleLayout.setError("Không được để trống");
+            check = false;
+        }
+        if (categoryId.isEmpty()){
+            binding.categoryLayout.setError("Không được để trống");
+            check = false;
+        }
+        if (inventory.isEmpty()){
+            binding.inventoryLayout.setError("Không được để trống");
+            check = false;
+        }
+        if (price.isEmpty()){
+            binding.priceLayout.setError("Không được để trống");
+            check = false;
+        }else if (Integer.parseInt(price) == 0){
+            binding.priceLayout.setError("Không hợp lệ");
+            check = false;
+        }
+        if (description.isEmpty()){
+            binding.descriptionLayout.setError("Không được để trống");
+            check = false;
+        }
+        if(uriArrayList.size() == 0){
+            Toast.makeText(UploadItemActivity.this,"Vui lòng thêm ảnh",Toast.LENGTH_LONG).show();
+            check = false;
+        }
+
+        return check;
+    }
+
+    private boolean checkItemForAdd(String title){
+        title = title.toLowerCase();
         for (Item item : LoginActivity.items){
-            if(item.getTitle().equals(title)){
-                Toast.makeText(this,"Sản phẩm đã tồn tại",Toast.LENGTH_LONG).show();
+            if(item.getTitle().toLowerCase().equals(title)){
+//                Toast.makeText(this,"Sản phẩm đã tồn tại",Toast.LENGTH_LONG).show();
+                binding.titleLayout.setError("Sản phẩm đã tồn tại");
                 return true;
             }
         }
         return false;
     }
 
-    public boolean checkItemForMod(String title){
+    private boolean checkItemForMod(String title){
+        title = title.toLowerCase();
         for (Item item : LoginActivity.items){
-            if(item.getTitle().equals(title) && !item.getTitle().equals(title)){
-                Toast.makeText(this,"Sản phẩm đã tồn tại",Toast.LENGTH_LONG).show();
+            if(item.getTitle().toLowerCase().equals(title) && !item.getTitle().equals(title)){
+//                Toast.makeText(this,"Sản phẩm đã tồn tại",Toast.LENGTH_LONG).show();
+                binding.titleLayout.setError("Sản phẩm đã tồn tại");
                 return true;
             }
         }
         return false;
     }
 
-    public void getImagasAfterModify(){
+    private void getImagasAfterModify(){
         ArrayList<String> newImages = new ArrayList<>();
         for (int i = 0; i < uriArrayList.size(); i++) {
             Uri uri = uriArrayList.get(i);
@@ -263,4 +326,13 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
         }
         item.setPicUrl(newImages);
     }
+
+    private void clearError(){
+        binding.title.addTextChangedListener(new ClearError(binding.title,binding.titleLayout));
+        binding.category.addTextChangedListener(new ClearError(binding.category,binding.categoryLayout));
+        binding.price.addTextChangedListener(new ClearError(binding.price,binding.priceLayout));
+        binding.inventory.addTextChangedListener(new ClearError(binding.inventory,binding.inventoryLayout));
+        binding.description.addTextChangedListener(new ClearError(binding.description,binding.descriptionLayout));
+    }
+
 }

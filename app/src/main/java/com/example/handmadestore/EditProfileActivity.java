@@ -2,26 +2,20 @@ package com.example.handmadestore;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
-import com.example.handmadestore.AdminCategory.UploadCategoryActivity;
 import com.example.handmadestore.Object.DatabaseManager;
 import com.example.handmadestore.Object.User;
 import com.example.handmadestore.databinding.ActivityEditProfileBinding;
@@ -45,6 +39,7 @@ public class EditProfileActivity extends AppCompatActivity {
         hideChangePass();
         save();
         cancel();
+        clearError();
         this.getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
@@ -108,7 +103,7 @@ public class EditProfileActivity extends AppCompatActivity {
         binding.email.addTextChangedListener(new NoWhitespaceTextWatcher(binding.email));
         binding.phone.addTextChangedListener(new NoWhitespaceTextWatcher(binding.phone));
         binding.password.addTextChangedListener(new NoWhitespaceTextWatcher(binding.password));
-        binding.edtCfPassword.addTextChangedListener(new NoWhitespaceTextWatcher(binding.edtCfPassword));
+        binding.cfPassword.addTextChangedListener(new NoWhitespaceTextWatcher(binding.cfPassword));
     }
 
     public void hideChangePass(){
@@ -116,9 +111,9 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(binding.changePass.isChecked()){
-                    binding.passwordLayout.setVisibility(View.VISIBLE);
+                    binding.hideLayout.setVisibility(View.VISIBLE);
                 }else {
-                    binding.passwordLayout.setVisibility(View.GONE);
+                    binding.hideLayout.setVisibility(View.GONE);
                 }
             }
         });
@@ -130,19 +125,12 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String email = binding.email.getText().toString();
                 String phone = binding.phone.getText().toString();
-                String password = binding.password.getText().toString();
-                String cfpassword = binding.edtCfPassword.getText().toString();
                 String realname = binding.realname.getText().toString();
                 String address = binding.address.getText().toString();
+                String password = binding.password.getText().toString();
+                String cfpassword = binding.cfPassword.getText().toString();
 
-                if(email.isEmpty() || phone.isEmpty() || address.isEmpty() || realname.isEmpty()){
-                    Toast.makeText(EditProfileActivity.this,"Vui lòng nhập đầy đủ thông tin",Toast.LENGTH_LONG).show();
-                } else if (!email.contains("@gmail.com")) {
-                    Toast.makeText(EditProfileActivity.this,"Vui lòng nhập đúng định dạng email",Toast.LENGTH_LONG).show();
-                } else if (phone.length() < 10 || !phone.startsWith("0")) {
-                    Toast.makeText(EditProfileActivity.this,"Vui lòng nhập đúng định dạng số điện thoại",Toast.LENGTH_LONG).show();
-                } else {
-
+                if (check(email,phone,realname,address,password,cfpassword)){
                     AlertDialog.Builder builder = new AlertDialog.Builder(binding.getRoot().getContext());
                     builder.setCancelable(false);
                     builder.setView(R.layout.loading_activity);
@@ -160,23 +148,121 @@ public class EditProfileActivity extends AppCompatActivity {
                     }
 
                     if (binding.changePass.isChecked()){
-                        if (password.isEmpty() || cfpassword.isEmpty()){
-                            Toast.makeText(EditProfileActivity.this,"Vui lòng nhập đầy đủ thông tin",Toast.LENGTH_LONG).show();
-                        }else if (!password.equals(cfpassword)) {
-                            Toast.makeText(EditProfileActivity.this,"Mật khẩu xác nhận không trùng khớp",Toast.LENGTH_LONG).show();
-                        } else if (password.length() < 6) {
-                            Toast.makeText(EditProfileActivity.this,"Mật khẩu phải tối thiểu 6 ký tự",Toast.LENGTH_LONG).show();
-                        }else {
-                            user.setPassword(password);
-                            databaseManager.updateUser(user,uri,EditProfileActivity.this,dialog,normal);
-                        }
+                        user.setPassword(password);
+                        databaseManager.updateUser(user,uri,EditProfileActivity.this,dialog,normal);
                     }else {
                         databaseManager.updateUser(user,uri,EditProfileActivity.this,dialog,normal);
+
                     }
                 }
 
+//                if(email.isEmpty() || phone.isEmpty() || address.isEmpty() || realname.isEmpty()){
+//                    Toast.makeText(EditProfileActivity.this,"Vui lòng nhập đầy đủ thông tin",Toast.LENGTH_LONG).show();
+//                } else if (!email.contains("@gmail.com")) {
+//                    Toast.makeText(EditProfileActivity.this,"Vui lòng nhập đúng định dạng email",Toast.LENGTH_LONG).show();
+//                } else if (phone.length() < 10 || !phone.startsWith("0")) {
+//                    Toast.makeText(EditProfileActivity.this,"Vui lòng nhập đúng định dạng số điện thoại",Toast.LENGTH_LONG).show();
+//                } else {
+//
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(binding.getRoot().getContext());
+//                    builder.setCancelable(false);
+//                    builder.setView(R.layout.loading_activity);
+//                    AlertDialog dialog = builder.create();
+//
+//                    DatabaseManager databaseManager = new DatabaseManager();
+//
+//                    user.setEmail(email);
+//                    user.setPhone(phone);
+//                    user.setRealname(realname);
+//                    user.setAddress(address);
+//
+//                    if (uri != null){
+//                        user.setImage(uri.toString());
+//                    }
+//
+//                    if (binding.changePass.isChecked()){
+//                        if (password.isEmpty() || cfpassword.isEmpty()){
+//                            Toast.makeText(EditProfileActivity.this,"Vui lòng nhập đầy đủ thông tin",Toast.LENGTH_LONG).show();
+//                        }else if (!password.equals(cfpassword)) {
+//                            Toast.makeText(EditProfileActivity.this,"Mật khẩu xác nhận không trùng khớp",Toast.LENGTH_LONG).show();
+//                        } else if (password.length() < 6) {
+//                            Toast.makeText(EditProfileActivity.this,"Mật khẩu phải tối thiểu 6 ký tự",Toast.LENGTH_LONG).show();
+//                        }else {
+//                            user.setPassword(password);
+//                            databaseManager.updateUser(user,uri,EditProfileActivity.this,dialog,normal);
+//                        }
+//                    }else {
+//                        databaseManager.updateUser(user,uri,EditProfileActivity.this,dialog,normal);
+//                    }
+//                }
+
             }
         });
+    }
+
+    private boolean check(String email,String phone,String realname,String address,String password, String cfpassword){
+        boolean check = true;
+
+        if (email.isEmpty()){
+            binding.emailLayout.setError("Không được để trống");
+            check = false;
+        }else if (!email.contains("@gmail.com")){
+            binding.emailLayout.setError("Chưa đúng định dạng");
+            check = false;
+        }
+
+        if (phone.isEmpty()){
+            binding.phoneLayout.setError("Không được để trống");
+            check = false;
+        }else if (phone.length() < 10 || !phone.startsWith("0")){
+            binding.phoneLayout.setError("Chưa đúng định dạng");
+            check = false;
+        }
+
+        if (realname.isEmpty()){
+            binding.realnameLayout.setError("Không được để trống");
+            check = false;
+        }
+
+        if (address.isEmpty()){
+            binding.addressLayout.setError("Không được để trống");
+            check = false;
+        }
+
+        if (binding.changePass.isChecked()){
+            if (password.isEmpty()){
+                binding.passwordLayout.setError("Không được để trống");
+                check = false;
+            }
+
+            if (cfpassword.isEmpty()){
+                binding.cfPasswordLayout.setError("Không được để trống");
+                check = false;
+            }
+
+            if (!password.equals(cfpassword) && !password.isEmpty() && !cfpassword.isEmpty()){
+                binding.cfPasswordLayout.setError("Không trùng khớp");
+                check = false;
+            }else if (password.length() < 6 && !password.isEmpty()) {
+                binding.passwordLayout.setError("Tối thiểu 6 ký tự");
+                if (!cfpassword.isEmpty()){
+                    binding.cfPasswordLayout.setError("");
+                }
+                check = false;
+            }
+
+        }
+
+        return check;
+    }
+
+    private void clearError(){
+        binding.email.addTextChangedListener(new ClearError(binding.email,binding.emailLayout));
+        binding.phone.addTextChangedListener(new ClearError(binding.phone,binding.phoneLayout));
+        binding.realname.addTextChangedListener(new ClearError(binding.realname,binding.realnameLayout));
+        binding.password.addTextChangedListener(new ClearError(binding.password,binding.passwordLayout));
+        binding.cfPassword.addTextChangedListener(new ClearError(binding.cfPassword,binding.cfPasswordLayout));
+        binding.address.addTextChangedListener(new ClearError(binding.address,binding.addressLayout));
     }
 
     public void cancel(){

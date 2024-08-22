@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center_horizontal"
-            android:padding="24dp">
+            android:padding="10dp">
 
 
             <TextView
@@ -77,6 +77,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/email_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:boxStrokeColor="@color/textinput_stroke_color"
@@ -89,7 +90,8 @@
                 app:boxCornerRadiusBottomEnd="10dp"
                 android:hint="Địa chỉ Email"
                 app:startIconDrawable="@drawable/baseline_email_24"
-                app:endIconMode="clear_text">
+                app:endIconMode="clear_text"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/email"
@@ -115,6 +117,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/phone_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:boxStrokeColor="@color/textinput_stroke_color"
@@ -125,10 +128,10 @@
                 app:boxCornerRadiusTopEnd="10dp"
                 app:boxCornerRadiusBottomStart="10dp"
                 app:boxCornerRadiusBottomEnd="10dp"
-                android:layout_marginTop="10dp"
                 android:hint="Số điện thoại"
                 app:startIconDrawable="@drawable/baseline_phone_24"
-                app:endIconMode="clear_text">
+                app:endIconMode="clear_text"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/phone"
@@ -156,6 +159,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/realname_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:boxStrokeColor="@color/textinput_stroke_color"
@@ -166,10 +170,10 @@
                 app:boxCornerRadiusTopEnd="10dp"
                 app:boxCornerRadiusBottomStart="10dp"
                 app:boxCornerRadiusBottomEnd="10dp"
-                android:layout_marginTop="10dp"
                 android:hint="Họ và tên"
                 app:startIconDrawable="@drawable/baseline_account_circle_24"
-                app:endIconMode="clear_text">
+                app:endIconMode="clear_text"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/realname"
@@ -196,6 +200,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/address_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:boxStrokeColor="@color/textinput_stroke_color"
@@ -206,10 +211,10 @@
                 app:boxCornerRadiusTopEnd="10dp"
                 app:boxCornerRadiusBottomStart="10dp"
                 app:boxCornerRadiusBottomEnd="10dp"
-                android:layout_marginTop="10dp"
                 android:hint="Địa chỉ"
                 app:startIconDrawable="@drawable/baseline_location_on_24"
-                app:endIconMode="clear_text">
+                app:endIconMode="clear_text"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/address"
@@ -229,7 +234,7 @@
                 android:drawableLeft="@drawable/checkbox"/>
 
             <LinearLayout
-                android:id="@+id/passwordLayout"
+                android:id="@+id/hide_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -248,6 +253,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:id="@+id/password_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:boxStrokeColor="@color/textinput_stroke_color"
@@ -260,7 +266,8 @@
                     app:boxCornerRadiusBottomEnd="10dp"
                     android:hint="Mật khẩu mới"
                     app:startIconDrawable="@drawable/baseline_lock_24"
-                    app:endIconMode="password_toggle">
+                    app:endIconMode="password_toggle"
+                    app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/password"
@@ -284,6 +291,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:id="@+id/cf_password_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:boxStrokeColor="@color/textinput_stroke_color"
@@ -294,13 +302,13 @@
                     app:boxCornerRadiusTopEnd="10dp"
                     app:boxCornerRadiusBottomStart="10dp"
                     app:boxCornerRadiusBottomEnd="10dp"
-                    android:layout_marginTop="10dp"
                     android:hint="Xác nhận lại mật khẩu"
                     app:startIconDrawable="@drawable/baseline_wifi_protected_setup_24"
-                    app:endIconMode="password_toggle">
+                    app:endIconMode="password_toggle"
+                    app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edtCfPassword"
+                        android:id="@+id/cf_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"/>
@@ -312,8 +320,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
+                android:orientation="horizontal">
                 <Button
                     android:layout_marginRight="10dp"
                     android:layout_width="0dp"

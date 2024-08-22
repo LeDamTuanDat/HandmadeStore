@@ -79,6 +79,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/email_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Địa chỉ Email"
@@ -91,7 +92,8 @@
                 app:cursorColor="@color/green"
                 app:endIconMode="clear_text"
                 app:hintTextColor="@color/green"
-                app:startIconDrawable="@drawable/baseline_email_24">
+                app:startIconDrawable="@drawable/baseline_email_24"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/email"
@@ -117,9 +119,9 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/phone_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:hint="Số điện thoại"
                 android:textColorHint="@color/green"
                 app:boxCornerRadiusBottomEnd="10dp"
@@ -130,7 +132,8 @@
                 app:cursorColor="@color/green"
                 app:endIconMode="clear_text"
                 app:hintTextColor="@color/green"
-                app:startIconDrawable="@drawable/baseline_phone_24">
+                app:startIconDrawable="@drawable/baseline_phone_24"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/phone"
@@ -158,9 +161,9 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/realname_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:hint="Họ và tên"
                 android:textColorHint="@color/green"
                 app:boxCornerRadiusBottomEnd="10dp"
@@ -171,7 +174,8 @@
                 app:cursorColor="@color/green"
                 app:endIconMode="clear_text"
                 app:hintTextColor="@color/green"
-                app:startIconDrawable="@drawable/baseline_account_circle_24">
+                app:startIconDrawable="@drawable/baseline_account_circle_24"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/realname"
@@ -198,9 +202,9 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/username_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:hint="Tên tài khoản"
                 android:textColorHint="@color/green"
                 app:boxCornerRadiusBottomEnd="10dp"
@@ -211,7 +215,8 @@
                 app:cursorColor="@color/green"
                 app:endIconMode="clear_text"
                 app:hintTextColor="@color/green"
-                app:startIconDrawable="@drawable/baseline_person_24">
+                app:startIconDrawable="@drawable/baseline_person_24"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/username"
@@ -236,9 +241,9 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/password_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:hint="Mật khẩu"
                 android:textColorHint="@color/green"
                 app:boxCornerRadiusBottomEnd="10dp"
@@ -249,7 +254,8 @@
                 app:cursorColor="@color/green"
                 app:endIconMode="password_toggle"
                 app:hintTextColor="@color/green"
-                app:startIconDrawable="@drawable/baseline_lock_24">
+                app:startIconDrawable="@drawable/baseline_lock_24"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password"
@@ -274,9 +280,9 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/address_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:hint="Địa chỉ"
                 android:textColorHint="@color/green"
                 app:boxCornerRadiusBottomEnd="10dp"
@@ -287,7 +293,8 @@
                 app:cursorColor="@color/green"
                 app:endIconMode="clear_text"
                 app:hintTextColor="@color/green"
-                app:startIconDrawable="@drawable/baseline_location_on_24">
+                app:startIconDrawable="@drawable/baseline_location_on_24"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/address"
@@ -301,7 +308,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <Button

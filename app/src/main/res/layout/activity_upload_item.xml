@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_gravity="center_horizontal"
-                android:padding="20dp"
+                android:padding="10dp"
                 android:background="@drawable/custom_edittext">
 
 
@@ -34,7 +34,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Thêm sản phẩm"
-                    android:textSize="30dp"
+                    android:textSize="25dp"
                     android:textAlignment="center"
                     android:textColor="@color/green"
                     android:layout_marginBottom="10dp"/>
@@ -71,6 +71,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:id="@+id/title_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:boxStrokeColor="@color/textinput_stroke_color"
@@ -81,9 +82,9 @@
                     app:boxCornerRadiusTopEnd="10dp"
                     app:boxCornerRadiusBottomStart="10dp"
                     app:boxCornerRadiusBottomEnd="10dp"
-                    android:layout_marginBottom="10dp"
                     android:hint="Tên sản phẩm"
-                    app:endIconMode="clear_text">
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/title"
@@ -117,8 +118,8 @@
                     app:boxCornerRadiusTopEnd="10dp"
                     app:boxCornerRadiusBottomStart="10dp"
                     app:boxCornerRadiusBottomEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:hint="Danh mục">
+                    android:hint="Danh mục"
+                    app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/category"
@@ -133,8 +134,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="10dp">
+                    android:orientation="horizontal">
 
 <!--                    <EditText-->
 <!--                        android:id="@+id/price"-->
@@ -151,6 +151,7 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:id="@+id/price_layout"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -163,7 +164,8 @@
                         app:boxCornerRadiusBottomStart="10dp"
                         app:boxCornerRadiusBottomEnd="10dp"
                         android:hint="Giá tiền"
-                        app:endIconMode="clear_text">
+                        app:endIconMode="clear_text"
+                        app:errorEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/price"
@@ -187,6 +189,7 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:id="@+id/inventory_layout"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -200,7 +203,8 @@
                         app:boxCornerRadiusBottomStart="10dp"
                         app:boxCornerRadiusBottomEnd="10dp"
                         android:hint="Tồn kho"
-                        app:endIconMode="clear_text">
+                        app:endIconMode="clear_text"
+                        app:errorEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/inventory"
@@ -226,8 +230,9 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:id="@+id/description_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
+                    android:layout_height="wrap_content"
                     app:boxStrokeColor="@color/textinput_stroke_color"
                     app:hintTextColor="@color/green"
                     android:textColorHint="@color/green"
@@ -236,15 +241,16 @@
                     app:boxCornerRadiusTopEnd="10dp"
                     app:boxCornerRadiusBottomStart="10dp"
                     app:boxCornerRadiusBottomEnd="10dp"
-                    android:layout_marginBottom="10dp"
                     android:hint="Mô tả sản phẩm"
-                    app:endIconMode="clear_text">
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/description"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:inputType="textMultiLine"
+                        android:lines="5"
                         android:gravity="start"/>
 
                 </com.google.android.material.textfield.TextInputLayout>

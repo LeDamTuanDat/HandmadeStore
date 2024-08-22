@@ -27,6 +27,7 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         init();
         handleEvent();
+        clearError();
     }
 
     private void init() {
@@ -82,12 +83,6 @@ public class SignupActivity extends AppCompatActivity {
 //                        finish();
 //                    }
 //                }
-                binding.email.addTextChangedListener(new ClearError(binding.email,binding.emailLayout));
-                binding.phone.addTextChangedListener(new ClearError(binding.phone,binding.phoneLayout));
-                binding.realname.addTextChangedListener(new ClearError(binding.realname,binding.realnameLayout));
-                binding.username.addTextChangedListener(new ClearError(binding.username,binding.usernameLayout));
-                binding.password.addTextChangedListener(new ClearError(binding.password,binding.passwordLayout));
-                binding.address.addTextChangedListener(new ClearError(binding.address,binding.addressLayout));
             }
         });
 
@@ -154,6 +149,15 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         return check;
+    }
+
+    private void clearError(){
+        binding.email.addTextChangedListener(new ClearError(binding.email,binding.emailLayout));
+        binding.phone.addTextChangedListener(new ClearError(binding.phone,binding.phoneLayout));
+        binding.realname.addTextChangedListener(new ClearError(binding.realname,binding.realnameLayout));
+        binding.username.addTextChangedListener(new ClearError(binding.username,binding.usernameLayout));
+        binding.password.addTextChangedListener(new ClearError(binding.password,binding.passwordLayout));
+        binding.address.addTextChangedListener(new ClearError(binding.address,binding.addressLayout));
     }
 
     private void disableSpace(){
