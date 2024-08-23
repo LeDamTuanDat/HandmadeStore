@@ -24,6 +24,7 @@ import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Banner;
 import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.R;
+import com.example.handmadestore.SplashScreenActivity;
 import com.example.handmadestore.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
@@ -84,7 +85,7 @@ public class HomeFragment extends Fragment {
 
     private void initBanners(){
         ArrayList<SlideModel> imageList = new ArrayList<>();
-        for ( Banner banner : LoginActivity.banners) {
+        for ( Banner banner : SplashScreenActivity.banners) {
             imageList.add(new SlideModel(banner.getUrl(), ScaleTypes.FIT));
         }
         binding.imageSlider.setImageList(imageList);
@@ -93,7 +94,7 @@ public class HomeFragment extends Fragment {
 
     private void initCategories(){
         binding.rycyclerCategory.setLayoutManager(new GridLayoutManager(getContext(),5));
-        binding.rycyclerCategory.setAdapter(new CategoryAdapter(LoginActivity.categories));
+        binding.rycyclerCategory.setAdapter(new CategoryAdapter(SplashScreenActivity.categories));
     }
 
     private void initItems(){
@@ -124,7 +125,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void getBestSelling(){
-        ArrayList<Item> temp = new ArrayList<>(LoginActivity.items);
+        ArrayList<Item> temp = new ArrayList<>(SplashScreenActivity.items);
         Collections.sort(temp, new Comparator<Item>() {
             @Override
             public int compare(Item j, Item i) {

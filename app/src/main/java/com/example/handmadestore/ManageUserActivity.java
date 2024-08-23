@@ -51,7 +51,7 @@ public class ManageUserActivity extends AppCompatActivity {
     }
 
     private void init(){
-        adapter = new UserAdapter(LoginActivity.users);
+        adapter = new UserAdapter(SplashScreenActivity.users);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(ManageUserActivity.this,LinearLayoutManager.VERTICAL,false));
         binding.recyclerView.setAdapter(adapter);
 
@@ -79,11 +79,11 @@ public class ManageUserActivity extends AppCompatActivity {
 
     private void resultAfterFiltered(int option){
         if (option == 0){
-            adapter.setResultAfterFiltered(LoginActivity.users);
+            adapter.setResultAfterFiltered(SplashScreenActivity.users);
         }else {
             resultAfterFiltered.clear();
             boolean priority = option == 1 ? true : false;
-            for (User user : LoginActivity.users) {
+            for (User user : SplashScreenActivity.users) {
                 if(user.getPriority() == priority){
                     resultAfterFiltered.add(user);
                 }
@@ -120,7 +120,7 @@ public class ManageUserActivity extends AppCompatActivity {
                 }
             }
         }else {
-            for (User user : LoginActivity.users) {
+            for (User user : SplashScreenActivity.users) {
                 String normalTitle = user.getUsername().toLowerCase();
                 String normalText = text.toLowerCase();
                 if(normalTitle.contains(normalText)){

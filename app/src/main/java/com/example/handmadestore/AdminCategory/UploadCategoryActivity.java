@@ -20,6 +20,7 @@ import com.example.handmadestore.LoginActivity;
 import com.example.handmadestore.Object.Category;
 import com.example.handmadestore.Object.DatabaseManager;
 import com.example.handmadestore.R;
+import com.example.handmadestore.SplashScreenActivity;
 import com.example.handmadestore.databinding.ActivityAddCategoryBinding;
 
 public class UploadCategoryActivity extends AppCompatActivity {
@@ -113,7 +114,7 @@ public class UploadCategoryActivity extends AppCompatActivity {
 
     public boolean checkCategoryForAdd(String title){
         title = title.toLowerCase();
-        for (Category item : LoginActivity.categories){
+        for (Category item : SplashScreenActivity.categories){
             if(item.getTitle().toLowerCase().equals(title)){
 //                Toast.makeText(this,"Danh mục đã tồn tại",Toast.LENGTH_LONG).show();
                 binding.titleLayout.setError("Danh mục đã tồn tại");
@@ -125,7 +126,7 @@ public class UploadCategoryActivity extends AppCompatActivity {
 
     public boolean checkCategoryForMod(String title){
         title = title.toLowerCase();
-        for (Category item : LoginActivity.categories){
+        for (Category item : SplashScreenActivity.categories){
             if(item.getTitle().toLowerCase().equals(title) && !category.getTitle().equals(title)){
 //                Toast.makeText(this,"Danh mục đã tồn tại",Toast.LENGTH_LONG).show();
                 binding.titleLayout.setError("Danh mục đã tồn tại");

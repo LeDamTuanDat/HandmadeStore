@@ -24,6 +24,7 @@ import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.Object.Rating;
 import com.example.handmadestore.Object.User;
 import com.example.handmadestore.R;
+import com.example.handmadestore.SplashScreenActivity;
 import com.example.handmadestore.databinding.CardAdminItemBinding;
 
 import java.text.NumberFormat;
@@ -129,7 +130,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.AdminItemViewH
     }
 
     public boolean checkCart(String text,DatabaseManager databaseManager){
-        for (User user : LoginActivity.users){
+        for (User user : SplashScreenActivity.users){
             for (Cart cart : user.getCarts()){
                 if (cart.getItem().getId().equals(text)){
                     user.getCarts().remove(cart);
@@ -143,7 +144,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.AdminItemViewH
     public float calRating(Item item){
         ArrayList<Rating> ratings = new ArrayList<>();
         float ratingsAvg = 0;
-        for (Rating temp: LoginActivity.ratings) {
+        for (Rating temp: SplashScreenActivity.ratings) {
             if(temp.getItemId().equals(item.getId())){
                 ratings.add(temp);
             }

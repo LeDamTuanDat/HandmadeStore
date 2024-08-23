@@ -147,7 +147,7 @@ public class OrderDetail extends AppCompatActivity {
         items = new ArrayList<>(check);
 
         for (Item item : check) {
-            for (Rating temp : LoginActivity.ratings) {
+            for (Rating temp : SplashScreenActivity.ratings) {
                 if (temp.getOrderId().equals(order.getKeyId())
                         && temp.getItemId().equals(item.getId())){
                     items.remove(item);

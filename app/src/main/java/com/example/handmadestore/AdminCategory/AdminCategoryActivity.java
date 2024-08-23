@@ -13,6 +13,7 @@ import com.example.handmadestore.AdminActivity;
 import com.example.handmadestore.LoginActivity;
 import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Category;
+import com.example.handmadestore.SplashScreenActivity;
 import com.example.handmadestore.databinding.ActivityCategoryBinding;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
 
 
     private void initCategory(){
-        adapter = new AdminCategoryAdapter(LoginActivity.categories);
+        adapter = new AdminCategoryAdapter(SplashScreenActivity.categories);
         binding.recyclerView.setLayoutManager(new GridLayoutManager(AdminCategoryActivity.this,3));
         binding.recyclerView.setAdapter(adapter);
     }
@@ -87,7 +88,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
 
     private void resultAfterSearch(String text){
         ArrayList<Category> result = new ArrayList<>();
-        for (Category item : LoginActivity.categories) {
+        for (Category item : SplashScreenActivity.categories) {
             String normalTitle = item.getTitle().toLowerCase();
             String normalText = text.toLowerCase();
             if(normalTitle.contains(normalText)){

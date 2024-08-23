@@ -188,7 +188,7 @@ public class DetailActivity extends AppCompatActivity {
     public float calRating(){
         ArrayList<Rating> ratings = new ArrayList<>();
         float ratingsAvg = 0;
-        for (Rating temp: LoginActivity.ratings) {
+        for (Rating temp: SplashScreenActivity.ratings) {
             if(temp.getItemId().equals(object.getId())){
                 ratings.add(temp);
             }

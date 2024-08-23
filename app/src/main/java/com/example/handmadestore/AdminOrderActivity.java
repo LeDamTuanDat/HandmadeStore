@@ -52,7 +52,7 @@ public class AdminOrderActivity extends AppCompatActivity {
     }
 
     public void initOrderList(){
-        orderAdapter = new OrderAdapter(LoginActivity.orders);
+        orderAdapter = new OrderAdapter(SplashScreenActivity.orders);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(AdminOrderActivity.this, LinearLayoutManager.VERTICAL, false));
         binding.recyclerView.setAdapter(orderAdapter);
     }
@@ -76,9 +76,9 @@ public class AdminOrderActivity extends AppCompatActivity {
     public void resultAfterFiltered(String text){
         resultAfterFiltered.clear();
         if (text.equals("Tất cả")){
-            orderAdapter.setResultAfterFiltered(LoginActivity.orders);
+            orderAdapter.setResultAfterFiltered(SplashScreenActivity.orders);
         }else {
-            for (Order order : LoginActivity.orders) {
+            for (Order order : SplashScreenActivity.orders) {
                 if(order.getStatus().equals(text)){
                     resultAfterFiltered.add(order);
                 }
@@ -106,7 +106,7 @@ public class AdminOrderActivity extends AppCompatActivity {
         resultAfterSearch.clear();
         ArrayList<Order> temp;
         if (resultAfterFiltered.size() == 0){
-            temp = new ArrayList<>(LoginActivity.orders);
+            temp = new ArrayList<>(SplashScreenActivity.orders);
         }else {
             temp = new ArrayList<>(resultAfterFiltered);
         }

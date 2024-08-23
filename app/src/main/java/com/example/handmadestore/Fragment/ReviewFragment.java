@@ -14,6 +14,7 @@ import com.example.handmadestore.Adapter.RatingAdapter;
 import com.example.handmadestore.LoginActivity;
 import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.Object.Rating;
+import com.example.handmadestore.SplashScreenActivity;
 import com.example.handmadestore.databinding.FragmentReviewBinding;
 
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class ReviewFragment extends Fragment {
     private void initList(View view) {
         ArrayList<Rating> ratings = new ArrayList<>();
         Item item = (Item) getArguments().getSerializable("item");
-        for (Rating temp: LoginActivity.ratings) {
+        for (Rating temp: SplashScreenActivity.ratings) {
             if(temp.getItemId().equals(item.getId())){
                 ratings.add(temp);
             }

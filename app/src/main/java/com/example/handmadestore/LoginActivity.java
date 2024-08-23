@@ -11,26 +11,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-
-import com.example.handmadestore.Object.Category;
 import com.example.handmadestore.Object.DatabaseManager;
-import com.example.handmadestore.Object.Banner;
-import com.example.handmadestore.Object.Item;
-import com.example.handmadestore.Object.Order;
-import com.example.handmadestore.Object.Rating;
 import com.example.handmadestore.Object.User;
 import com.example.handmadestore.databinding.ActivityLoginBinding;
 
-import java.util.ArrayList;
-
 public class LoginActivity extends AppCompatActivity {
     ActivityLoginBinding binding;
-    public static ArrayList<User> users;
-    public static ArrayList<Banner> banners;
-    public static ArrayList<Category> categories;
-    public static ArrayList<Item> items;
-    public static ArrayList<Order> orders;
-    public static ArrayList<Rating> ratings;
     User user;
     DatabaseManager databaseManager;
 
@@ -39,30 +25,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        init();
         handleEvent();
         this.getOnBackPressedDispatcher().addCallback(this, callback);
-    }
-
-    @Override
-    protected void onResume() {
-        init();
-        super.onResume();
-    }
-
-    private void init() {
-        users = new ArrayList<>();
-        banners = new ArrayList<>();
-        categories = new ArrayList<>();
-        items = new ArrayList<>();
-        orders = new ArrayList<>();
-        ratings = new ArrayList<>();
-        databaseManager = new DatabaseManager();
-        databaseManager.getUsers(users);
-        databaseManager.getBanner(banners);
-        databaseManager.getCategory(categories);
-        databaseManager.getItems(items);
-        databaseManager.getRatings(ratings);
     }
 
     private void handleEvent(){
@@ -74,13 +38,14 @@ public class LoginActivity extends AppCompatActivity {
                 String password = binding.password.getText().toString();
                 if (check(username,password)){
                     Toast.makeText(LoginActivity.this,"Đăng nhập thành công",Toast.LENGTH_LONG).show();
+                    databaseManager = new DatabaseManager();
                     if (user.getPriority()){
-                        databaseManager.getAllOrder(orders);
+                        databaseManager.getAllOrder(SplashScreenActivity.orders);
                         Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
                         intent.putExtra("user",user);
                         startActivity(intent);
                     }else {
-                        databaseManager.getOrder(username,orders);
+                        databaseManager.getOrder(username,SplashScreenActivity.orders);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("user",user);
                         startActivity(intent);
@@ -114,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (check){
             boolean isExist = false;
-            for (User temp : users) {
+            for (User temp : SplashScreenActivity.users) {
                 if (temp.getUsername().equals(username)) {
                     isExist = true;
                     if(!temp.getPassword().equals(password)){

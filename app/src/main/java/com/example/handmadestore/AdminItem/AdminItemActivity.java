@@ -22,6 +22,7 @@ import com.example.handmadestore.LoginActivity;
 import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Category;
 import com.example.handmadestore.Object.Item;
+import com.example.handmadestore.SplashScreenActivity;
 import com.example.handmadestore.databinding.ActivityAdminItemBinding;
 import com.example.handmadestore.databinding.DropdownSearchBinding;
 
@@ -74,13 +75,13 @@ public class AdminItemActivity extends AppCompatActivity {
 
     private void initItems(){
         if (MainActivity.currentUser != null){
-            adapter = new ItemAdapter(LoginActivity.items, MainActivity.currentUser);
+            adapter = new ItemAdapter(SplashScreenActivity.items, MainActivity.currentUser);
         }else {
-            adapter = new ItemAdapter(LoginActivity.items, AdminActivity.currentUser);
+            adapter = new ItemAdapter(SplashScreenActivity.items, AdminActivity.currentUser);
         }
         binding.recyclerView.setLayoutManager(new GridLayoutManager(AdminItemActivity.this,2));
         binding.recyclerView.setAdapter(adapter);
-        checkItems(LoginActivity.items);
+        checkItems(SplashScreenActivity.items);
     }
 
     private void checkItems(ArrayList<Item> items){
@@ -102,7 +103,7 @@ public class AdminItemActivity extends AppCompatActivity {
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
 
-                ArrayList<Category> temp = new ArrayList<>(LoginActivity.categories);
+                ArrayList<Category> temp = new ArrayList<>(SplashScreenActivity.categories);
                 temp.add(0,new Category("Tất cả danh mục"));
                 ArrayAdapter<Category> arrayAdapter = new ArrayAdapter<>(AdminItemActivity.this, android.R.layout.simple_list_item_1, temp);
                 dropdownBinding.list.setAdapter(arrayAdapter);
@@ -140,10 +141,10 @@ public class AdminItemActivity extends AppCompatActivity {
 
     private void resultAfterFiltered(String text){
         if (text.equals("all")){
-            adapter.setResultAfterFiltered(LoginActivity.items);
+            adapter.setResultAfterFiltered(SplashScreenActivity.items);
         }else {
             resultAfterFiltered.clear();
-            for (Item item : LoginActivity.items) {
+            for (Item item : SplashScreenActivity.items) {
                 if(item.getCategoryId().equals(text)){
                     resultAfterFiltered.add(item);
                 }
@@ -189,7 +190,7 @@ public class AdminItemActivity extends AppCompatActivity {
                 }
             }
         }else {
-            for (Item item : LoginActivity.items) {
+            for (Item item : SplashScreenActivity.items) {
                 String normalTitle = item.getTitle().toLowerCase();
                 String normalText = text.toLowerCase();
                 if(normalTitle.contains(normalText)){

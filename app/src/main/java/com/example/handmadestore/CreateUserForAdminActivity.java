@@ -201,7 +201,7 @@ public class CreateUserForAdminActivity extends AppCompatActivity {
         }
 
         if (check){
-            for (User user : LoginActivity.users) {
+            for (User user : SplashScreenActivity.users) {
                 if (user.getUsername().equals(username)) {
                     binding.usernameLayout.setError("Tài khoản đã tồn tại");
                     check = false;

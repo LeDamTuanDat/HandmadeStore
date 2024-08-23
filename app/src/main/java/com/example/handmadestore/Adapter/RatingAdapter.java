@@ -15,6 +15,7 @@ import com.example.handmadestore.Object.Rating;
 import com.example.handmadestore.Object.ReviewDomain;
 import com.example.handmadestore.Object.User;
 import com.example.handmadestore.R;
+import com.example.handmadestore.SplashScreenActivity;
 import com.example.handmadestore.databinding.ViewholderReviewBinding;
 
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.Viewholder
 
     public String getUserImage(Rating rating){
         String userImage = "";
-        for (User temp : LoginActivity.users) {
+        for (User temp : SplashScreenActivity.users) {
             if (temp.getUsername().equals(rating.getUserId())){
                 userImage = temp.getImage();
             }

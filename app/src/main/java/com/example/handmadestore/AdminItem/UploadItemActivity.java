@@ -30,6 +30,7 @@ import com.example.handmadestore.Object.Category;
 import com.example.handmadestore.Object.DatabaseManager;
 import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.R;
+import com.example.handmadestore.SplashScreenActivity;
 import com.example.handmadestore.databinding.ActivityUploadItemBinding;
 import com.example.handmadestore.databinding.DropdownSearchBinding;
 
@@ -76,7 +77,7 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
     }
 
     public Category findCategory(String id){
-        for (Category category : LoginActivity.categories) {
+        for (Category category : SplashScreenActivity.categories) {
             if (category.getId().equals(id)) {
                 return category;
             }
@@ -95,7 +96,7 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
 
-                ArrayAdapter<Category> adapter = new ArrayAdapter<>(UploadItemActivity.this, android.R.layout.simple_list_item_1, LoginActivity.categories);
+                ArrayAdapter<Category> adapter = new ArrayAdapter<>(UploadItemActivity.this, android.R.layout.simple_list_item_1, SplashScreenActivity.categories);
                 dropdownBinding.list.setAdapter(adapter);
                 dropdownBinding.search.addTextChangedListener(new TextWatcher() {
                     @Override
@@ -290,7 +291,7 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
 
     private boolean checkItemForAdd(String title){
         title = title.toLowerCase();
-        for (Item item : LoginActivity.items){
+        for (Item item : SplashScreenActivity.items){
             if(item.getTitle().toLowerCase().equals(title)){
 //                Toast.makeText(this,"Sản phẩm đã tồn tại",Toast.LENGTH_LONG).show();
                 binding.titleLayout.setError("Sản phẩm đã tồn tại");
@@ -302,7 +303,7 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
 
     private boolean checkItemForMod(String title){
         title = title.toLowerCase();
-        for (Item item : LoginActivity.items){
+        for (Item item : SplashScreenActivity.items){
             if(item.getTitle().toLowerCase().equals(title) && !item.getTitle().equals(title)){
 //                Toast.makeText(this,"Sản phẩm đã tồn tại",Toast.LENGTH_LONG).show();
                 binding.titleLayout.setError("Sản phẩm đã tồn tại");

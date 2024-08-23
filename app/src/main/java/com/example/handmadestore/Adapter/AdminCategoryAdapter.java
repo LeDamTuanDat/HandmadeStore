@@ -23,6 +23,7 @@ import com.example.handmadestore.Object.Category;
 import com.example.handmadestore.Object.DatabaseManager;
 import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.R;
+import com.example.handmadestore.SplashScreenActivity;
 import com.example.handmadestore.databinding.CardAdminCategoryBinding;
 
 import java.util.ArrayList;
@@ -120,7 +121,7 @@ public class AdminCategoryAdapter extends RecyclerView.Adapter<AdminCategoryAdap
     }
     
     public boolean checkItem(String text){
-        for (Item item : LoginActivity.items) {
+        for (Item item : SplashScreenActivity.items) {
             if(item.getCategoryId().equals(text)){
                 return true;
             }

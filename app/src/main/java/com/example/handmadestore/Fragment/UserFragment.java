@@ -17,6 +17,7 @@ import com.example.handmadestore.EditProfileActivity;
 import com.example.handmadestore.LoginActivity;
 import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.R;
+import com.example.handmadestore.SplashScreenActivity;
 import com.example.handmadestore.databinding.FragmentUserBinding;
 
 public class UserFragment extends Fragment {
@@ -49,7 +50,7 @@ public class UserFragment extends Fragment {
         binding.txtRealName.setText(MainActivity.currentUser.getRealname());
         binding.txtUsername.setText(MainActivity.currentUser.getUsername());
         binding.cart.setText(MainActivity.currentUser.getCarts().size()+"");
-        binding.order.setText(LoginActivity.orders.size() + "");
+        binding.order.setText(SplashScreenActivity.orders.size() + "");
         binding.username.setText(MainActivity.currentUser.getUsername());
         binding.realName.setText(MainActivity.currentUser.getRealname());
         binding.email.setText(MainActivity.currentUser.getEmail());

@@ -96,7 +96,7 @@ public class CartActivity extends AppCompatActivity {
     public boolean checkCarts(){
         for (Cart cart : MainActivity.currentUser.getCarts()) {
             Item temp = cart.getItem();
-            for (Item item : LoginActivity.items) {
+            for (Item item : SplashScreenActivity.items) {
                 if (item.getId().equals(temp.getId())){
                     if (cart.getNumber() > item.getInventory()){
                         return false;

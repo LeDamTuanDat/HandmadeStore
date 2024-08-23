@@ -138,7 +138,7 @@ public class StatisticActivity extends AppCompatActivity {
         revenueOverTimes.clear();
         for (int i = 0; i <= currentMonth; i++) {
             long money = 0;
-            for (Order order: LoginActivity.orders) {
+            for (Order order: SplashScreenActivity.orders) {
                 if (order.getStatus().equals("Đã giao")) {
                     Date orderTime = order.getOrderTime();
                     calendar.setTime(orderTime);
@@ -159,7 +159,7 @@ public class StatisticActivity extends AppCompatActivity {
         int daysInMonth = yearMonth.lengthOfMonth();
         for (int i = 1; i <= daysInMonth; i++) {
             long money = 0;
-            for (Order order: LoginActivity.orders) {
+            for (Order order: SplashScreenActivity.orders) {
                 if (order.getStatus().equals("Đã giao")) {
                     Date orderTime = order.getOrderTime();
                     calendar.setTime(orderTime);
