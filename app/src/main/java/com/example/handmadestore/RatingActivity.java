@@ -74,7 +74,7 @@ public class RatingActivity extends AppCompatActivity {
                     DatabaseManager databaseManager = new DatabaseManager();
                     Rating rating = new Rating(item.getId(),MainActivity.currentUser.getUsername(),id,review,ratingValue);
                     databaseManager.addRating(rating);
-                    Toast.makeText(RatingActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RatingActivity.this, "Đánh giá thành công", Toast.LENGTH_SHORT).show();
                     if (items.size() != 1){
                         items.remove(item);
                         setSpinner();
