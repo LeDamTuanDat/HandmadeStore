@@ -14,11 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.handmadestore.AdminItem.UploadItemActivity;
-import com.example.handmadestore.DetailActivity;
 import com.example.handmadestore.EditProfileActivity;
 import com.example.handmadestore.Object.DatabaseManager;
-import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.Object.User;
 import com.example.handmadestore.R;
 import com.example.handmadestore.databinding.CardUserBinding;
@@ -82,7 +79,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                         context.startActivity(intent);
                         break;
                     case R.id.delete_user:
-                        new androidx.appcompat.app.AlertDialog.Builder(context)
+                        new AlertDialog.Builder(context)
                                 .setTitle("Xác nhận xóa")
                                 .setMessage("Bạn có chắc chắn muốn xóa người dùng không?")
                                 .setPositiveButton("Có", new DialogInterface.OnClickListener() {

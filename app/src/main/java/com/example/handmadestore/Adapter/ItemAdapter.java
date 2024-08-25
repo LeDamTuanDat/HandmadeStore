@@ -95,7 +95,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.AdminItemViewH
                         context.startActivity(intent);
                         break;
                     case R.id.delete_item:
-                        new androidx.appcompat.app.AlertDialog.Builder(context)
+                        new AlertDialog.Builder(context)
                                 .setTitle("Xác nhận xóa")
                                 .setMessage("Bạn có chắc chắn muốn xóa sản phẩm không?")
                                 .setPositiveButton("Có", new DialogInterface.OnClickListener() {
