@@ -56,33 +56,6 @@ public class SignupActivity extends AppCompatActivity {
                     setResult(RESULT_OK, intent);
                     finish();
                 }
-//                boolean isExist = false;
-//                if(email.isEmpty() || phone.isEmpty() || username.isEmpty() || password.isEmpty() || address.isEmpty() || realname.isEmpty()){
-//                    Toast.makeText(SignupActivity.this,"Vui lòng nhập đầy đủ thông tin",Toast.LENGTH_LONG).show();
-//                } else if (!email.contains("@gmail.com")) {
-//                    Toast.makeText(SignupActivity.this,"Vui lòng nhập đúng định dạng email",Toast.LENGTH_LONG).show();
-//                } else if (phone.length() < 10 || !phone.startsWith("0")) {
-//                    Toast.makeText(SignupActivity.this,"Vui lòng nhập đúng định dạng số điện thoại",Toast.LENGTH_LONG).show();
-//                } else if (password.length() < 6) {
-//                    Toast.makeText(SignupActivity.this,"Mật khẩu phải tối thiểu 6 ký tự",Toast.LENGTH_LONG).show();
-//                }
-//                else {
-//                    for (User user : users) {
-//                        if (user.getUsername().equals(username)) {
-//                            isExist = true;
-//                            Toast.makeText(SignupActivity.this,"Tài khoản đã tồn tại",Toast.LENGTH_LONG).show();
-//                        }
-//                    }
-//                    if (!isExist){
-//                        User user = new User(email,phone,username,password,realname,address,false);
-//                        databaseManager.addUser(user);
-//                        Toast.makeText(SignupActivity.this,"Đăng ký thành công",Toast.LENGTH_LONG).show();
-//                        Intent intent = new Intent();
-//                        intent.putExtra("new_user",user);
-//                        setResult(RESULT_OK, intent);
-//                        finish();
-//                    }
-//                }
             }
         });
 

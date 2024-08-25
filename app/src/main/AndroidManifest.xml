@@ -67,7 +67,7 @@
             android:name=".AdminCategory.UploadCategoryActivity"
             android:exported="true" />
         <activity
-            android:name=".AdminCategory.AdminCategoryActivity"
+            android:name=".AdminCategory.CategoryActivity"
             android:exported="true" />
         <activity
             android:name=".AdminActivity"

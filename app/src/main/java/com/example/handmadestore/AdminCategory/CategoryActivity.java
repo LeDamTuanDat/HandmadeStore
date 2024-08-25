@@ -8,9 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.example.handmadestore.Adapter.AdminCategoryAdapter;
-import com.example.handmadestore.AdminActivity;
-import com.example.handmadestore.LoginActivity;
+import com.example.handmadestore.Adapter.CategoryAdapter;
 import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Category;
 import com.example.handmadestore.SplashScreenActivity;
@@ -18,10 +16,10 @@ import com.example.handmadestore.databinding.ActivityCategoryBinding;
 
 import java.util.ArrayList;
 
-public class AdminCategoryActivity extends AppCompatActivity {
+public class CategoryActivity extends AppCompatActivity {
 
     ActivityCategoryBinding binding;
-    AdminCategoryAdapter adapter;
+    CategoryAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +40,8 @@ public class AdminCategoryActivity extends AppCompatActivity {
 
 
     private void initCategory(){
-        adapter = new AdminCategoryAdapter(SplashScreenActivity.categories);
-        binding.recyclerView.setLayoutManager(new GridLayoutManager(AdminCategoryActivity.this,3));
+        adapter = new CategoryAdapter(SplashScreenActivity.categories);
+        binding.recyclerView.setLayoutManager(new GridLayoutManager(CategoryActivity.this,3));
         binding.recyclerView.setAdapter(adapter);
     }
 
@@ -59,7 +57,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         binding.addCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AdminCategoryActivity.this, UploadCategoryActivity.class);
+                Intent intent = new Intent(CategoryActivity.this, UploadCategoryActivity.class);
                 startActivity(intent);
             }
         });

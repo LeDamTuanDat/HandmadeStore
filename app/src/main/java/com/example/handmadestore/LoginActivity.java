@@ -62,8 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivityForResult(intent, 14);
             }
         });
-        binding.username.addTextChangedListener(new ClearError(binding.username,binding.usernameLayout));
-        binding.password.addTextChangedListener(new ClearError(binding.password,binding.passwordLayout));
+        clearError();
     }
 
     private boolean check(String username, String password){
@@ -117,6 +116,11 @@ public class LoginActivity extends AppCompatActivity {
     private void disableSpace(){
         binding.username.addTextChangedListener(new NoWhitespaceTextWatcher(binding.username));
         binding.password.addTextChangedListener(new NoWhitespaceTextWatcher(binding.password));
+    }
+
+    private void clearError(){
+        binding.username.addTextChangedListener(new ClearError(binding.username,binding.usernameLayout));
+        binding.password.addTextChangedListener(new ClearError(binding.password,binding.passwordLayout));
     }
 
     OnBackPressedCallback callback = new OnBackPressedCallback(true) {

@@ -10,7 +10,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.example.handmadestore.AdminCategory.AdminCategoryActivity;
+import com.example.handmadestore.AdminCategory.CategoryActivity;
 import com.example.handmadestore.AdminItem.AdminItemActivity;
 import com.example.handmadestore.Object.User;
 import com.example.handmadestore.databinding.ActivityAdminBinding;
@@ -42,7 +42,7 @@ public class AdminActivity extends AppCompatActivity {
         binding.category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AdminActivity.this, AdminCategoryActivity.class);
+                Intent intent = new Intent(AdminActivity.this, CategoryActivity.class);
                 startActivity(intent);
             }
         });

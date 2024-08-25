@@ -14,12 +14,10 @@ import com.bumptech.glide.Glide;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.handmadestore.Adapter.ItemAdapter;
-import com.example.handmadestore.Adapter.CategoryAdapter;
-import com.example.handmadestore.AdminCategory.AdminCategoryActivity;
+import com.example.handmadestore.Adapter.MiniCategoryAdapter;
+import com.example.handmadestore.AdminCategory.CategoryActivity;
 import com.example.handmadestore.AdminItem.AdminItemActivity;
 import com.example.handmadestore.CartActivity;
-import com.example.handmadestore.EditProfileActivity;
-import com.example.handmadestore.LoginActivity;
 import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Banner;
 import com.example.handmadestore.Object.Item;
@@ -94,7 +92,7 @@ public class HomeFragment extends Fragment {
 
     private void initCategories(){
         binding.rycyclerCategory.setLayoutManager(new GridLayoutManager(getContext(),5));
-        binding.rycyclerCategory.setAdapter(new CategoryAdapter(SplashScreenActivity.categories));
+        binding.rycyclerCategory.setAdapter(new MiniCategoryAdapter(SplashScreenActivity.categories));
     }
 
     private void initItems(){
@@ -118,7 +116,7 @@ public class HomeFragment extends Fragment {
         binding.category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(binding.getRoot().getContext(), AdminCategoryActivity.class);
+                Intent intent = new Intent(binding.getRoot().getContext(), CategoryActivity.class);
                 startActivity(intent);
             }
         });
