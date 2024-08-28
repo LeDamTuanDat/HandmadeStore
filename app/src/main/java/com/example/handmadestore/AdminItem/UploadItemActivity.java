@@ -303,8 +303,8 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
 
     private boolean checkItemForMod(String title){
         title = title.toLowerCase();
-        for (Item item : SplashScreenActivity.items){
-            if(item.getTitle().toLowerCase().equals(title) && !item.getTitle().equals(title)){
+        for (Item temp : SplashScreenActivity.items){
+            if(temp.getTitle().toLowerCase().equals(title) && !item.getTitle().toLowerCase().equals(title)){
 //                Toast.makeText(this,"Sản phẩm đã tồn tại",Toast.LENGTH_LONG).show();
                 binding.titleLayout.setError("Sản phẩm đã tồn tại");
                 return true;

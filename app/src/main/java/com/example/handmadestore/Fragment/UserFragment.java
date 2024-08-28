@@ -104,6 +104,7 @@ public class UserFragment extends Fragment {
                 Intent intent = new Intent(getContext(),LoginActivity.class);
                 startActivity(intent);
                 MainActivity.currentUser = null;
+                SplashScreenActivity.orders.clear();
                 getActivity().finish();
             }
         });
