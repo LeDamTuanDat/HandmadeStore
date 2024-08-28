@@ -81,6 +81,7 @@ public class AdminActivity extends AppCompatActivity {
                 Intent intent = new Intent(AdminActivity.this,LoginActivity.class);
                 startActivity(intent);
                 currentUser = null;
+                SplashScreenActivity.orders.clear();
                 finish();
             }
         });
