@@ -1,4 +1,4 @@
-package com.example.handmadestore;
+package com.example.handmadestore.Order;
 
 import android.os.Bundle;
 import android.view.View;
@@ -7,16 +7,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.handmadestore.Object.Cart;
-import com.example.handmadestore.Object.DatabaseManager;
+import com.example.handmadestore.Database.DatabaseManager;
+import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.Object.Rating;
+import com.example.handmadestore.R;
 import com.example.handmadestore.databinding.ActivityRatingBinding;
 
 import java.util.ArrayList;
@@ -43,7 +40,7 @@ public class RatingActivity extends AppCompatActivity {
     }
 
     public void setSpinner(){
-        adapter = new ArrayAdapter<>(this,R.layout.spinner_item,items);
+        adapter = new ArrayAdapter<>(this, R.layout.spinner_item,items);
         adapter.setDropDownViewResource(R.layout.spinner_item);
         binding.spinner.setAdapter(adapter);
         binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -72,7 +69,7 @@ public class RatingActivity extends AppCompatActivity {
                     Toast.makeText(RatingActivity.this, "Vui lòng điền nhận xét", Toast.LENGTH_SHORT).show();
                 }else {
                     DatabaseManager databaseManager = new DatabaseManager();
-                    Rating rating = new Rating(item.getId(),MainActivity.currentUser.getUsername(),id,review,ratingValue);
+                    Rating rating = new Rating(item.getId(), MainActivity.currentUser.getUsername(),id,review,ratingValue);
                     databaseManager.addRating(rating);
                     Toast.makeText(RatingActivity.this, "Đánh giá thành công", Toast.LENGTH_SHORT).show();
                     if (items.size() != 1){

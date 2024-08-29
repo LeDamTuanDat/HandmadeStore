@@ -1,4 +1,4 @@
-package com.example.handmadestore;
+package com.example.handmadestore.User;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,8 +11,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.handmadestore.Object.DatabaseManager;
+import com.example.handmadestore.AdminActivity;
+import com.example.handmadestore.Database.DatabaseManager;
+import com.example.handmadestore.HelperClass.ClearError;
+import com.example.handmadestore.HelperClass.NoWhitespaceTextWatcher;
+import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.User;
+import com.example.handmadestore.SplashScreenActivity;
 import com.example.handmadestore.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {

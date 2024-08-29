@@ -1,4 +1,4 @@
-package com.example.handmadestore.Object;
+package com.example.handmadestore.Database;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -8,8 +8,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.handmadestore.CreateUserForAdminActivity;
 import com.example.handmadestore.MainActivity;
+import com.example.handmadestore.Object.Banner;
+import com.example.handmadestore.Object.Cart;
+import com.example.handmadestore.Object.Category;
+import com.example.handmadestore.Object.Item;
+import com.example.handmadestore.Object.Order;
+import com.example.handmadestore.Object.Rating;
+import com.example.handmadestore.Object.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -106,7 +112,7 @@ public class DatabaseManager {
         dialog.show();
         if (uri == null){
             if (normal){
-                MainActivity.currentUser.setImage("");// Phải có đoạn này để sau khi người dùng thực hiện xóa ảnh và cập nhật thì các fragment của người dùng mới cập nhật lại
+                MainActivity.currentUser.setImage("");
             }
             databaseReference.child("Users").child(user.getUsername()).setValue(user);
             Toast.makeText(context,"Cập nhật thông tin thành công",Toast.LENGTH_SHORT).show();

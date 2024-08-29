@@ -1,4 +1,4 @@
-package com.example.handmadestore.AdminItem;
+package com.example.handmadestore.Item;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.handmadestore.Adapter.ItemAdapter;
 import com.example.handmadestore.AdminActivity;
-import com.example.handmadestore.LoginActivity;
 import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Category;
 import com.example.handmadestore.Object.Item;
@@ -28,12 +27,11 @@ import com.example.handmadestore.databinding.DropdownSearchBinding;
 
 import java.util.ArrayList;
 
-public class AdminItemActivity extends AppCompatActivity {
+public class ItemActivity extends AppCompatActivity {
     ActivityAdminItemBinding binding;
     DropdownSearchBinding dropdownBinding;
     ItemAdapter adapter;
     Category category;
-//    boolean isSearch;
     ArrayList<Item> resultAfterFiltered = new ArrayList<>();
     ArrayList<Item> resultAfterSearch = new ArrayList<>();
     @Override
@@ -43,7 +41,6 @@ public class AdminItemActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         category = (Category) getIntent().getSerializableExtra("category");
-//        isSearch = getIntent().getBooleanExtra("search",false);
 
         checkUser();
         initItems();
@@ -67,9 +64,6 @@ public class AdminItemActivity extends AppCompatActivity {
     private void checkUser() {
         if (MainActivity.currentUser != null){
             binding.addItem.setVisibility(View.GONE);
-//            if (isSearch == false){
-//                binding.filter.setVisibility(View.GONE);
-//            }
         }
     }
 
@@ -79,7 +73,7 @@ public class AdminItemActivity extends AppCompatActivity {
         }else {
             adapter = new ItemAdapter(SplashScreenActivity.items, AdminActivity.currentUser);
         }
-        binding.recyclerView.setLayoutManager(new GridLayoutManager(AdminItemActivity.this,2));
+        binding.recyclerView.setLayoutManager(new GridLayoutManager(ItemActivity.this,2));
         binding.recyclerView.setAdapter(adapter);
         checkItems(SplashScreenActivity.items);
     }
@@ -96,8 +90,8 @@ public class AdminItemActivity extends AppCompatActivity {
         binding.filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Dialog dialog = new Dialog(AdminItemActivity.this);
-                dropdownBinding = DropdownSearchBinding.inflate(LayoutInflater.from(AdminItemActivity.this));
+                Dialog dialog = new Dialog(ItemActivity.this);
+                dropdownBinding = DropdownSearchBinding.inflate(LayoutInflater.from(ItemActivity.this));
                 dialog.setContentView(dropdownBinding.getRoot());
                 dialog.getWindow().setLayout(750,900);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -105,7 +99,7 @@ public class AdminItemActivity extends AppCompatActivity {
 
                 ArrayList<Category> temp = new ArrayList<>(SplashScreenActivity.categories);
                 temp.add(0,new Category("Tất cả danh mục"));
-                ArrayAdapter<Category> arrayAdapter = new ArrayAdapter<>(AdminItemActivity.this, android.R.layout.simple_list_item_1, temp);
+                ArrayAdapter<Category> arrayAdapter = new ArrayAdapter<>(ItemActivity.this, android.R.layout.simple_list_item_1, temp);
                 dropdownBinding.list.setAdapter(arrayAdapter);
                 dropdownBinding.search.addTextChangedListener(new TextWatcher() {
                     @Override
@@ -158,7 +152,7 @@ public class AdminItemActivity extends AppCompatActivity {
         binding.addItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AdminItemActivity.this, UploadItemActivity.class);
+                Intent intent = new Intent(ItemActivity.this, UploadItemActivity.class);
                 startActivity(intent);
             }
         });

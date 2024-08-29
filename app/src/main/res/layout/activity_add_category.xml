@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".AdminCategory.UploadCategoryActivity">
+    tools:context=".Category.UploadCategoryActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

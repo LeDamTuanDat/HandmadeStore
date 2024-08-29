@@ -15,9 +15,9 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.handmadestore.Adapter.ItemAdapter;
 import com.example.handmadestore.Adapter.MiniCategoryAdapter;
-import com.example.handmadestore.AdminCategory.CategoryActivity;
-import com.example.handmadestore.AdminItem.AdminItemActivity;
-import com.example.handmadestore.CartActivity;
+import com.example.handmadestore.Category.CategoryActivity;
+import com.example.handmadestore.Item.ItemActivity;
+import com.example.handmadestore.Order.CartActivity;
 import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Banner;
 import com.example.handmadestore.Object.Item;
@@ -98,7 +98,6 @@ public class HomeFragment extends Fragment {
     private void initItems(){
         getBestSelling();
         binding.rycyclerItems.setLayoutManager(new GridLayoutManager(getContext(),2));
-//        binding.rycyclerItems.setAdapter(new ItemAdapter(LoginActivity.items, MainActivity.currentUser));
         binding.rycyclerItems.setAdapter(new ItemAdapter(bestSelling, MainActivity.currentUser));
     }
 
@@ -137,27 +136,17 @@ public class HomeFragment extends Fragment {
     }
 
     private void openItem() {
-//        binding.item.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (getActivity() instanceof MainActivity) {
-//                    ((MainActivity) getActivity()).switchToFragment(1); // Chuyển sang fragment ở vị trí 1 (CartFragment)
-//                }
-//            }
-//        });
         binding.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(binding.getRoot().getContext(), AdminItemActivity.class);
-//                intent.putExtra("search",true);
+                Intent intent = new Intent(binding.getRoot().getContext(), ItemActivity.class);
                 startActivity(intent);
             }
         });
         binding.search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(binding.getRoot().getContext(), AdminItemActivity.class);
-//                intent.putExtra("search",true);
+                Intent intent = new Intent(binding.getRoot().getContext(), ItemActivity.class);
                 startActivity(intent);
             }
         });

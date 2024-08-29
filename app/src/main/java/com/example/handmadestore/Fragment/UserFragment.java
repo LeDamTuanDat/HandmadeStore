@@ -10,11 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
-import com.example.handmadestore.AddOrder;
-import com.example.handmadestore.AdminActivity;
-import com.example.handmadestore.CartActivity;
-import com.example.handmadestore.EditProfileActivity;
-import com.example.handmadestore.LoginActivity;
+import com.example.handmadestore.Order.CartActivity;
+import com.example.handmadestore.User.EditProfileActivity;
+import com.example.handmadestore.User.LoginActivity;
 import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.R;
 import com.example.handmadestore.SplashScreenActivity;

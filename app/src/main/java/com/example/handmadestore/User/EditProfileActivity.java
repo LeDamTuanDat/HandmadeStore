@@ -1,4 +1,4 @@
-package com.example.handmadestore;
+package com.example.handmadestore.User;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,8 +16,11 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.example.handmadestore.Object.DatabaseManager;
+import com.example.handmadestore.Database.DatabaseManager;
+import com.example.handmadestore.HelperClass.ClearError;
+import com.example.handmadestore.HelperClass.NoWhitespaceTextWatcher;
 import com.example.handmadestore.Object.User;
+import com.example.handmadestore.R;
 import com.example.handmadestore.databinding.ActivityEditProfileBinding;
 
 public class EditProfileActivity extends AppCompatActivity {
@@ -88,7 +91,7 @@ public class EditProfileActivity extends AppCompatActivity {
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {//Nếu đã lấy ảnh
+                    if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
                         uri = data.getData();
                         binding.image.setImageURI(uri);
@@ -155,47 +158,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
                     }
                 }
-
-//                if(email.isEmpty() || phone.isEmpty() || address.isEmpty() || realname.isEmpty()){
-//                    Toast.makeText(EditProfileActivity.this,"Vui lòng nhập đầy đủ thông tin",Toast.LENGTH_LONG).show();
-//                } else if (!email.contains("@gmail.com")) {
-//                    Toast.makeText(EditProfileActivity.this,"Vui lòng nhập đúng định dạng email",Toast.LENGTH_LONG).show();
-//                } else if (phone.length() < 10 || !phone.startsWith("0")) {
-//                    Toast.makeText(EditProfileActivity.this,"Vui lòng nhập đúng định dạng số điện thoại",Toast.LENGTH_LONG).show();
-//                } else {
-//
-//                    AlertDialog.Builder builder = new AlertDialog.Builder(binding.getRoot().getContext());
-//                    builder.setCancelable(false);
-//                    builder.setView(R.layout.loading_activity);
-//                    AlertDialog dialog = builder.create();
-//
-//                    DatabaseManager databaseManager = new DatabaseManager();
-//
-//                    user.setEmail(email);
-//                    user.setPhone(phone);
-//                    user.setRealname(realname);
-//                    user.setAddress(address);
-//
-//                    if (uri != null){
-//                        user.setImage(uri.toString());
-//                    }
-//
-//                    if (binding.changePass.isChecked()){
-//                        if (password.isEmpty() || cfpassword.isEmpty()){
-//                            Toast.makeText(EditProfileActivity.this,"Vui lòng nhập đầy đủ thông tin",Toast.LENGTH_LONG).show();
-//                        }else if (!password.equals(cfpassword)) {
-//                            Toast.makeText(EditProfileActivity.this,"Mật khẩu xác nhận không trùng khớp",Toast.LENGTH_LONG).show();
-//                        } else if (password.length() < 6) {
-//                            Toast.makeText(EditProfileActivity.this,"Mật khẩu phải tối thiểu 6 ký tự",Toast.LENGTH_LONG).show();
-//                        }else {
-//                            user.setPassword(password);
-//                            databaseManager.updateUser(user,uri,EditProfileActivity.this,dialog,normal);
-//                        }
-//                    }else {
-//                        databaseManager.updateUser(user,uri,EditProfileActivity.this,dialog,normal);
-//                    }
-//                }
-
             }
         });
     }

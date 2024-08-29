@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.handmadestore.Fragment.CartFragment;
 import com.example.handmadestore.Fragment.HomeFragment;
 import com.example.handmadestore.Fragment.OrderFragment;
 import com.example.handmadestore.Fragment.UserFragment;
@@ -26,8 +25,6 @@ public class AdapterViewPagerForMain extends FragmentStateAdapter {
         switch (position){
             case 0:
                 return new HomeFragment();
-//            case 1:
-//                return new CartFragment();
             case 1:
                 return new OrderFragment();
             case 2:

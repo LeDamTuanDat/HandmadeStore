@@ -8,21 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.example.handmadestore.Adapter.CartAdapter;
 import com.example.handmadestore.Adapter.OrderAdapter;
-import com.example.handmadestore.LoginActivity;
-import com.example.handmadestore.MainActivity;
-import com.example.handmadestore.Object.DatabaseManager;
-import com.example.handmadestore.Object.Order;
-import com.example.handmadestore.R;
 import com.example.handmadestore.SplashScreenActivity;
-import com.example.handmadestore.databinding.FragmentCartBinding;
 import com.example.handmadestore.databinding.FragmentOrderBinding;
-
-import java.util.ArrayList;
 
 public class OrderFragment extends Fragment {
 

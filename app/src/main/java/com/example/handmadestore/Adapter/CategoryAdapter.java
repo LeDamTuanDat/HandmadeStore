@@ -15,11 +15,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.handmadestore.AdminCategory.UploadCategoryActivity;
-import com.example.handmadestore.AdminItem.AdminItemActivity;
+import com.example.handmadestore.Category.UploadCategoryActivity;
+import com.example.handmadestore.Item.ItemActivity;
 import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Category;
-import com.example.handmadestore.Object.DatabaseManager;
+import com.example.handmadestore.Database.DatabaseManager;
 import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.R;
 import com.example.handmadestore.SplashScreenActivity;
@@ -55,7 +55,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 if (MainActivity.currentUser != null){
-                    Intent intent = new Intent(context, AdminItemActivity.class);
+                    Intent intent = new Intent(context, ItemActivity.class);
                     intent.putExtra("category",category);
                     context.startActivity(intent);
                 }else {

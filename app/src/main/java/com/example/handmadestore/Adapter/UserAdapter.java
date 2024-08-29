@@ -14,8 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.handmadestore.EditProfileActivity;
-import com.example.handmadestore.Object.DatabaseManager;
+import com.example.handmadestore.User.EditProfileActivity;
+import com.example.handmadestore.Database.DatabaseManager;
 import com.example.handmadestore.Object.User;
 import com.example.handmadestore.R;
 import com.example.handmadestore.databinding.CardUserBinding;
@@ -89,13 +89,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                                         builder.setCancelable(false);
                                         builder.setView(R.layout.loading_activity);
                                         AlertDialog loading = builder.create();
-//                                        loading.show();
+
                                         DatabaseManager databaseManager = new DatabaseManager();
-//                                        checkCart(item.getId(),databaseManager);
+
                                         databaseManager.deleteUser(user,loading,context);
                                         UserAdapter.this.users.remove(user);
                                         notifyDataSetChanged();
-//                                        notifyDataSetChanged();
+
                                     }
                                 })
                                 .setNegativeButton("Không", null)

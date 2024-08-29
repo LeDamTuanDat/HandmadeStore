@@ -1,4 +1,4 @@
-package com.example.handmadestore;
+package com.example.handmadestore.User;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.handmadestore.Adapter.UserAdapter;
 import com.example.handmadestore.Object.User;
+import com.example.handmadestore.R;
+import com.example.handmadestore.SplashScreenActivity;
 import com.example.handmadestore.databinding.ActivityManageUserBinding;
 
 import java.util.ArrayList;
@@ -55,7 +57,7 @@ public class ManageUserActivity extends AppCompatActivity {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(ManageUserActivity.this,LinearLayoutManager.VERTICAL,false));
         binding.recyclerView.setAdapter(adapter);
 
-        optionsAdapter = new ArrayAdapter<>(this,R.layout.spinner_item,options);
+        optionsAdapter = new ArrayAdapter<>(this, R.layout.spinner_item,options);
         optionsAdapter.setDropDownViewResource(R.layout.spinner_item);
         binding.spinner.setAdapter(optionsAdapter);
     }

@@ -20,28 +20,28 @@
         android:theme="@style/Theme.HandmadeStore"
         tools:targetApi="31">
         <activity
-            android:name=".CreateUserForAdminActivity"
+            android:name=".User.CreateUserForAdminActivity"
             android:exported="false" />
         <activity
-            android:name=".ManageUserActivity"
+            android:name=".User.ManageUserActivity"
             android:exported="false" />
         <activity
-            android:name=".StatisticActivity"
+            android:name=".Statistic.StatisticActivity"
             android:exported="false" />
         <activity
-            android:name=".EditProfileActivity"
+            android:name=".User.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".RatingActivity"
+            android:name=".Order.RatingActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminOrderActivity"
+            android:name=".Order.ManageOrderActivity"
             android:exported="true" />
         <activity
-            android:name=".OrderDetail"
+            android:name=".Order.OrderDetail"
             android:exported="true" />
         <activity
-            android:name=".AddOrder"
+            android:name=".Order.AddOrderActivity"
             android:exported="true"
             android:label="Merchant Demo"
             android:launchMode="singleTask">
@@ -57,30 +57,30 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AdminItem.UploadItemActivity"
+            android:name=".Item.UploadItemActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".AdminItem.AdminItemActivity"
+            android:name=".Item.ItemActivity"
             android:exported="true" />
         <activity
-            android:name=".AdminCategory.UploadCategoryActivity"
+            android:name=".Category.UploadCategoryActivity"
             android:exported="true" />
         <activity
-            android:name=".AdminCategory.CategoryActivity"
+            android:name=".Category.CategoryActivity"
             android:exported="true" />
         <activity
             android:name=".AdminActivity"
             android:exported="true" />
         <activity
-            android:name=".SignupActivity"
+            android:name=".User.SignupActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".User.LoginActivity"
             android:exported="true" />
         <activity
-            android:name=".IntroSliderActivity"
+            android:name=".HelperClass.IntroSliderActivity"
             android:exported="true"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
@@ -96,10 +96,10 @@
             android:name=".MainActivity"
             android:exported="true" />
         <activity
-            android:name=".DetailActivity"
+            android:name=".Item.DetailActivity"
             android:exported="true" />
         <activity
-            android:name=".CartActivity"
+            android:name=".Order.CartActivity"
             android:exported="true" />
     </application>
 

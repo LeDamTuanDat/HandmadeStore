@@ -1,4 +1,4 @@
-package com.example.handmadestore.AdminCategory;
+package com.example.handmadestore.Category;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import com.example.handmadestore.Adapter.CategoryAdapter;
 import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Category;
-import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.SplashScreenActivity;
 import com.example.handmadestore.databinding.ActivityCategoryBinding;
 

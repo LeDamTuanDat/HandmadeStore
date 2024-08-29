@@ -7,13 +7,15 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
+import com.example.handmadestore.HelperClass.IntroSliderActivity;
 import com.example.handmadestore.Object.Banner;
 import com.example.handmadestore.Object.Category;
-import com.example.handmadestore.Object.DatabaseManager;
+import com.example.handmadestore.Database.DatabaseManager;
 import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.Object.Order;
 import com.example.handmadestore.Object.Rating;
 import com.example.handmadestore.Object.User;
+import com.example.handmadestore.User.LoginActivity;
 
 import java.util.ArrayList;
 
@@ -45,10 +47,10 @@ public class SplashScreenActivity extends AppCompatActivity {
                 if (isFirstTime) {
                     editor.putBoolean("isFirstTime", false);
                     editor.apply();
-                    Intent intent = new Intent(SplashScreenActivity.this,IntroSliderActivity.class);
+                    Intent intent = new Intent(SplashScreenActivity.this, IntroSliderActivity.class);
                     startActivity(intent);
                 }else {
-                    Intent intent = new Intent(SplashScreenActivity.this,LoginActivity.class);
+                    Intent intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
 

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/login_signup_bg"
     android:orientation="vertical"
-    tools:context=".SignupActivity">
+    tools:context=".User.SignupActivity">
 
     <ImageView
         android:layout_width="match_parent"

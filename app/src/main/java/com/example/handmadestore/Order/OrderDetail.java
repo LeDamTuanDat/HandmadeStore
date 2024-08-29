@@ -1,4 +1,4 @@
-package com.example.handmadestore;
+package com.example.handmadestore.Order;
 
 import android.content.Intent;
 import android.graphics.Paint;
@@ -13,11 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.handmadestore.Adapter.CartAdapter;
+import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Cart;
-import com.example.handmadestore.Object.DatabaseManager;
+import com.example.handmadestore.Database.DatabaseManager;
 import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.Object.Order;
 import com.example.handmadestore.Object.Rating;
+import com.example.handmadestore.R;
+import com.example.handmadestore.SplashScreenActivity;
 import com.example.handmadestore.databinding.ActivityOrderDetailBinding;
 
 import java.text.NumberFormat;
@@ -47,7 +50,7 @@ public class OrderDetail extends AppCompatActivity {
 
     public void getData(){
         order = (Order) getIntent().getSerializableExtra("order");
-        statusAdapter = new ArrayAdapter<>(this,R.layout.spinner_item,status);
+        statusAdapter = new ArrayAdapter<>(this, R.layout.spinner_item,status);
         statusAdapter.setDropDownViewResource(R.layout.spinner_item);
         binding.spinner.setAdapter(statusAdapter);
 
@@ -126,7 +129,7 @@ public class OrderDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (checkRating()){
-                    Intent intent = new Intent(OrderDetail.this,RatingActivity.class);
+                    Intent intent = new Intent(OrderDetail.this, RatingActivity.class);
                     intent.putExtra("items",items);
                     intent.putExtra("orderId",order.getKeyId());
                     startActivity(intent);

@@ -1,4 +1,4 @@
-package com.example.handmadestore.AdminCategory;
+package com.example.handmadestore.Category;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,10 +15,9 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.example.handmadestore.ClearError;
-import com.example.handmadestore.LoginActivity;
+import com.example.handmadestore.HelperClass.ClearError;
 import com.example.handmadestore.Object.Category;
-import com.example.handmadestore.Object.DatabaseManager;
+import com.example.handmadestore.Database.DatabaseManager;
 import com.example.handmadestore.R;
 import com.example.handmadestore.SplashScreenActivity;
 import com.example.handmadestore.databinding.ActivityAddCategoryBinding;
@@ -77,7 +76,7 @@ public class UploadCategoryActivity extends AppCompatActivity {
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {//Nếu đã lấy ảnh
+                    if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
                         uri = data.getData();
                         binding.image.setImageURI(uri);
@@ -90,7 +89,6 @@ public class UploadCategoryActivity extends AppCompatActivity {
     public void savaData(){
         String title = binding.title.getText().toString().trim();
         if (title.isEmpty()){
-//            Toast.makeText(this,"Vui lòng nhập danh mục",Toast.LENGTH_LONG).show();
             binding.titleLayout.setError("Chưa nhập danh mục");
         }else if(uri == null){
             Toast.makeText(this,"Vui lòng chọn ảnh",Toast.LENGTH_LONG).show();
@@ -116,7 +114,6 @@ public class UploadCategoryActivity extends AppCompatActivity {
         title = title.toLowerCase();
         for (Category item : SplashScreenActivity.categories){
             if(item.getTitle().toLowerCase().equals(title)){
-//                Toast.makeText(this,"Danh mục đã tồn tại",Toast.LENGTH_LONG).show();
                 binding.titleLayout.setError("Danh mục đã tồn tại");
                 return true;
             }
@@ -128,7 +125,6 @@ public class UploadCategoryActivity extends AppCompatActivity {
         title = title.toLowerCase();
         for (Category item : SplashScreenActivity.categories){
             if(item.getTitle().toLowerCase().equals(title) && !category.getTitle().equals(title)){
-//                Toast.makeText(this,"Danh mục đã tồn tại",Toast.LENGTH_LONG).show();
                 binding.titleLayout.setError("Danh mục đã tồn tại");
                 return true;
             }

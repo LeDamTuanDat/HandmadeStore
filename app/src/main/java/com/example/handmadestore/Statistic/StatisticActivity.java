@@ -1,16 +1,17 @@
-package com.example.handmadestore;
+package com.example.handmadestore.Statistic;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.handmadestore.Object.RevenueOverTime;
 import com.example.handmadestore.Object.Order;
+import com.example.handmadestore.R;
+import com.example.handmadestore.SplashScreenActivity;
 import com.example.handmadestore.databinding.ActivityStatisticBinding;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
@@ -54,7 +55,7 @@ public class StatisticActivity extends AppCompatActivity {
         revenueOverTimes = new ArrayList<>();
         options = new ArrayList<>();
         options.add("Cả năm");
-        adapter = new ArrayAdapter<>(this,R.layout.spinner_item,options);
+        adapter = new ArrayAdapter<>(this, R.layout.spinner_item,options);
         binding.spinner.setAdapter(adapter);
         calendar = Calendar.getInstance();
         currentMonth = calendar.get(Calendar.MONTH);
@@ -114,7 +115,6 @@ public class StatisticActivity extends AppCompatActivity {
         xAxis.setDrawAxisLine(false);
         xAxis.setGranularity(1f);
         xAxis.setGranularityEnabled(true);
-//        xAxis.setLabelCount(lables.size());
         if (month == 0){
             xAxis.setLabelRotationAngle(270);
         }else {

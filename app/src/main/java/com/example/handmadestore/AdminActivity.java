@@ -10,9 +10,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.example.handmadestore.AdminCategory.CategoryActivity;
-import com.example.handmadestore.AdminItem.AdminItemActivity;
+import com.example.handmadestore.Category.CategoryActivity;
+import com.example.handmadestore.Item.ItemActivity;
 import com.example.handmadestore.Object.User;
+import com.example.handmadestore.Order.ManageOrderActivity;
+import com.example.handmadestore.Statistic.StatisticActivity;
+import com.example.handmadestore.User.LoginActivity;
+import com.example.handmadestore.User.ManageUserActivity;
 import com.example.handmadestore.databinding.ActivityAdminBinding;
 
 public class AdminActivity extends AppCompatActivity {
@@ -49,28 +53,28 @@ public class AdminActivity extends AppCompatActivity {
         binding.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AdminActivity.this, AdminItemActivity.class);
+                Intent intent = new Intent(AdminActivity.this, ItemActivity.class);
                 startActivity(intent);
             }
         });
         binding.order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent itent = new Intent(AdminActivity.this,AdminOrderActivity.class);
+                Intent itent = new Intent(AdminActivity.this, ManageOrderActivity.class);
                 startActivity(itent);
             }
         });
         binding.statistic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent itent = new Intent(AdminActivity.this,StatisticActivity.class);
+                Intent itent = new Intent(AdminActivity.this, StatisticActivity.class);
                 startActivity(itent);
             }
         });
         binding.user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent itent = new Intent(AdminActivity.this,ManageUserActivity.class);
+                Intent itent = new Intent(AdminActivity.this, ManageUserActivity.class);
                 startActivity(itent);
             }
         });
@@ -78,7 +82,7 @@ public class AdminActivity extends AppCompatActivity {
         binding.logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AdminActivity.this,LoginActivity.class);
+                Intent intent = new Intent(AdminActivity.this, LoginActivity.class);
                 startActivity(intent);
                 currentUser = null;
                 SplashScreenActivity.orders.clear();

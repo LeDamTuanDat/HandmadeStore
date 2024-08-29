@@ -1,4 +1,4 @@
-package com.example.handmadestore;
+package com.example.handmadestore.Order;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.handmadestore.Adapter.CartAdapter;
+import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Cart;
 import com.example.handmadestore.Object.Item;
+import com.example.handmadestore.SplashScreenActivity;
 import com.example.handmadestore.databinding.ActivityCartBinding;
 
 import java.text.NumberFormat;
@@ -38,7 +40,7 @@ public class CartActivity extends AppCompatActivity {
 
     protected long getTotalPrice(){
         long totalPrice = 0;
-        for (int i = 0 ; i < MainActivity.currentUser.getCarts().size() ; i++){
+        for (int i = 0; i < MainActivity.currentUser.getCarts().size() ; i++){
             Cart cart = MainActivity.currentUser.getCarts().get(i);
             totalPrice += cart.calculatePrice();
         }
@@ -75,7 +77,7 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (checkCarts()){
-                    Intent intent = new Intent(CartActivity.this, AddOrder.class);
+                    Intent intent = new Intent(CartActivity.this, AddOrderActivity.class);
                     startActivity(intent);
                 }else {
                     Toast.makeText(CartActivity.this, "Số lượng nhiều hơn tồn kho", Toast.LENGTH_SHORT).show();

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".StatisticActivity">
+    tools:context=".Statistic.StatisticActivity">
 
     <ImageView
         android:id="@+id/back"

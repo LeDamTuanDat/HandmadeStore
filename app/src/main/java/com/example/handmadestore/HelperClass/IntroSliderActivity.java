@@ -1,4 +1,4 @@
-package com.example.handmadestore;
+package com.example.handmadestore.HelperClass;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.handmadestore.User.LoginActivity;
+import com.example.handmadestore.R;
 import com.github.appintro.AppIntro;
 import com.github.appintro.AppIntroFragment;
 

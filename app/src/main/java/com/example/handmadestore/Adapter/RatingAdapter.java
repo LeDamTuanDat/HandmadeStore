@@ -8,11 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
-import com.example.handmadestore.LoginActivity;
-import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Rating;
-import com.example.handmadestore.Object.ReviewDomain;
 import com.example.handmadestore.Object.User;
 import com.example.handmadestore.R;
 import com.example.handmadestore.SplashScreenActivity;

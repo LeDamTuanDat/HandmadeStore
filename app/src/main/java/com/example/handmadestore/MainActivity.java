@@ -3,7 +3,6 @@ package com.example.handmadestore;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -11,7 +10,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.handmadestore.Adapter.AdapterViewPagerForMain;
-import com.example.handmadestore.Object.DatabaseManager;
 import com.example.handmadestore.Object.User;
 import com.example.handmadestore.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationBarView;
@@ -69,9 +67,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.itHome:
                         binding.pageMain.setCurrentItem(0);
                         break;
-//                    case R.id.itCart:
-//                        binding.pageMain.setCurrentItem(1);
-//                        break;
+
+
+
                     case R.id.itOrder:
                         binding.pageMain.setCurrentItem(1);
                         break;

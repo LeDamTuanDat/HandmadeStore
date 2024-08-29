@@ -1,4 +1,4 @@
-package com.example.handmadestore.AdminItem;
+package com.example.handmadestore.Item;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -24,10 +24,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.handmadestore.Adapter.ImageAdapter;
-import com.example.handmadestore.ClearError;
-import com.example.handmadestore.LoginActivity;
+import com.example.handmadestore.HelperClass.ClearError;
 import com.example.handmadestore.Object.Category;
-import com.example.handmadestore.Object.DatabaseManager;
+import com.example.handmadestore.Database.DatabaseManager;
 import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.R;
 import com.example.handmadestore.SplashScreenActivity;
@@ -218,34 +217,6 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
                         }
                     }
                 }
-//                if (title.isEmpty() || categoryId.isEmpty() || inventory.isEmpty() || price.isEmpty() || description.isEmpty()){
-//                    Toast.makeText(UploadItemActivity.this,"Vui lòng nhập đủ thông tin",Toast.LENGTH_LONG).show();
-//                }else if (uriArrayList.size() == 0){
-//                    Toast.makeText(UploadItemActivity.this,"Vui lòng thêm ảnh",Toast.LENGTH_LONG).show();
-//                }else {
-//                    AlertDialog.Builder builder = new AlertDialog.Builder(binding.getRoot().getContext());
-//                    builder.setCancelable(false);
-//                    builder.setView(R.layout.loading_activity);
-//                    AlertDialog dialog = builder.create();
-//
-//                    databaseManager = new DatabaseManager();
-//                    if (item == null){
-//                        if(!checkItemForAdd(title)) {
-//                            item = new Item(title, categoryId, Integer.parseInt(inventory), Long.parseLong(price), description);
-//                            databaseManager.uploadItem(item, uriArrayList, dialog, UploadItemActivity.this,false);
-//                        }
-//                    }else {
-//                        if (!checkItemForMod(title)){
-//                            item.setTitle(title);
-//                            item.setCategoryId(categoryId);
-//                            item.setInventory(Integer.parseInt(inventory));
-//                            item.setPrice(Long.parseLong(price));
-//                            item.setDescription(description);
-//                            getImagasAfterModify();
-//                            databaseManager.uploadItem(item,uriArrayList,dialog,UploadItemActivity.this,true);
-//                        }
-//                    }
-//                }
             }
         });
         binding.exit.setOnClickListener(new View.OnClickListener() {
@@ -293,7 +264,6 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
         title = title.toLowerCase();
         for (Item item : SplashScreenActivity.items){
             if(item.getTitle().toLowerCase().equals(title)){
-//                Toast.makeText(this,"Sản phẩm đã tồn tại",Toast.LENGTH_LONG).show();
                 binding.titleLayout.setError("Sản phẩm đã tồn tại");
                 return true;
             }
@@ -305,7 +275,6 @@ public class UploadItemActivity extends AppCompatActivity implements ImageAdapte
         title = title.toLowerCase();
         for (Item temp : SplashScreenActivity.items){
             if(temp.getTitle().toLowerCase().equals(title) && !item.getTitle().toLowerCase().equals(title)){
-//                Toast.makeText(this,"Sản phẩm đã tồn tại",Toast.LENGTH_LONG).show();
                 binding.titleLayout.setError("Sản phẩm đã tồn tại");
                 return true;
             }

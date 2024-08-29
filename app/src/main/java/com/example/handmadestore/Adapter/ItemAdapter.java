@@ -14,12 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.handmadestore.AdminItem.UploadItemActivity;
-import com.example.handmadestore.DetailActivity;
-import com.example.handmadestore.LoginActivity;
-import com.example.handmadestore.MainActivity;
+import com.example.handmadestore.Item.UploadItemActivity;
+import com.example.handmadestore.Item.DetailActivity;
 import com.example.handmadestore.Object.Cart;
-import com.example.handmadestore.Object.DatabaseManager;
+import com.example.handmadestore.Database.DatabaseManager;
 import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.Object.Rating;
 import com.example.handmadestore.Object.User;

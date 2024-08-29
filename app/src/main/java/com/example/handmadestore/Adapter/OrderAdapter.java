@@ -10,9 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.handmadestore.Object.Order;
-import com.example.handmadestore.OrderDetail;
+import com.example.handmadestore.Order.OrderDetail;
 import com.example.handmadestore.databinding.CardOrderItemBinding;
-import com.example.handmadestore.databinding.FragmentOrderBinding;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

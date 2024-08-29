@@ -1,4 +1,4 @@
-package com.example.handmadestore;
+package com.example.handmadestore.HelperClass;
 
 import android.text.Editable;
 import android.text.TextWatcher;

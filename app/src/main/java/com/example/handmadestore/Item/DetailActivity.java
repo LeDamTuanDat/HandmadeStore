@@ -1,4 +1,4 @@
-package com.example.handmadestore;
+package com.example.handmadestore.Item;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,20 +10,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.handmadestore.Adapter.AdapterViewPagerForItem;
+import com.example.handmadestore.Order.CartActivity;
 import com.example.handmadestore.Fragment.DescriptionFragment;
 import com.example.handmadestore.Fragment.ReviewFragment;
+import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Banner;
 import com.example.handmadestore.Object.Cart;
-import com.example.handmadestore.Object.DatabaseManager;
+import com.example.handmadestore.Database.DatabaseManager;
 import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.Object.Rating;
+import com.example.handmadestore.SplashScreenActivity;
 import com.example.handmadestore.databinding.ActivityDetailBinding;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 public class DetailActivity extends AppCompatActivity {
@@ -126,7 +128,7 @@ public class DetailActivity extends AppCompatActivity {
                         carts.add(cart);
                         databaseManager.addCart(MainActivity.currentUser);
                         Toast.makeText(DetailActivity.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(DetailActivity.this,CartActivity.class);
+                        Intent intent = new Intent(DetailActivity.this, CartActivity.class);
                         startActivity(intent);
                     }
                 }

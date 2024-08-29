@@ -1,4 +1,4 @@
-package com.example.handmadestore;
+package com.example.handmadestore.Order;
 
 import android.os.Bundle;
 import android.view.View;
@@ -10,13 +10,14 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.handmadestore.Adapter.OrderAdapter;
-import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.Object.Order;
+import com.example.handmadestore.R;
+import com.example.handmadestore.SplashScreenActivity;
 import com.example.handmadestore.databinding.ActivityAdminOrderBinding;
 
 import java.util.ArrayList;
 
-public class AdminOrderActivity extends AppCompatActivity {
+public class ManageOrderActivity extends AppCompatActivity {
     ActivityAdminOrderBinding binding;
     OrderAdapter orderAdapter;
     ArrayList<Order> resultAfterFiltered = new ArrayList<>();
@@ -46,14 +47,14 @@ public class AdminOrderActivity extends AppCompatActivity {
     }
 
     public void initSpinner(){
-        statusAdapter = new ArrayAdapter<>(this,R.layout.spinner_item,status);
+        statusAdapter = new ArrayAdapter<>(this, R.layout.spinner_item,status);
         statusAdapter.setDropDownViewResource(R.layout.spinner_item);
         binding.spinner.setAdapter(statusAdapter);
     }
 
     public void initOrderList(){
         orderAdapter = new OrderAdapter(SplashScreenActivity.orders);
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(AdminOrderActivity.this, LinearLayoutManager.VERTICAL, false));
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(ManageOrderActivity.this, LinearLayoutManager.VERTICAL, false));
         binding.recyclerView.setAdapter(orderAdapter);
         checkOrders(SplashScreenActivity.orders);
     }

@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.handmadestore.AdminItem.AdminItemActivity;
+import com.example.handmadestore.Item.ItemActivity;
 import com.example.handmadestore.Object.Category;
 import com.example.handmadestore.databinding.ViewholderCategoryBinding;
 
@@ -55,7 +55,7 @@ public class MiniCategoryAdapter extends RecyclerView.Adapter<MiniCategoryAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, AdminItemActivity.class);
+                Intent intent = new Intent(context, ItemActivity.class);
                 intent.putExtra("category",category);
                 context.startActivity(intent);
             }

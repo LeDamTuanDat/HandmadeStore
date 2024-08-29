@@ -1,4 +1,4 @@
-package com.example.handmadestore;
+package com.example.handmadestore.Order;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,28 +6,22 @@ import android.os.StrictMode;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.handmadestore.Api.CreateOrder;
-import com.example.handmadestore.Object.Cart;
-import com.example.handmadestore.Object.DatabaseManager;
+import com.example.handmadestore.Database.DatabaseManager;
+import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Order;
 import com.example.handmadestore.databinding.ConfirmOrderBinding;
 
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 import vn.zalopay.sdk.Environment;
 import vn.zalopay.sdk.ZaloPayError;
 import vn.zalopay.sdk.ZaloPaySDK;
 import vn.zalopay.sdk.listeners.PayOrderListener;
 
-public class AddOrder extends AppCompatActivity {
+public class AddOrderActivity extends AppCompatActivity {
     ConfirmOrderBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +64,9 @@ public class AddOrder extends AppCompatActivity {
                 String address = binding.address.getText().toString();
 
                 if (name.isEmpty() || phone.isEmpty() || address.isEmpty()){
-                    Toast.makeText(AddOrder.this,"Vui lòng điền đủ thông tin",Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddOrderActivity.this,"Vui lòng điền đủ thông tin",Toast.LENGTH_LONG).show();
                 }else if (phone.length() < 10 || !phone.startsWith("0")) {
-                    Toast.makeText(AddOrder.this,"Vui lòng nhập đúng định dạng số điện thoại",Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddOrderActivity.this,"Vui lòng nhập đúng định dạng số điện thoại",Toast.LENGTH_LONG).show();
                 } else {
 
                     String idUser = MainActivity.currentUser.getUsername();
@@ -88,23 +82,23 @@ public class AddOrder extends AppCompatActivity {
 
                             if (code.equals("1")) {
                                 String token = data.getString("zp_trans_token");
-                                ZaloPaySDK.getInstance().payOrder(AddOrder.this, token, "demozpdk://app", new PayOrderListener() {
+                                ZaloPaySDK.getInstance().payOrder(AddOrderActivity.this, token, "demozpdk://app", new PayOrderListener() {
                                     @Override
                                     public void onPaymentSucceeded(String s, String s1, String s2) {
                                         order.setZaloPayment(true);
-                                        databaseManager.addOrder(order,AddOrder.this);
+                                        databaseManager.addOrder(order, AddOrderActivity.this);
                                         finish();
-                                        Toast.makeText(AddOrder.this,"Thanh toán thành công",Toast.LENGTH_LONG).show();
+                                        Toast.makeText(AddOrderActivity.this,"Thanh toán thành công",Toast.LENGTH_LONG).show();
                                     }
 
                                     @Override
                                     public void onPaymentCanceled(String s, String s1) {
-                                        Toast.makeText(AddOrder.this,"Thanh toán thất bại",Toast.LENGTH_LONG).show();
+                                        Toast.makeText(AddOrderActivity.this,"Thanh toán thất bại",Toast.LENGTH_LONG).show();
                                     }
 
                                     @Override
                                     public void onPaymentError(ZaloPayError zaloPayError, String s, String s1) {
-                                        Toast.makeText(AddOrder.this,"Huỷ bỏ giao dịch",Toast.LENGTH_LONG).show();
+                                        Toast.makeText(AddOrderActivity.this,"Huỷ bỏ giao dịch",Toast.LENGTH_LONG).show();
                                     }
                                 });
                             }
@@ -114,7 +108,7 @@ public class AddOrder extends AppCompatActivity {
                         }
 
                     }else {
-                        databaseManager.addOrder(order,AddOrder.this);
+                        databaseManager.addOrder(order, AddOrderActivity.this);
                         finish();
                     }
                 }

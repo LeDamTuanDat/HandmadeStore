@@ -1,9 +1,6 @@
 package com.example.handmadestore.Adapter;
 
 import android.content.DialogInterface;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +14,9 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Cart;
-import com.example.handmadestore.Object.DatabaseManager;
+import com.example.handmadestore.Database.DatabaseManager;
 import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.databinding.ActivityCartBinding;
-import com.example.handmadestore.databinding.FragmentCartBinding;
 import com.example.handmadestore.databinding.ViewholderCartBinding;
 
 
