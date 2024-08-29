@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import com.example.handmadestore.Adapter.CategoryAdapter;
 import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.Category;
+import com.example.handmadestore.Object.Item;
 import com.example.handmadestore.SplashScreenActivity;
 import com.example.handmadestore.databinding.ActivityCategoryBinding;
 
@@ -43,6 +44,7 @@ public class CategoryActivity extends AppCompatActivity {
         adapter = new CategoryAdapter(SplashScreenActivity.categories);
         binding.recyclerView.setLayoutManager(new GridLayoutManager(CategoryActivity.this,3));
         binding.recyclerView.setAdapter(adapter);
+        checkCategory(SplashScreenActivity.categories);
     }
 
     @Override
@@ -94,6 +96,15 @@ public class CategoryActivity extends AppCompatActivity {
             }
         }
         adapter.setReSultAfterSearch(result);
+        checkCategory(result);
+    }
+
+    private void checkCategory(ArrayList<Category> categories){
+        if (categories.size() == 0){
+            binding.notification.setVisibility(View.VISIBLE);
+        }else {
+            binding.notification.setVisibility(View.GONE);
+        }
     }
 
 }

@@ -55,6 +55,15 @@ public class AdminOrderActivity extends AppCompatActivity {
         orderAdapter = new OrderAdapter(SplashScreenActivity.orders);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(AdminOrderActivity.this, LinearLayoutManager.VERTICAL, false));
         binding.recyclerView.setAdapter(orderAdapter);
+        checkOrders(SplashScreenActivity.orders);
+    }
+
+    private void checkOrders(ArrayList<Order> orders){
+        if (orders.size() == 0){
+            binding.notification.setVisibility(View.VISIBLE);
+        }else {
+            binding.notification.setVisibility(View.GONE);
+        }
     }
 
     public void handleFiltered(){
@@ -84,6 +93,7 @@ public class AdminOrderActivity extends AppCompatActivity {
                 }
             }
             orderAdapter.setResultAfterFiltered(resultAfterFiltered);
+            checkOrders(resultAfterFiltered);
         }
     }
 
@@ -118,6 +128,7 @@ public class AdminOrderActivity extends AppCompatActivity {
             }
         }
         orderAdapter.setResultAfterFiltered(resultAfterSearch);
+        checkOrders(resultAfterSearch);
     }
 
     public void handleExit(){
