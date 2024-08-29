@@ -108,11 +108,13 @@ public class DatabaseManager {
     }
 
 
-    public void updateUser(User user, Uri uri, Context context,AlertDialog dialog, boolean normal){
+    public void updateUser(User user, Uri uri, Context context,AlertDialog dialog, boolean normal,boolean isCurrentImg){
         dialog.show();
         if (uri == null){
             if (normal){
-                MainActivity.currentUser.setImage("");
+                if (!isCurrentImg){
+                    MainActivity.currentUser.setImage("");
+                }
             }
             databaseReference.child("Users").child(user.getUsername()).setValue(user);
             Toast.makeText(context,"Cập nhật thông tin thành công",Toast.LENGTH_SHORT).show();

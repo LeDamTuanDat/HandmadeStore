@@ -27,9 +27,10 @@ import com.example.handmadestore.databinding.ActivityEditProfileBinding;
 public class EditProfileActivity extends AppCompatActivity {
     ActivityEditProfileBinding binding;
     Uri uri;
-    String currentUserImage;
+//    String currentUserImage;
     User user;
     boolean normal;
+    boolean isCurrentImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +62,8 @@ public class EditProfileActivity extends AppCompatActivity {
         binding.phone.setText(user.getPhone());
         binding.realname.setText(user.getRealname());
         binding.address.setText(user.getAddress());
-        currentUserImage = user.getImage();
+//        currentUserImage = user.getImage();
+        isCurrentImg = true;
     }
 
     private void setImage(){
@@ -81,6 +83,7 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 uri = null;
                 user.setImage("");
+                isCurrentImg = false;
                 binding.image.setImageResource(R.drawable.avatar);
                 binding.delete.setVisibility(View.GONE);
             }
@@ -95,6 +98,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
                         uri = data.getData();
+                        isCurrentImg = false;
                         binding.image.setImageURI(uri);
                         binding.delete.setVisibility(View.VISIBLE);
                     } else {
@@ -161,7 +165,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         MainActivity.currentUser.setRealname(realname);
                         MainActivity.currentUser.setAddress(address);
                     }
-                    databaseManager.updateUser(user,uri,EditProfileActivity.this,dialog,normal);
+                    databaseManager.updateUser(user,uri,EditProfileActivity.this,dialog,normal,isCurrentImg);
                 }
             }
         });
@@ -236,7 +240,7 @@ public class EditProfileActivity extends AppCompatActivity {
         binding.exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                user.setImage(currentUserImage);
+//                user.setImage(currentUserImage);
                 finish();
             }
         });
@@ -245,7 +249,7 @@ public class EditProfileActivity extends AppCompatActivity {
     OnBackPressedCallback callback = new OnBackPressedCallback(true) {
         @Override
         public void handleOnBackPressed() {
-            user.setImage(currentUserImage);
+//            user.setImage(currentUserImage);
             finish();
         }
     };
