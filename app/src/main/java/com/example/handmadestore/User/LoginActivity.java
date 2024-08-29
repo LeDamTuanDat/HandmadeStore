@@ -20,6 +20,8 @@ import com.example.handmadestore.Object.User;
 import com.example.handmadestore.SplashScreenActivity;
 import com.example.handmadestore.databinding.ActivityLoginBinding;
 
+import java.util.ArrayList;
+
 public class LoginActivity extends AppCompatActivity {
     ActivityLoginBinding binding;
     User user;
@@ -45,11 +47,13 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this,"Đăng nhập thành công",Toast.LENGTH_LONG).show();
                     databaseManager = new DatabaseManager();
                     if (user.getPriority()){
+                        SplashScreenActivity.orders = new ArrayList<>();
                         databaseManager.getAllOrder(SplashScreenActivity.orders);
                         Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
                         intent.putExtra("user",user);
                         startActivity(intent);
                     }else {
+                        SplashScreenActivity.orders = new ArrayList<>();
                         databaseManager.getOrder(username,SplashScreenActivity.orders);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("user",user);
