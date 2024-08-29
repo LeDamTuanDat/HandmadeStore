@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.example.handmadestore.Database.DatabaseManager;
 import com.example.handmadestore.HelperClass.ClearError;
 import com.example.handmadestore.HelperClass.NoWhitespaceTextWatcher;
+import com.example.handmadestore.MainActivity;
 import com.example.handmadestore.Object.User;
 import com.example.handmadestore.R;
 import com.example.handmadestore.databinding.ActivityEditProfileBinding;
@@ -152,11 +153,15 @@ public class EditProfileActivity extends AppCompatActivity {
 
                     if (binding.changePass.isChecked()){
                         user.setPassword(password);
-                        databaseManager.updateUser(user,uri,EditProfileActivity.this,dialog,normal);
-                    }else {
-                        databaseManager.updateUser(user,uri,EditProfileActivity.this,dialog,normal);
-
+                        MainActivity.currentUser.setPassword(password);
                     }
+                    if (normal){
+                        MainActivity.currentUser.setEmail(email);
+                        MainActivity.currentUser.setPhone(phone);
+                        MainActivity.currentUser.setRealname(realname);
+                        MainActivity.currentUser.setAddress(address);
+                    }
+                    databaseManager.updateUser(user,uri,EditProfileActivity.this,dialog,normal);
                 }
             }
         });
